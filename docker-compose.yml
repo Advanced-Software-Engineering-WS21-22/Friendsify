@@ -18,7 +18,7 @@ services:
     image: friendsify-person
     build: friendsify-person-service
     ports:
-      - "9001:9000"
+      - "9001:9001"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -30,7 +30,7 @@ services:
     image: friendsify-email
     build: friendsify-email-service
     ports: 
-      - "9002:9000"
+      - "9002:9002"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -42,7 +42,7 @@ services:
     image: friendsify-friends
     build: friendsify-friends-service
     ports: 
-     - "9003:9000"
+     - "9003:9003"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -55,7 +55,7 @@ services:
    image: friendsify-joke
    build: friendsify-joke-service
    ports:
-    - "9004:9000"
+    - "9004:9004"
    environment:
      - POSTGRES_DB=friendsify
      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -67,7 +67,7 @@ services:
     image: friendsify-birthday
     build: friendsify-birthday-service
     ports:
-     - "9005:9000"
+     - "9005:9005"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -79,7 +79,7 @@ services:
     image: friendsify-recommendations
     build: friendsify-recommendations-service
     ports:
-     - "9006:9000"
+     - "9006:9006"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -93,6 +93,19 @@ services:
     build: friendsify-frontend-service
     ports: 
       - "9000:9000"
+    environment:
+      - EMAIL_HOST=friendsify-email
+      - EMAIL_PORT=9001
+      - PERSON_HOST=friendsify-person
+      - PERSON_PORT=9002
+      - FRIENDS_HOST=friendsify-friends
+      - FRIENDS_PORT=9003
+      - JOKE_HOST=friendsify-joke
+      - JOKE_PORT=9004
+      - BIRTHDAY_HOST=friendsify-birthday
+      - BIRTHDAY_PORT=9005
+      - RECOMMENDATIONS_HOST=friendsify-recommendations
+      - RECOMMENDATIONS_PORT=9006
     depends_on:
       - friendsify-db
       - friendsify-person
