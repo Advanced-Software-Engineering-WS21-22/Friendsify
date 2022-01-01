@@ -117,4 +117,8 @@ services:
       - friendsify-db
       - friendsify-person
       - friendsify-email
+      - friendsify-friends
+      - friendsify-birthday
+      - friendsify-joke
+      - friendsify-recommendations
     restart: on-failure
