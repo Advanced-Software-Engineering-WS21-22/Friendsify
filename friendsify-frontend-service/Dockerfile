@@ -1,6 +1,6 @@
 FROM openjdk:11
 
-COPY target/friendsify-frontend-service-1.0-SNAPSHOT.jar /spring-boot.jar
+COPY target/friendsify-frontend-service-0.0.1-SNAPSHOT.jar /spring-boot.jar
 ENV EMAIL_HOST=host.docker.internal
 ENV PERSON_HOST=host.docker.internal
 ENV FRIENDS_HOST=host.docker.internal
