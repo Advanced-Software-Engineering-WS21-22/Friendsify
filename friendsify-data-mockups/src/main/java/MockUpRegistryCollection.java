@@ -1,3 +1,6 @@
+import Entities.Friends;
+import Entities.Person;
+
 public class MockUpRegistryCollection {
 
     private static MockUpRegistryCollection mockUpRegistryCollection = null;
@@ -6,8 +9,8 @@ public class MockUpRegistryCollection {
     private Registry friendsRegistry;
 
     private MockUpRegistryCollection() {
-        this.personRegistry = RegistryFactory.getMockUpRegistry("Person");
-        this.friendsRegistry = RegistryFactory.getMockUpRegistry("Friends");
+        this.personRegistry = new MockUpRegistryImpl<Integer, Person>();
+        this.friendsRegistry = new MockUpRegistryImpl<Integer, Friends>();
 
         this.addPersonSamples();
         this.addFriendsSamples();

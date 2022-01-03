@@ -16,8 +16,8 @@ public class MockUpRegistryTest {
 
     @Before
     public void setUp() {
-        this.personRegistry = RegistryFactory.getMockUpRegistry("Person");
-        this.friendsRegistry = RegistryFactory.getMockUpRegistry("Friends");
+        this.personRegistry = new MockUpRegistryImpl<>();
+        this.friendsRegistry = new MockUpRegistryImpl<>();
         this.testPerson = this.createTestPerson();
         this.testFriends = this.createTestFriends();
         this.personRegistry.addMockUp(0, this.testPerson);

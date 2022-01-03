@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MockUpRegistry<K, V> implements Registry<K, V>{
+public class MockUpRegistryImpl<K, V> implements Registry<K, V>{
 
     HashMap<K, V> items = null;
 
-    public MockUpRegistry() {
+    public MockUpRegistryImpl() {
         items = new HashMap<>();
     }
 
