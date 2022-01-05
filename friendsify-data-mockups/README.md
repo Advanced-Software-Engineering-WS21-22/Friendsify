@@ -7,10 +7,9 @@
 ### Table of Contents
 1. [ Person MockUps ](#person)
 2. [ Friends MockUps ](#friends)
-3. [ Registries ](#registries)
-   1. [ RegistryFactory ](#registryfactory)
-   2. [ RegistryInterface ](#registryinterface)
-   3. [ MockUpRegistryCollection ](#registrycollection)
+3. [ MockUpRegistry ](#registries)
+   1. [ RegistryInterface ](#registryinterface)
+   2. [ MockUpRegistryCollection ](#registrycollection)
 ---
 <a name="person"></a>
 ## Person
@@ -18,8 +17,9 @@
 
 * id_p [int] 
 * name [String]
+* email [String]
 * birthday [Date]
-* location_id [int]
+* id_geoDB [int]
 
 </p>
 
@@ -43,25 +43,19 @@ The created MockUps can be stored in a key-value based MockUp-Registry which can
 The creation of a registry can be executed by using the RegistryFactory. This way one can create its own registries 
 holding self-created sample data or instead use the MockUpRegistryCollection.
 
-<a name="registryfactory"></a>
-### RegistryFactory 
-<p>
-The RegistryFactory provides a static method "getMockUpRegistry(String entity)". By passing the desired entity {Person,
-Friends}, the corresponding registry will be created and returned for further use via the Registry Interface. Example:
-</p>
 
 ```
-Registry person = RegistryFactory.getMockUpRegistry("Person")
+Registry<Integer, Person> person = new MockUpRegistryImpl()
 ```
 <a name="registryinterface"></a>
 ### Registry Interface
 <p>
 This can be used for simple operations on the registry. The following methods are provided:
 
-* public void addMockUp(K key, V value);
-* public ArrayList<V> getAll();
-* public V getByKey(K key);
-* public void removeByKey(K key);
+* void addMockUp(K key, V value);
+* ArrayList<V> getAll();
+* V getByKey(K key);
+* void removeByKey(K key);
 
 Where K stands for the Key (suggested: Integer) used to access one entry in the registry and 
 V stands for the corresponding entity (e.g. Person).
@@ -85,20 +79,23 @@ The registries contain the following sample data:
     <tr>
         <th>id_p</th>
         <th>name</th>
+        <th>name</th>
         <th>birthday</th>
         <th>id_geoDB</th>
     </tr>
     <tr>
         <td>0</td>
         <td>Maxi Mustermann</td>
+        <td>maxi@mustermann.at</td>
         <td>1999-21-02</td>
-        <td>12</td>
+        <td>Q41753</td>
     </tr>
     <tr>
         <td>1</td>
-        <td>Maxi Mustermann</td>
-        <td>1999-21-02</td>
-        <td>12</td>
+        <td>Lisa Musterfrau</td>
+        <td>lisa@musterfrau.at</td>
+        <td>1994-01-04</td>
+        <td>Q64</td>
     </tr>
 </table>
 
@@ -111,11 +108,11 @@ The registries contain the following sample data:
     <tr>
         <td>0</td>
         <td>1</td>
-        <td>3</td>
+        <td>2</td>
     </tr>
     <tr>
         <td>1</td>
         <td>1</td>
-        <td>2</td>
+        <td>3</td>
     </tr>
 </table> 

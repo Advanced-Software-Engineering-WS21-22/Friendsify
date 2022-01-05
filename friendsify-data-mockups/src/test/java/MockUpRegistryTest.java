@@ -37,7 +37,7 @@ public class MockUpRegistryTest {
     }
 
     private Person createTestPerson() {
-        return new Person(1, "Hans", new Date(), 12);
+        return new Person(1, "Hans", "hans@outlook.at",new Date(), "Q41753");
     }
 
     private Friends createTestFriends() {
