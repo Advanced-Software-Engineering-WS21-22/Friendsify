@@ -72,6 +72,8 @@ services:
      - POSTGRES_DB=friendsify
      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
      - POSTGRES_USER=admin
+     - EMAIL_HOST=friendsify-email
+     - EMAIL_PORT=9001
    depends_on:
      - friendsify-friends
    restart: on-failure
@@ -85,6 +87,8 @@ services:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
       - POSTGRES_USER=admin
+      - EMAIL_HOST=friendsify-email
+      - EMAIL_PORT=9001
     depends_on:
       - friendsify-friends
     restart: on-failure
