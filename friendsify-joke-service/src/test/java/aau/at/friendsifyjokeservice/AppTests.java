@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
-class FriendsifyJokeServiceApplicationTests {
+class AppTests {
 
     private JokeService service;
 
@@ -22,6 +22,22 @@ class FriendsifyJokeServiceApplicationTests {
     @Test
     public void testJokeOfTheDay() {
         String joke = this.service.jokeOfTheDay();
+
+        assertNotNull(joke);
+        assertNotEquals("", joke);
+    }
+
+    @Test
+    public void testRandomJoke() {
+        String joke = this.service.randomJoke();
+
+        assertNotNull(joke);
+        assertNotEquals("", joke);
+    }
+
+    @Test
+    public void testJokeTypes() {
+        String joke = this.service.getJokebyType("XYZ");
 
         assertNotNull(joke);
         assertNotEquals("", joke);
