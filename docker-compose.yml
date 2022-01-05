@@ -1,0 +1,124 @@
+# mvn install should be run before building the docker images!!
+
+version: '3'
+
+services:
+  friendsify-db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+     - POSTGRES_PASSWORD=placeholder # TODO: later replace with secret env variable
+     - POSTGRES_USER=admin
+     - POSTGRES_DB=friendsify
+
+  
+  friendsify-person:
+    image: friendsify-person
+    build: friendsify-person-service
+    ports:
+      - "9001:9001"
+    environment:
+      - POSTGRES_DB=friendsify
+      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
+      - POSTGRES_USER=admin
+
+    depends_on: 
+      - friendsify-db
+    restart: on-failure
+
+  friendsify-email:
+    image: friendsify-email
+    build: friendsify-email-service
+    ports: 
+      - "9002:9002"
+    environment:
+      - POSTGRES_DB=friendsify
+      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
+      - POSTGRES_USER=admin
+    depends_on:
+      - friendsify-db
+    restart: on-failure
+
+  friendsify-friends:
+    image: friendsify-friends
+    build: friendsify-friends-service
+    ports: 
+     - "9003:9003"
+    environment:
+      - POSTGRES_DB=friendsify
+      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
+      - POSTGRES_USER=admin
+    depends_on:
+      - friendsify-person
+      - friendsify-email
+    restart: on-failure
+
+  friendsify-joke:
+   image: friendsify-joke
+   build: friendsify-joke-service
+   ports:
+    - "9004:9004"
+   environment:
+     - POSTGRES_DB=friendsify
+     - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
+     - POSTGRES_USER=admin
+   depends_on:
+     - friendsify-friends
+   restart: on-failure
+
+  friendsify-birthday:
+    image: friendsify-birthday
+    build: friendsify-birthday-service
+    ports:
+     - "9005:9005"
+    environment:
+      - POSTGRES_DB=friendsify
+      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
+      - POSTGRES_USER=admin
+    depends_on:
+      - friendsify-friends
+    restart: on-failure
+
+  friendsify-recommendations:
+    image: friendsify-recommendations
+    build: friendsify-recommendations-service
+    ports:
+     - "9006:9006"
+    environment:
+      - POSTGRES_DB=friendsify
+      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
+      - POSTGRES_USER=admin
+    depends_on:
+      - friendsify-friends
+    restart: on-failure
+
+
+  friendsify-frontend:
+    image: friendsify-frontend
+    build: friendsify-frontend-service
+    ports: 
+      - "9000:9000"
+    environment:
+      - EMAIL_HOST=friendsify-email
+      - EMAIL_PORT=9001
+      - PERSON_HOST=friendsify-person
+      - PERSON_PORT=9002
+      - FRIENDS_HOST=friendsify-friends
+      - FRIENDS_PORT=9003
+      - JOKE_HOST=friendsify-joke
+      - JOKE_PORT=9004
+      - BIRTHDAY_HOST=friendsify-birthday
+      - BIRTHDAY_PORT=9005
+      - RECOMMENDATIONS_HOST=friendsify-recommendations
+      - RECOMMENDATIONS_PORT=9006
+    depends_on:
+      - friendsify-db
+      - friendsify-person
+      - friendsify-email
+      - friendsify-friends
+      - friendsify-birthday
+      - friendsify-joke
+      - friendsify-recommendations
+    restart: on-failure
