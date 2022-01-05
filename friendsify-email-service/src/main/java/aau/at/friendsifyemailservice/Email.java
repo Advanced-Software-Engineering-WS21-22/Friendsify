@@ -9,7 +9,7 @@ import javax.persistence.Id;
 public class Email {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    Long id;
 
     String from;
     String to;
@@ -18,18 +18,18 @@ public class Email {
     public Email(){
 
     }
-    public Email(int id, String from, String to, String text){
+    public Email(Long id, String from, String to, String text){
         this.id =id;
         this.from = from;
         this.to = to;
         this.text = text;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
