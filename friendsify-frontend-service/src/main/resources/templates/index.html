@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Friendsify-Home</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
 <body>
-<h1>This is friendsify</h1>
+<div th:replace="fragments/header :: header"></div>
+<div th:replace="fragments/home :: home"></div>
+
 </body>
 </html>
