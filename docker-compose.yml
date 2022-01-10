@@ -74,7 +74,8 @@ services:
      - POSTGRES_USER=admin
      - EMAIL_HOST=friendsify-email
      - EMAIL_PORT=9001
-     - JOKE_API_TOKEN = <token>
+   env_file:
+     - .env
    depends_on:
      - friendsify-friends
    restart: on-failure

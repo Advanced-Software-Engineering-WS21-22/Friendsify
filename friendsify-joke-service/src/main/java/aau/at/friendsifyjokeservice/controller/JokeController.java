@@ -1,10 +1,8 @@
 package aau.at.friendsifyjokeservice.controller;
 
-import aau.at.friendsifyjokeservice.exception.PersonNotFoundException;
-import aau.at.friendsifyjokeservice.model.Person;
-import aau.at.friendsifyjokeservice.repository.PersonDao;
 import aau.at.friendsifyjokeservice.services.EmailClient;
 import aau.at.friendsifyjokeservice.services.JokeService;
+import aau.at.friendsifyjokeservice.services.PersonClient;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +18,10 @@ public class JokeController {
     private JokeService service;
 
     @Autowired
-    private PersonDao personDao;
+    private EmailClient emailClient;
 
     @Autowired
-    private EmailClient client;
+    private PersonClient personClient;
 
     @GetMapping("/?type={type}")
     public ResponseEntity<String> getJoke(@PathVariable(name = "type", required = false) String type) {
@@ -42,11 +40,11 @@ public class JokeController {
             @PathVariable(name = "type", required = false) String type
     ) throws Exception {
         // call Person service
-        Person friend = personDao.findById(personId).orElseThrow(() -> new PersonNotFoundException(personId));
+        String email = personClient.emailOfPerson(personId);
         // call joke service
         String joke = service.getJokebyType(type);
         // call Email Service
-        client.send(friend.getEmail(), joke);
+        emailClient.send(email, joke);
 
         return ResponseEntity.ok().build();
 
