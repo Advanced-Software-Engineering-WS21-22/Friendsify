@@ -1,14 +1,21 @@
 package Entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Person {
 
+
     private int id_p;
     private String name;
     private String email;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
+
     private String id_geoDB;
+
 
     public Person(int id_p, String name, String email, Date birthday, String id_geoDB) {
         this.id_p =id_p;
@@ -17,6 +24,9 @@ public class Person {
         this.birthday = birthday;
         this.id_geoDB = id_geoDB;
     }
+
+
+    public Person(){}
 
     public int getId_p() {
         return id_p;

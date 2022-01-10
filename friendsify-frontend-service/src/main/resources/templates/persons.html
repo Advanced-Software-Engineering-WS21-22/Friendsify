@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container mt-5">
+    <h1>Persons Overview</h1>
+
+    <div class="card mt-3">
+        <div class="card-header">
+            <h5>Add a new person!</h5>
+        </div>
+        <div class="card-body">
+            <form action="#" th:action="@{/persons}" th:object="${personForm}" method="post">
+                <div class="form-group row">
+                    <label for="name" class="col-sm-2 col-form-label">Name:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" placeholder="John Doe" th:field="*{name}">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="mail" class="col-sm-2 col-form-label">E-Mail:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="mail" placeholder="example@email.com" th:field="*{email}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="birthdate" class="col-sm-2 col-form-label">Birthdate:</label>
+                    <div class="col-sm-10">
+                        <input type="date" class="form-control" id="birthdate" autocomplete="off" th:field="*{birthday}">
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="id_geoDB" class="col-sm-2 col-form-label">GeoDB ID:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="id_geoDB" placeholder="Q1234" th:field="*{id_geoDB}">
+                    </div>
+                </div>
+                <button type="submit" value="Submit" class="btn btn-primary mb-2">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
