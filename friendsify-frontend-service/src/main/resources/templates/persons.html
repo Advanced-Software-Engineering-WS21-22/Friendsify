@@ -47,6 +47,27 @@
         </div>
     </div>
 
+    <table class="table table-striped table-dark mt-5">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Birthday</th>
+                <th scope="col">GeoDB-ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="person: ${personList}">
+                <th scope="row" th:text="${person.getId_p()}"></th>
+                <td th:text="${person.getName()}"></td>
+                <td th:text="${person.getEmail()}"></td>
+                <td th:text="${person.getBirthday()}"></td>
+                <td th:text="${person.getId_geoDB()}"></td>
+            </tr>
+        </tbody>
+    </table>
+
 </div>
 
 </body>

@@ -4,24 +4,27 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import java.util.Date;
+import registry.MockUpRegistry;
+import registry.MockUpMockUpRegistryImpl;
+
+import java.time.LocalDate;
 
 
-public class MockUpRegistryTest {
+public class MockUpMockUpRegistryTest {
 
-    private Registry<Integer, Person> personRegistry;
-    private Registry<Integer, Friends> friendsRegistry;
+    private MockUpRegistry<Person> personRegistry;
+    private MockUpRegistry<Friends> friendsRegistry;
     private Person testPerson;
     private Friends testFriends;
 
     @Before
     public void setUp() {
-        this.personRegistry = new MockUpRegistryImpl<>();
-        this.friendsRegistry = new MockUpRegistryImpl<>();
+        this.personRegistry = new MockUpMockUpRegistryImpl<>();
+        this.friendsRegistry = new MockUpMockUpRegistryImpl<>();
         this.testPerson = this.createTestPerson();
         this.testFriends = this.createTestFriends();
-        this.personRegistry.addMockUp(0, this.testPerson);
-        this.friendsRegistry.addMockUp(0, testFriends);
+        this.personRegistry.addMockUp(this.testPerson);
+        this.friendsRegistry.addMockUp(this.testFriends);
     }
 
     @After
@@ -37,10 +40,10 @@ public class MockUpRegistryTest {
     }
 
     private Person createTestPerson() {
-        return new Person(1, "Hans", "hans@outlook.at",new Date(), "Q41753");
+        return new Person(Long.valueOf(0), "Max", "Mustermann", "max@mustermann.de", LocalDate.of(1999,4,1), "Q64", "Berlin", "testhash");
     }
 
     private Friends createTestFriends() {
-        return new Friends(0, 1,2);
+        return new Friends(Long.valueOf(0), Long.valueOf(0), Long.valueOf(1), LocalDate.of(1999,4,1), false);
     }
 }

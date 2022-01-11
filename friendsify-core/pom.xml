@@ -9,9 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>aau.at</groupId>
-    <artifactId>friendsify-entities</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>friendsify-core</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

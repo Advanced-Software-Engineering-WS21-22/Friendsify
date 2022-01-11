@@ -5,114 +5,168 @@
 **@author: Alex Wirth**
 
 ### Table of Contents
-1. [ Person MockUps ](#person)
-2. [ Friends MockUps ](#friends)
-3. [ MockUpRegistry ](#registries)
-   1. [ RegistryInterface ](#registryinterface)
+1. [ MockUpRegistry ](#registries)
+   1. [ MockUpRegistry-Interface ](#registryinterface)
    2. [ MockUpRegistryCollection ](#registrycollection)
----
-<a name="person"></a>
-## Person
-<p>The person mockup <b>[Person]</b> creates an object with the following attributes: <br>
-
-* id_p [int] 
-* name [String]
-* email [String]
-* birthday [Date]
-* id_geoDB [int]
-
-</p>
-
----
-<a name="friends"></a>
-## Friends Mockups
-<p>The friendship mockup <b>[Friendship]</b> creates an object with the following attributes:
-
-* id_fs
-* id_p_first
-* id_p_second
-
-
-</p>
-
+2. [ MockUp-Samples](#mockupsamples)
 ---
 <a name="registries"></a>
-## Registries
+## MockUpRegistries
 <p>
-The created MockUps can be stored in a key-value based MockUp-Registry which can be used by the Registry Interface. 
-The creation of a registry can be executed by using the RegistryFactory. This way one can create its own registries 
-holding self-created sample data or instead use the MockUpRegistryCollection.
-
+The created MockUps can be stored in a MockUpRegistry which can be used by the MockUpRegistry-Interface. 
+One can simply create an individual MockUpRegistry to hold self-created sample data or instead use the 
+MockUpRegistryCollection. For the initialization the entity-type has to be specified, as the following example
+suggests:
 
 ```
-Registry<Integer, Person> person = new MockUpRegistryImpl()
+MockUpRegistry<Person> personRegistry = new MockUpRegistryImpl()
 ```
 <a name="registryinterface"></a>
-### Registry Interface
+### MockUpRegistry Interface
 <p>
 This can be used for simple operations on the registry. The following methods are provided:
 
-* void addMockUp(K key, V value);
-* ArrayList<V> getAll();
-* V getByKey(K key);
-* void removeByKey(K key);
+* public void addMockUp(E value);
+* public ArrayList<E> getAll();
+* public E getByKey(int key);
+* public void removeByKey(int key);
+* public void changeMockup(int key, E value);
 
-Where K stands for the Key (suggested: Integer) used to access one entry in the registry and 
-V stands for the corresponding entity (e.g. Person).
+Where E stands for the corresponding entity.
 </p>
 
 <a name="registrycollection"></a>
 ### MockUpRegistryCollection
 <p>
-This is presents the easiest way to use a pre-defined collection of registries containing sample data for all available
+This is the easiest way to use a pre-defined collection of registries containing sample data for all available
 entities. The collection contains:
 
 * PersonRegistry (getPersonRegistry())
 * FriendsRegistry (getFriendsRegistry())
 
-The registries can be accessed via simple getter-methods returning the Registry-Interface (see above). The implementation
-is realized as Singleton. 
+The registries holding the samples of a certain entity can be accessed via simple getter-methods returning the 
+registry-Interface (see above). 
+The implementation is realized as Singleton, where the instance of the collection can be accesed via the static
+method getMockUpRegistryCollection().
+
+```
+MockUpRegsitryCollection mockUpRegistryCollection = MockUpRegsitryCollection.getMockUpRegistryCollection();
+```
+---
+<a name="mockupsamples"></a>
+## MockUp-Samples
 The registries contain the following sample data:
 </p>
 
+#### Persons
 <table title="Person">
     <tr>
         <th>id_p</th>
-        <th>name</th>
-        <th>name</th>
+        <th>firstName</th>
+        <th>lastName</th>
+        <th>email</th>
         <th>birthday</th>
         <th>id_geoDB</th>
+        <th>city</th>
+        <th>password_hash</th>
     </tr>
     <tr>
         <td>0</td>
-        <td>Maxi Mustermann</td>
-        <td>maxi@mustermann.at</td>
-        <td>1999-21-02</td>
-        <td>Q41753</td>
+        <td>Max</td>
+        <td>Mustermann</td>
+        <td>max@mustermann.de</td>
+        <td>01.01.2000</td>
+        <td>Q483522</td>
+        <td>Villach</td>
+        <td>cGFzc3dvcmQ= (password)</td>
     </tr>
     <tr>
         <td>1</td>
-        <td>Lisa Musterfrau</td>
-        <td>lisa@musterfrau.at</td>
-        <td>1994-01-04</td>
-        <td>Q64</td>
+        <td>Anna</td>
+        <td>Mustermann</td>
+        <td>anna@mustermann.de</td>
+        <td>01.01.2001</td>
+        <td>Q483522</td>
+        <td>Villach</td>
+        <td>aG91c2U= (house)</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>John</td>
+        <td>Doe</td>
+        <td>john.doe@email.com</td>
+        <td>06.06.1990</td>
+        <td>Q41753</td>
+        <td>Klagenfurt</td>
+        <td>YW5pbWFsCg== (animal)</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>Hans</td>
+        <td>Müller</td>
+        <td>hans.m@gmail.com</td>
+        <td>18.08.1994</td>
+        <td>Q660687</td>
+        <td>Velden am Wörthersee</td>
+        <td>Y2Fy (car)</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td>Maria</td>
+        <td>Schmidt</td>
+        <td>m.schmidt@gmail.com</td>
+        <td>01.12.1994</td>
+        <td>Q875805</td>
+        <td>Pörtschach am Wörthersee</td>
+        <td>dHJlZQ== (tree)</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td>Lukas</td>
+        <td>Maier</td>
+        <td>lumai@gmx.com</td>
+        <td>15.10.1999</td>
+        <td>Q494604</td>
+        <td>Sankt Veit an der Glan</td>
+        <td>Y29tcHV0ZXI= (computer)</td>
     </tr>
 </table>
 
-<table title="Person">
+#### Friends
+<table title="Friends">
     <tr>
-        <th>id_f</th>
-        <th>id_p_one</th>
-        <th>id_p_second</th>
+        <th>id_fs</th>
+        <th>id_p_initiator</th>
+        <th>id_p_friend</th>
+        <th>fs_start_date</th>
+        <th>is_timed_out</th>
     </tr>
     <tr>
         <td>0</td>
-        <td>1</td>
-        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>31.01.2019</td>
+        <td>false</td>
     </tr>
     <tr>
         <td>1</td>
         <td>1</td>
+        <td>0</td>
+        <td>01.06.2020</td>
+        <td>false</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>6</td>
+        <td>5</td>
+        <td>18.02.2021</td>
+        <td>false</td>
+    </tr>
+    <tr>
         <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>21.08.2020</td>
+        <td>true</td>
     </tr>
 </table> 
