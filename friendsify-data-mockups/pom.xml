@@ -43,7 +43,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>at.aau</groupId>
+            <groupId>aau.at</groupId>
             <artifactId>friendsify-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
