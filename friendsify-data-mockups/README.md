@@ -78,7 +78,7 @@ The registries contain the following sample data:
         <td>01.01.2000</td>
         <td>Q483522</td>
         <td>Villach</td>
-        <td>cGFzc3dvcmQ= (password)</td>
+        <td>$2a$10$A7tRy7jyQsTKNVcEjkwlauKhSg6deU9bnpNJt2CeQQPkWJPKlhry6 (password)</td>
     </tr>
     <tr>
         <td>1</td>
@@ -88,7 +88,7 @@ The registries contain the following sample data:
         <td>01.01.2001</td>
         <td>Q483522</td>
         <td>Villach</td>
-        <td>aG91c2U= (house)</td>
+        <td>$2a$10$v6vYLfGiwxC.Go1HyxKinuzNdhFto9ZW0K8cO6Y1LpNA5mt/YK5mK (house)</td>
     </tr>
     <tr>
         <td>2</td>
@@ -98,7 +98,7 @@ The registries contain the following sample data:
         <td>06.06.1990</td>
         <td>Q41753</td>
         <td>Klagenfurt</td>
-        <td>YW5pbWFsCg== (animal)</td>
+        <td>$2a$10$suHpLlQe44a4IzfXSx6kUeX1VN6Os1thIBaLnr2OEkkJbeb.RVeVG (animal)</td>
     </tr>
     <tr>
         <td>3</td>
@@ -108,7 +108,7 @@ The registries contain the following sample data:
         <td>18.08.1994</td>
         <td>Q660687</td>
         <td>Velden am Wörthersee</td>
-        <td>Y2Fy (car)</td>
+        <td>$2a$10$jyBKNyMulV6YVTgpl0M5EOl9Z2Iy/ncZvVdr.SAztZngb.qjpQJza (car)</td>
     </tr>
     <tr>
         <td>4</td>
@@ -118,7 +118,7 @@ The registries contain the following sample data:
         <td>01.12.1994</td>
         <td>Q875805</td>
         <td>Pörtschach am Wörthersee</td>
-        <td>dHJlZQ== (tree)</td>
+        <td>$2a$10$cQ2liy6Ut0AsaYNoQLBxOujRERYESHTRzBO0CVPuevrrMfpmuVHSi (tree)</td>
     </tr>
     <tr>
         <td>5</td>
@@ -128,7 +128,7 @@ The registries contain the following sample data:
         <td>15.10.1999</td>
         <td>Q494604</td>
         <td>Sankt Veit an der Glan</td>
-        <td>Y29tcHV0ZXI= (computer)</td>
+        <td>$2a$10$SzI/pP8kNZ4z.HcQeRWDp.wgFFpIqc7TKhDI2qTekvBKkmLMoLxIq (computer)</td>
     </tr>
 </table>
 
