@@ -19,9 +19,7 @@ public class MainController {
 
     @GetMapping("/home")
     public String main(Model model, HttpSession session) {
-        session.setAttribute("registryCollection", MockUpRegistryCollection.getMockUpRegistryCollection());
         System.out.println("Request index" + model);
-        System.out.println("Session: " + session.getAttribute("registryCollection"));
         return "index";
     }
 

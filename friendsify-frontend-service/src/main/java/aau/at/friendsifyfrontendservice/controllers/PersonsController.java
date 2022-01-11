@@ -23,36 +23,9 @@ public class PersonsController {
         return "persons";
     }
 
+
     @RequestMapping(value = "persons", method = RequestMethod.GET)
-    public String person(Model model, HttpSession session) {
-        //Initialize Person-Form
-        Person newP = new Person();
-        model.addAttribute("personForm", newP);
-        System.out.println("Request persons" + model);
-
-        MockUpRegistryCollection registryCollection = (MockUpRegistryCollection) session.getAttribute("registryCollection");
-        this.personArrayList = registryCollection.getPersonRegistry().getAll();
-        for(Person p : this.personArrayList) {
-            System.out.println("Person: " + p.getFirstName() + " " + p.getId_p());
-        }
-
-        if(this.personArrayList != null && !this.personArrayList.isEmpty()) {
-            model.addAttribute("personList", this.personArrayList);
-        }
-
-
-        //Load persons template
+    public String person(Model model) {
         return "persons";
     }
-
-    @RequestMapping(value = "persons", method = RequestMethod.POST)
-    public RedirectView addPerson (@ModelAttribute(value="personForm") Person newP, Model model, HttpSession session) {
-        System.out.println("Add Person: " + model);
-
-        return new RedirectView("./persons");
-    }
-
-
-
-
 }

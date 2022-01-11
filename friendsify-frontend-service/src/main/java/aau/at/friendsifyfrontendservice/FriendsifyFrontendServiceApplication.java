@@ -10,7 +10,6 @@ public class FriendsifyFrontendServiceApplication {
 
     public static void main(String[] args) {
         System.out.println("Friendsify-Frontend Container running");
-        ApplicationContext context = new ClassPathXmlApplicationContext();
         SpringApplication.run(FriendsifyFrontendServiceApplication.class, args);
     }
 
