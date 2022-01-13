@@ -34,6 +34,14 @@ public class Person {
         this.place = place;
     }
 
+    public void update(Person updatedPerson){
+        this.setFirstName(updatedPerson.getFirstName());
+        this.setLastName(updatedPerson.getLastName());
+        this.setEmail(updatedPerson.getEmail());
+        this.setBirthday(updatedPerson.getBirthday());
+        this.setPlace(updatedPerson.getPlace());
+    }
+
     public Long getId() {
         return id;
     }
