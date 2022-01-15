@@ -16,7 +16,7 @@ public class FriendsController {
 
     @RequestMapping(value = "friends", method = RequestMethod.GET)
     public String friends(Model model) {
-        System.out.println("Request friends" + model);
+        System.out.println("Request friends " + model.getAttribute("userFirstname"));
         return "friends";
     }
 }

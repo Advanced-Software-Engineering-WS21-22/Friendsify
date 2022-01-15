@@ -23,8 +23,6 @@
         <module>friendsify-birthday-service</module>
         <module>friendsify-recommendations-service</module>
         <module>friendsify-frontend-service</module>
-        <module>friendsify-data-mockups</module>
-        <module>friendsify-core</module>
     </modules>
 
     <properties>
