@@ -41,11 +41,18 @@ services:
       - person-db
     restart: on-failure
 
+  friendsify-email:
+    image: friendsify-email
+    build: friendsify-email-service
+    ports:
+      - "9002:9002"
+    restart: on-failure
+
   friendsify-friends:
     image: friendsify-friends
     build: friendsify-friends-service
     ports: 
-     - "9002:9002"
+     - "9003:9003"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -55,32 +62,26 @@ services:
       - friends-db
     restart: on-failure
 
-  friendsify-email:
-    image: friendsify-email
-    build: friendsify-email-service
-    ports:
-      - "9002:9002"
-    restart: on-failure
 
   friendsify-joke:
    image: friendsify-joke
    build: friendsify-joke-service
    ports:
-    - "9003:9003"
+    - "9004:9004"
    restart: on-failure
 
   friendsify-birthday:
     image: friendsify-birthday
     build: friendsify-birthday-service
     ports:
-     - "9004:9004"
+     - "9005:9005"
     restart: on-failure
 
   friendsify-recommendations:
     image: friendsify-recommendations
     build: friendsify-recommendations-service
     ports:
-     - "9005:9005"
+     - "9006:9006"
     restart: on-failure
 
 
