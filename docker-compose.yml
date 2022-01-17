@@ -3,20 +3,30 @@
 version: '3'
 
 services:
-  friendsify-db:
+  person-db:
     image: postgres
     restart: always
     volumes:
-      - ./database/:/docker-entrypoint-initdb.d/
+      - ./database/person/:/docker-entrypoint-initdb.d/
     ports:
-      - 5432:5432
+      - 5001:5432
     environment:
      - POSTGRES_PASSWORD=placeholder # TODO: later replace with secret env variable
      - POSTGRES_USER=admin
      - POSTGRES_DB=friendsify
 
+  friends-db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./database/friends/:/docker-entrypoint-initdb.d/
+    ports:
+      - 5002:5432
+    environment:
+      - POSTGRES_PASSWORD=placeholder # TODO: later replace with secret env variable
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=friendsify
 
-  
   friendsify-person:
     image: friendsify-person
     build: friendsify-person-service
@@ -26,43 +36,31 @@ services:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
       - POSTGRES_USER=admin
-
+      - DB_PORT=5001
     depends_on: 
-      - friendsify-db
-    restart: on-failure
-
-  friendsify-email:
-    image: friendsify-email
-    build: friendsify-email-service
-    ports: 
-      - "9002:9002"
-    environment:
-      - POSTGRES_DB=friendsify
-      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
-      - POSTGRES_USER=admin
-    depends_on:
-      - friendsify-db
+      - person-db
     restart: on-failure
 
   friendsify-friends:
     image: friendsify-friends
     build: friendsify-friends-service
     ports: 
-     - "9003:9003"
+     - "9002:9002"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
       - POSTGRES_USER=admin
+      - DB_PORT=5002
+
     depends_on:
-      - friendsify-person
-      - friendsify-email
+      - friends-db
     restart: on-failure
 
   friendsify-joke:
    image: friendsify-joke
    build: friendsify-joke-service
    ports:
-    - "9004:9004"
+    - "9003:9003"
    environment:
      - POSTGRES_DB=friendsify
      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -75,7 +73,7 @@ services:
     image: friendsify-birthday
     build: friendsify-birthday-service
     ports:
-     - "9005:9005"
+     - "9004:9004"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -88,7 +86,7 @@ services:
     image: friendsify-recommendations
     build: friendsify-recommendations-service
     ports:
-     - "9006:9006"
+     - "9005:9005"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -117,7 +115,6 @@ services:
       - RECOMMENDATIONS_HOST=friendsify-recommendations
       - RECOMMENDATIONS_PORT=9006
     depends_on:
-      - friendsify-db
       - friendsify-person
       - friendsify-email
       - friendsify-friends
