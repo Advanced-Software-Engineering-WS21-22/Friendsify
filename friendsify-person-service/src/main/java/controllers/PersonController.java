@@ -19,7 +19,10 @@ public class PersonController {
     private PersonDao personDao;
 
     @GetMapping()
-    public List<Person> getAllPersons(){ return personDao.findAll();}
+    public List<Person> getAllPersons(){
+        System.out.println("Get all persons");
+        return personDao.findAll();
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Person> getPersonByID(@PathVariable("id")Long id) throws PersonNotFoundException {

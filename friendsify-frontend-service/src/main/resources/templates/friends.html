@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.15.4/css/all.css} "/>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -16,6 +17,66 @@
         <div class="card-body">
             <p>Bellow you can see, wall of your friends. The first table shows persons, that you are friends with. The second one shows people that added you as a friend.</p>
         </div>
+    </div>
+
+    <div class="container mt-5">
+        <h1>People, I am friends with:</h1>
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Friend First Name</th>
+                    <th scope="col">Friend Last Name</th>
+                    <th scope="col">Friends since</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="friend : ${friendsList_active}">
+                    <td th:text="${friend.getId_fs()}"></td>
+                    <td th:text="${@friendsToPersonService.getPerson(friend.getId_receiver()).getFirstName()}"></td>
+                    <td th:text="${@friendsToPersonService.getPerson(friend.getId_receiver()).getLastName()}"></td>
+                    <td th:text="${#temporals.format(friend.getFs_start(), 'dd.MM.yyyy')}"></td>
+                    <td>
+                        <form action="#" th:action="@{./persons/} + ${{friend.getId_receiver()}}" method="get">
+                            <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_receiver()}" type="submit">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container mt-5">
+        <h1>People, that are friends with me:</h1>
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Friend First Name</th>
+                <th scope="col">Friend Last Name</th>
+                <th scope="col">Friends since</th>
+                <th scope="col">Details</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="friend : ${friendsList_passive}">
+                <td th:text="${friend.getId_fs()}"></td>
+                <td th:text="${@friendsToPersonService.getPerson(friend.getId_initiator()).getFirstName()}"></td>
+                <td th:text="${@friendsToPersonService.getPerson(friend.getId_initiator()).getLastName()}"></td>
+                <td th:text="${#temporals.format(friend.getFs_start(), 'dd.MM.yyyy')}"></td>
+                <td>
+                    <form action="#" th:action="@{./persons/} + ${{friend.getId_initiator()}}" method="get">
+                        <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_initiator()}" type="submit">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 
 </div>

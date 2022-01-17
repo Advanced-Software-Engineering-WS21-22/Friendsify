@@ -4,6 +4,7 @@ package aau.at.friendsifyfrontendservice.controllers;
 import aau.at.friendsifyfrontendservice.dataSamples.PersonRepository;
 import aau.at.friendsifyfrontendservice.exceptions.PasswordMatchException;
 import aau.at.friendsifyfrontendservice.models.Person;
+import aau.at.friendsifyfrontendservice.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,12 @@ public class PersonsController {
     @Autowired
     PersonRepository personRepository;
 
+    @Autowired
+    private PersonService personService;
+
     private ArrayList<Person> personArrayList;
+
+    private Person[] allPersons;
 
     @ModelAttribute("module")
     String module() {
@@ -35,6 +41,15 @@ public class PersonsController {
         Person personForm = new Person();
         model.addAttribute("personForm", personForm);
         return "persons";
+
+        /*
+        this.allPersons = this.personService.getPersons();
+
+        Person personForm = new Person();
+        model.addAttribute("personForm", personForm);
+        model.addAttribute("personList", this.allPersons);
+        return "persons";
+        */
     }
 
     @GetMapping("{id_p}")

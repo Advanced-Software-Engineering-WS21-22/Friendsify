@@ -20,6 +20,9 @@
             <li class="nav-item">
                 <a class="nav-link" th:classappend="${module == 'friends' ? 'active' : ''}" href="#" th:href="@{/friends}">Friends</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:classappend="${module == 'newFriends' ? 'active' : ''}" href="#" th:href="@{/friends/new}">Find new Friends</a>
+            </li>
         </ul>
     </div>
     <div class="mx-auto order-0">
