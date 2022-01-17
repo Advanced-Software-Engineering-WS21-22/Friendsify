@@ -51,9 +51,15 @@ services:
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
       - POSTGRES_USER=admin
       - DB_PORT=5002
-
     depends_on:
       - friends-db
+    restart: on-failure
+
+  friendsify-email:
+    image: friendsify-email
+    build: friendsify-email-service
+    ports:
+      - "9002:9002"
     restart: on-failure
 
   friendsify-joke:
@@ -61,12 +67,6 @@ services:
    build: friendsify-joke-service
    ports:
     - "9003:9003"
-   environment:
-     - POSTGRES_DB=friendsify
-     - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
-     - POSTGRES_USER=admin
-   depends_on:
-     - friendsify-friends
    restart: on-failure
 
   friendsify-birthday:
@@ -74,12 +74,6 @@ services:
     build: friendsify-birthday-service
     ports:
      - "9004:9004"
-    environment:
-      - POSTGRES_DB=friendsify
-      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
-      - POSTGRES_USER=admin
-    depends_on:
-      - friendsify-friends
     restart: on-failure
 
   friendsify-recommendations:
@@ -87,12 +81,6 @@ services:
     build: friendsify-recommendations-service
     ports:
      - "9005:9005"
-    environment:
-      - POSTGRES_DB=friendsify
-      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
-      - POSTGRES_USER=admin
-    depends_on:
-      - friendsify-friends
     restart: on-failure
 
 
@@ -114,11 +102,4 @@ services:
       - BIRTHDAY_PORT=9005
       - RECOMMENDATIONS_HOST=friendsify-recommendations
       - RECOMMENDATIONS_PORT=9006
-    depends_on:
-      - friendsify-person
-      - friendsify-email
-      - friendsify-friends
-      - friendsify-birthday
-      - friendsify-joke
-      - friendsify-recommendations
     restart: on-failure

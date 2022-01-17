@@ -1,6 +1,6 @@
 # Database setup
 
-### This directory contains the initialization scripts for the postgres databse.
+### This directory contains the initialization scripts for the postgres databses used by the services.
 
 #### Note that the ```docker-compose.yml``` creates and binds a local data directory to the internal docker volume. That volume persists even after shutting down the services. If you want to newly create the database with the ```init.sql``` script, you have two options:
 
@@ -13,7 +13,7 @@
 
 ## Data 
 
-#### The ```init.sql``` creates two tables and fills them with some sample data, the schema is listed below. For simplicity reasons all Persons use the password: <i>"password"</i>
+#### The ```init.sql``` scripts create a database for each service and fills them with some sample data, the schema is listed below. For simplicity reasons all Persons use the password: <i>"password"</i>. The combined tables of all dbs can be seen below:
  
 ### Persons
 <table title="Person">
