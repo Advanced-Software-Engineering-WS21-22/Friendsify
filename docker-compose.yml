@@ -6,12 +6,15 @@ services:
   friendsify-db:
     image: postgres
     restart: always
+    volumes:
+      - ./database/:/docker-entrypoint-initdb.d/
     ports:
       - 5432:5432
     environment:
      - POSTGRES_PASSWORD=placeholder # TODO: later replace with secret env variable
      - POSTGRES_USER=admin
      - POSTGRES_DB=friendsify
+
 
   
   friendsify-person:
