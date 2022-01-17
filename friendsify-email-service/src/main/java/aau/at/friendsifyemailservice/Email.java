@@ -1,44 +1,18 @@
 package aau.at.friendsifyemailservice;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
 public class Email {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
 
     String from;
     String to;
     String subject;
     String text;
 
-    public Email(){
-
-    }
-    public Email(Long id, String from, String to, String text, String subject){
-        this.id =id;
+    public Email(String from, String to, String subject, String text) {
         this.from = from;
         this.to = to;
         this.text = text;
         this.subject = subject;
-    }
-    public Email(Long id, String from, String to, String text){
-        this.id = id;
-        this.from = from;
-        this.to = to;
-        this.text = text;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFrom() {
@@ -73,12 +47,6 @@ public class Email {
         this.subject = subject;
     }
 
-    public void updateFromDTO(Email other){
-        this.setFrom(other.getFrom());
-        this.setTo(other.getTo());
-        this.setText(other.getText());
-    }
-
     @Override
     public String toString() {
         return "Email{" +
@@ -87,4 +55,5 @@ public class Email {
                 ", text='" + text + '\'' +
                 '}';
     }
+
 }
