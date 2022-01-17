@@ -9,11 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>at.aau</groupId>
-    <artifactId>Friendsify</artifactId>
+    <artifactId>ASE</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Friendsify</name>
+    <name>ASE</name>
     <packaging>pom</packaging>
-    <description>Friendsify</description>
+    <description>ASE</description>
 
     <modules>
         <module>friendsify-person-service</module>
@@ -23,6 +23,8 @@
         <module>friendsify-birthday-service</module>
         <module>friendsify-recommendations-service</module>
         <module>friendsify-frontend-service</module>
+        <module>friendsify-data-mockups</module>
+        <module>friendsify-core</module>
     </modules>
 
     <properties>
