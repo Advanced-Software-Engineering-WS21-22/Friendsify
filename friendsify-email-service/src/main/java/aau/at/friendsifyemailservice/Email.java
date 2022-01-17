@@ -13,13 +13,21 @@ public class Email {
 
     String from;
     String to;
+    String subject;
     String text;
 
     public Email(){
 
     }
-    public Email(Long id, String from, String to, String text){
+    public Email(Long id, String from, String to, String text, String subject){
         this.id =id;
+        this.from = from;
+        this.to = to;
+        this.text = text;
+        this.subject = subject;
+    }
+    public Email(Long id, String from, String to, String text){
+        this.id = id;
         this.from = from;
         this.to = to;
         this.text = text;
@@ -55,6 +63,14 @@ public class Email {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public void updateFromDTO(Email other){
