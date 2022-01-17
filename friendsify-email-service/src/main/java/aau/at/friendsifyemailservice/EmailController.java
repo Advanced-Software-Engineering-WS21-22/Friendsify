@@ -37,11 +37,11 @@ public class EmailController {
         }
         return emailList;
     }
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Email> listEmails(@PathVariable("id") Long id){
-//        Email e = emailDAO.findById(id);
-//        return ResponseEntity.ok(e);
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Email> listEmails(@PathVariable("id") Long id) throws Exception{
+        Email e = emailDAO.findById(id).orElseThrow(()-> new Exception("Email not found by id: "+id));
+        return ResponseEntity.ok(e);
+    }
 
 
     @PostMapping()
@@ -49,21 +49,21 @@ public class EmailController {
         return emailDAO.save(email);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Email> updateEmail(@PathVariable("id") Long id, @RequestBody Email email){
-//        Email originEmail = emailDAO.findById(id);
-//        originEmail.updateFromDTO(email);
-//        Email updatedEmail = emailDAO.save(originEmail);
-//        return ResponseEntity.ok(updatedEmail);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Email> updateEmail(@PathVariable("id") Long id, @RequestBody Email email) throws  Exception{
+        Email originEmail = emailDAO.findById(id).orElseThrow(()-> new Exception("Person not found by id: "+id));
+        originEmail.updateFromDTO(email);
+        Email updatedEmail = emailDAO.save(originEmail);
+        return ResponseEntity.ok(updatedEmail);
+    }
 
-//    @DeleteMapping("/{id}")
-//    public Map<String, Boolean> deleteEmail(@PathVariable("id") Long id){
-//        Email originEmail = emailDAO.findById(id);
-//        emailDAO.delete(originEmail);
-//        Map<String, Boolean>  map = new HashMap<>();
-//        map.put("deleted", Boolean.TRUE);
-//        return map;
-//
-//    }
+    @DeleteMapping("/{id}")
+    public Map<String, Boolean> deleteEmail(@PathVariable("id") Long id) throws Exception{
+        Email originEmail = emailDAO.findById(id).orElseThrow(()-> new Exception("Person not found by id: "+id));
+        emailDAO.delete(originEmail);
+        Map<String, Boolean>  map = new HashMap<>();
+        map.put("deleted", Boolean.TRUE);
+        return map;
+
+    }
 }
