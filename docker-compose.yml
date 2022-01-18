@@ -4,7 +4,7 @@ version: '3'
 
 services:
   person-db:
-    image: postgres
+    image: postgres:alpine3.15
     restart: always
     volumes:
       - ./database/person/:/docker-entrypoint-initdb.d/
@@ -37,7 +37,7 @@ services:
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
       - POSTGRES_USER=admin
       - DB_PORT=5001
-    depends_on: 
+    depends_on:
       - person-db
     restart: on-failure
 

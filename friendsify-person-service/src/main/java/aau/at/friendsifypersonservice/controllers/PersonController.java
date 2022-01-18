@@ -1,11 +1,11 @@
-package controllers;
+package aau.at.friendsifypersonservice.controllers;
 
-import exceptions.PersonNotFoundException;
-import models.Person;
+import aau.at.friendsifypersonservice.exceptions.PersonNotFoundException;
+import aau.at.friendsifypersonservice.models.Person;
+import aau.at.friendsifypersonservice.repositories.PersonDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import repositories.PersonDao;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +19,9 @@ public class PersonController {
     private PersonDao personDao;
 
     @GetMapping()
-    public List<Person> getAllPersons(){ return personDao.findAll();}
+    public List<Person> getAllPersons(){
+        System.out.println("Hey!");
+        return personDao.findAll();}
 
     @GetMapping("/{id}")
     public ResponseEntity<Person> getPersonByID(@PathVariable("id")Long id) throws PersonNotFoundException {
