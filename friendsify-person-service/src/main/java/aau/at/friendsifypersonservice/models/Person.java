@@ -2,6 +2,7 @@ package aau.at.friendsifypersonservice.models;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Entity
@@ -16,6 +17,9 @@ public class Person {
 
     private LocalDate birthday;
 
+    @Email
+    @NotBlank(message = "Email is mandatory!")
+    @Column(unique=true)
     private String email;
 
     private String password;
@@ -27,8 +31,7 @@ public class Person {
     public Person() {
     }
 
-    public Person(Long id_p, String first_name, String last_name, LocalDate birthday, String email, String password, String id_geoDB, String city) {
-        this.id_p = id_p;
+    public Person(String first_name, String last_name, LocalDate birthday, String email, String password, String id_geoDB, String city) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.birthday = birthday;
