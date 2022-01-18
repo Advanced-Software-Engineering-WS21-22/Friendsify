@@ -1,7 +1,8 @@
-package repositories;
+package aau.at.friendsifypersonservice.repositories;
 
-import models.Person;
+import aau.at.friendsifypersonservice.models.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 
 public interface PersonDao extends JpaRepository<Person,Long>{
 }
