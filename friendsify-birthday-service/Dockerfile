@@ -1,6 +1,7 @@
 FROM openjdk:11
 
-COPY target/friendsify-birthday-service-0.0.1-SNAPSHOT.jar /spring-boot.jar
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
 
 EXPOSE 9005
 

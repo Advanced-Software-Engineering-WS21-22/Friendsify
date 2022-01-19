@@ -84,13 +84,15 @@ services:
     ports:
      - "9005:9005"
     environment:
-      - POSTGRES_DB=friendsify
-      - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
-      - POSTGRES_USER=admin
       - EMAIL_HOST=friendsify-email
       - EMAIL_PORT=9001
+      - PERSON_HOST=friendsify-person
+      - PERSON_PORT=9002
+      - FRIENDS_HOST=friendsify-friends
+      - FRIENDS_PORT=9003
     depends_on:
-      - friendsify-friends
+      - friendsify-person
+      - friendsify-email
     restart: on-failure
 
   friendsify-recommendations:
