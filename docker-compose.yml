@@ -62,18 +62,16 @@ services:
       - friends-db
     restart: on-failure
 
-
   friendsify-joke:
    image: friendsify-joke
    build: friendsify-joke-service
    ports:
     - "9004:9004"
    environment:
-     - POSTGRES_DB=friendsify
-     - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
-     - POSTGRES_USER=admin
      - EMAIL_HOST=friendsify-email
      - EMAIL_PORT=9001
+     - PERSON_HOST=friendsify-person
+     - PERSON_PORT=9002
    env_file:
      - .env
    depends_on:
