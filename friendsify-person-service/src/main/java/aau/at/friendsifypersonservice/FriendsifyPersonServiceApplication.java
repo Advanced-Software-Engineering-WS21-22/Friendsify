@@ -1,12 +1,11 @@
 package aau.at.friendsifypersonservice;
 
-import controllers.PersonController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackageClasses = PersonController.class)
 public class FriendsifyPersonServiceApplication {
 
     public static void main(String[] args) {

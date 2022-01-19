@@ -5,6 +5,6 @@ ENV POSTGRES_DB=host.docker.internal
 ENV POSTGRES_pASS=host.docker.internal
 ENV DB_PORT=host.docker.internal
 
-EXPOSE 9004
+EXPOSE 9003
 
 ENTRYPOINT ["java","-jar","spring-boot.jar"]
