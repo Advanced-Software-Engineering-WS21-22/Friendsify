@@ -93,6 +93,7 @@ services:
     depends_on:
       - friendsify-person
       - friendsify-email
+      - friendsify-friends
     restart: on-failure
 
   friendsify-recommendations:
