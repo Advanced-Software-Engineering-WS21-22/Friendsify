@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,12 +43,12 @@ public class PersonController {
     }
 
     @PostMapping()
-    public Person createPerson(@RequestBody Person person){
+    public Person createPerson(@Valid @RequestBody Person person){
         return personDao.save(person);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Person> updatePerson(@PathVariable("id") Long id, @RequestBody Person newPerson) throws PersonNotFoundException {
+    public ResponseEntity<Person> updatePerson(@PathVariable("id") Long id, @Valid @RequestBody Person newPerson) throws PersonNotFoundException {
         Person storedPerson = personDao.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException("Person not found by id: "+id));
 
@@ -58,7 +59,7 @@ public class PersonController {
     }
 
     @PutMapping("/{email}")
-    public ResponseEntity<Person> updatePerson(@PathVariable("email") String email, @RequestBody Person newPerson) throws PersonNotFoundException {
+    public ResponseEntity<Person> updatePerson(@PathVariable("email") String email, @Valid @RequestBody Person newPerson) throws PersonNotFoundException {
         Person storedPerson = personDao.findByEmail(email);
         if (storedPerson==null) throw new PersonNotFoundException("Person not found by email: "+email);
 
