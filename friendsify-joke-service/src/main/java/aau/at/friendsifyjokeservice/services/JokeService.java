@@ -13,7 +13,8 @@ import java.util.Optional;
 public class JokeService {
     private final WebClient jokesOneClient;
     private final WebClient jokeApiClient;
-    @Value("joke.api.token")
+
+    @Value("#{environment.JOKE_API_TOKEN}")
     private String token;
 
     public JokeService(WebClient.Builder webClientBuilder) {
@@ -21,7 +22,6 @@ public class JokeService {
         this.jokeApiClient = webClientBuilder
                 .baseUrl("https://jokeapi-v2.p.rapidapi.com/joke/Programming?type=single&format=json&blacklistFlags=nsfw,racist&safe-mode=true")
                 .defaultHeader("x-rapidapi-host", "jokeapi-v2.p.rapidapi.com")
-                .defaultHeader("x-rapidapi-key", token)
         .build();
     }
 
@@ -44,9 +44,11 @@ public class JokeService {
     }
 
     public String randomJoke() {
+        System.out.println(token);
         return Optional.ofNullable(
                 this.jokeApiClient
                         .get()
+                        .header("x-rapidapi-key", token)
                         .retrieve()
                         .bodyToMono(JokeApiContent.class)
                         .block()
@@ -54,7 +56,9 @@ public class JokeService {
     }
 
     public String getJokebyType(String type) {
+        System.out.println(type);
         JokeTypes jt = JokeTypes.find(type);
+        System.out.println(jt.name());
         String joke = null;
         switch (jt) {
             case JOD:
