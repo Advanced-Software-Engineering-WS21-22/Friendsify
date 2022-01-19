@@ -11,17 +11,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class FriendsifyUserDetailsService implements UserDetailsService {
 
 
     @Autowired
-    private PersonRepository personRepository;
+    private PersonRepository personRepository = PersonRepository.getPersonRepository();
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        this.personRepository = PersonRepository.getPersonRepository();
         List authorities = new ArrayList();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
@@ -29,11 +29,12 @@ public class FriendsifyUserDetailsService implements UserDetailsService {
     }
 
     private Person findUser(String username) {
+        Person found = null;
         for (Person p: this.personRepository.getPersons()) {
-            if(username.equals(p.getEmail())) {
-                return p;
+            if(Objects.equals(username, p.getEmail())) {
+                found = p;
             }
         }
-        return null;
+        return found;
     }
 }

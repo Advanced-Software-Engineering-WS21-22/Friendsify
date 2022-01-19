@@ -3,6 +3,8 @@ package aau.at.friendsifyfrontendservice.models;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -56,5 +58,14 @@ public class Person {
         this.id_geoDB = id_geoDB;
         this.city = city;
         this.password_hash = password_hash;
+    }
+
+    public String getPassword_hash() {
+        if(this.password_hash != null) {
+            return this.password_hash;
+        } else {
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            return passwordEncoder.encode(this.password);
+        }
     }
 }

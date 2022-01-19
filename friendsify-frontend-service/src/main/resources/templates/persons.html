@@ -89,7 +89,6 @@
                     <th scope="col">E-Mail</th>
                     <th scope="col">Birthday</th>
                     <th scope="col">City</th>
-                    <th scope="col">geoDB ID</th>
                     <th scope="col">Details</th>
                 </tr>
             </thead>
@@ -101,7 +100,6 @@
                     <td th:text="${person.getEmail()}"></td>
                     <td th:text="${#temporals.format(person.getBirthday(), 'dd.MM.yyyy')}"></td>
                     <td th:text="${person.getCity()}"></td>
-                    <td th:text="${person.getId_geoDB()}"></td>
                     <td>
                         <form action="#" th:action="@{./persons/} + ${{person.getId_p()}}" method="get">
                             <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${person.getId_p()}" type="submit">

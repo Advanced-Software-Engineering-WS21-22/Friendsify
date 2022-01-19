@@ -92,9 +92,9 @@ services:
       - "9000:9000"
     environment:
       - EMAIL_HOST=friendsify-email
-      - EMAIL_PORT=9001
+      - EMAIL_PORT=9002
       - PERSON_HOST=friendsify-person
-      - PERSON_PORT=9002
+      - PERSON_PORT=9001
       - FRIENDS_HOST=friendsify-friends
       - FRIENDS_PORT=9003
       - JOKE_HOST=friendsify-joke
