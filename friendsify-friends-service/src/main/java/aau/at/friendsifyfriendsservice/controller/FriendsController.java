@@ -1,6 +1,7 @@
 package aau.at.friendsifyfriendsservice.controller;
 
-import aau.at.friendsifyfriendsservice.ResourceNotFoundException;
+import aau.at.friendsifyfriendsservice.exceptions.InvalidDataException;
+import aau.at.friendsifyfriendsservice.exceptions.ResourceNotFoundException;
 import aau.at.friendsifyfriendsservice.model.Friends;
 import aau.at.friendsifyfriendsservice.repositories.FriendsDao;
 import org.slf4j.Logger;
@@ -37,11 +38,11 @@ public class FriendsController {
     }
 
     @PostMapping()
-    public Friends createFriendship(@Valid @RequestBody Friends friends) throws Exception{
+    public Friends createFriendship(@Valid @RequestBody Friends friends) throws InvalidDataException{
         if(checkForDuplicate(friends)){
-            throw new Exception("Friendship is already in DB.");
+            throw new InvalidDataException("Friendship is already in DB.");
         }else  if(checkFriendshipToItself(friends)){
-            throw  new Exception("Friendship to itself is not allowed.");
+            throw  new InvalidDataException("Friendship to itself is not allowed.");
         }
         return friendsDao.save(friends);
     }
@@ -49,26 +50,26 @@ public class FriendsController {
     @PutMapping("/{id}")
     public ResponseEntity<Friends> updateFriendship(@PathVariable("id") Long id,
                                                     @Valid @RequestBody Friends friendsDto)
-            throws ResourceNotFoundException, Exception{
+            throws ResourceNotFoundException, InvalidDataException {
 
 
-        Friends origLecture = friendsDao.findById(id)
+        Friends origFriends = friendsDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Friendship not found for id: " + id));
 
         if(checkForDuplicate(friendsDto)){
-            throw new Exception("Friendship is already in DB.");
+            throw new InvalidDataException("Friendship is already in DB.");
         }else if(checkFriendshipToItself(friendsDto)){
-            throw  new Exception("Friendship to itself is not allowed.");
+            throw  new InvalidDataException("Friendship to itself is not allowed.");
         }
 
-        origLecture.updateFromDto(friendsDto);
+        origFriends.updateFromDto(friendsDto);
 
-        Friends updatedLecture = friendsDao.save(origLecture);
+        Friends updatedLecture = friendsDao.save(origFriends);
         return ResponseEntity.ok(updatedLecture);
     }
 
     @DeleteMapping("/{id}")
-    public Map<String, Boolean> deleteLecture(@PathVariable("id") Long id)
+    public Map<String, Boolean> deleteFriendship(@PathVariable("id") Long id)
             throws ResourceNotFoundException {
 
         Friends origfriends = friendsDao.findById(id)
