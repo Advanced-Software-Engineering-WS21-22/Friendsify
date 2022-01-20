@@ -26,7 +26,6 @@
         <module>friendsify-frontend-service</module>
         <module>friendsify-data-mockups</module>
         <module>friendsify-core</module>
-        <module>friendsify-weather-service</module>
     </modules>
 
     <properties>

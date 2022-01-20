@@ -89,6 +89,8 @@ services:
     build: friendsify-weather-service
     ports:
       - "9007:9007"
+    env_file:
+      - .env
     restart: on-failure
 
 
