@@ -1,6 +1,6 @@
 CREATE TABLE person
 (
-    ID_P       int primary key not null,
+    ID_P       bigint primary key not null,
     FIRST_NAME varchar         not null,
     LAST_NAME  varchar         not null,
     BIRTHDAY   date            not null,
