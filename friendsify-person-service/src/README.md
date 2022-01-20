@@ -15,11 +15,11 @@
 
 ##Paths
 * GET /persons
-* GET /persons/{id}
-* GET /persons/{email}
+* GET /persons?id={value}
+* GET /persons?email={value}
 * POST /persons
-* PUT /persons/{id}
-* PUT /persons/{email}
-* DELETE /persons/{id}
-* DELETE /persons/{email}
+* PUT /persons?id={value}
+* PUT /persons?email={value}
+* DELETE /persons?id={value}
+* DELETE /persons?email={value}
 

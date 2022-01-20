@@ -24,16 +24,16 @@ public class PersonController {
         System.out.println("Hey!");
         return personDao.findAll();}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Person> getPersonByID(@PathVariable("id")Long id) throws PersonNotFoundException {
+    @GetMapping(params="id")
+    public ResponseEntity<Person> getPersonByID(@RequestParam Long id) throws PersonNotFoundException {
 
         Person p = personDao.findById(id)
                 .orElseThrow(()-> new PersonNotFoundException("Person not found by id: "+id));
         return ResponseEntity.ok(p);
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<Person> getPersonByEmail(@PathVariable("email")String email) throws PersonNotFoundException {
+    @GetMapping(params = "email")
+    public ResponseEntity<Person> getPersonByEmail(@RequestParam String email) throws PersonNotFoundException {
 
         Person p = personDao.findByEmail(email);
         if (p == null){
@@ -47,8 +47,8 @@ public class PersonController {
         return personDao.save(person);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Person> updatePerson(@PathVariable("id") Long id, @Valid @RequestBody Person newPerson) throws PersonNotFoundException {
+    @PutMapping(params = "id")
+    public ResponseEntity<Person> updatePerson(@RequestParam Long id, @Valid @RequestBody Person newPerson) throws PersonNotFoundException {
         Person storedPerson = personDao.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException("Person not found by id: "+id));
 
@@ -58,8 +58,8 @@ public class PersonController {
         return ResponseEntity.ok(updatedPerson);
     }
 
-    @PutMapping("/{email}")
-    public ResponseEntity<Person> updatePerson(@PathVariable("email") String email, @Valid @RequestBody Person newPerson) throws PersonNotFoundException {
+    @PutMapping(params = "email")
+    public ResponseEntity<Person> updatePerson(@RequestParam String email, @Valid @RequestBody Person newPerson) throws PersonNotFoundException {
         Person storedPerson = personDao.findByEmail(email);
         if (storedPerson==null) throw new PersonNotFoundException("Person not found by email: "+email);
 
@@ -68,8 +68,8 @@ public class PersonController {
         return ResponseEntity.ok(updatedPerson);
     }
 
-    @DeleteMapping("/{id}")
-    public Map<String, Boolean> deletePerson(@PathVariable("id") Long id)
+    @DeleteMapping(params = "id")
+    public Map<String, Boolean> deletePerson(@RequestParam Long id)
             throws PersonNotFoundException {
 
         Person storedPerson = personDao.findById(id)
@@ -81,8 +81,8 @@ public class PersonController {
         return response;
     }
 
-    @DeleteMapping("/{email}")
-    public Map<String, Boolean> deletePerson(@PathVariable("email") String email)
+    @DeleteMapping(params = "email")
+    public Map<String, Boolean> deletePerson(@RequestParam String email)
             throws PersonNotFoundException {
 
         Person storedPerson = personDao.findByEmail(email);
