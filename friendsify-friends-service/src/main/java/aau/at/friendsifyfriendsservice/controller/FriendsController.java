@@ -90,10 +90,7 @@ public class FriendsController {
         return false;
     }
     private boolean checkFriendshipToItself(Friends friends){
-        if(friends.getEmail_p_initiator().equals(friends.getEmail_p_friend())){
-            return true;
-        }
-        return false;
+        return friends.getEmail_p_initiator().equals(friends.getEmail_p_friend());
     }
 
 }
