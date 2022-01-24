@@ -11,9 +11,11 @@ public class Friends {
     private Long id_friend;
 
     @Email
+    @NotBlank(message = "Email_Initator is mandatory!")
     private String email_p_initiator;
 
     @Email
+    @NotBlank(message = "Email_friend is mandatory!")
     private String email_p_friend;
 
     private Date fs_start_date;
