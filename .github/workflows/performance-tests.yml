@@ -18,6 +18,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Run mvn intall
+        run: mvn install
       - name: Run docker compose
         run: docker-compose -f docker-compose.yml up -d
       - name: Run performance tests
@@ -25,3 +27,5 @@ jobs:
         with:
           testFilePath: friendsify-email-service/src/test/jmeter/performance-test.jmx
           outputReportsFolder: reports
+      - name: Stop docker compose
+        run: docker-compose down
