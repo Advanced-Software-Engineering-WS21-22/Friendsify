@@ -22,7 +22,7 @@ jobs:
         run: mvn install -DskipTests
       - name: Run performance tests
         uses: rbhadti94/apache-jmeter-action@v0.5.0
-        run: docker-compose -f docker-compose.yml up -d
+        run: docker-compose -f docker-compose.yml up -d -H localhost
         with:
           testFilePath: friendsify-email-service/src/test/jmeter/performance-test.jmx
       - name: Stop docker compose
