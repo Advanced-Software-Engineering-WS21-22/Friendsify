@@ -18,8 +18,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - name: Run mvn intall
-        run: mvn install
+      - name: Run mvn install and skip tests
+        run: mvn install -DskipTests
       - name: Run docker compose
         run: docker-compose -f docker-compose.yml up -d
       - name: Run performance tests
