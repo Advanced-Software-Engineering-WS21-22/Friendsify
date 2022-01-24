@@ -8,7 +8,11 @@ import org.springframework.web.bind.annotation.*;
 public class EmailController {
 
     @Autowired
-    public EmailService emailService;
+    public final EmailService emailService;
+
+    public EmailController(EmailService emailService) {
+        this.emailService = emailService;
+    }
 
     @GetMapping()
     public String showEmailsPage() {

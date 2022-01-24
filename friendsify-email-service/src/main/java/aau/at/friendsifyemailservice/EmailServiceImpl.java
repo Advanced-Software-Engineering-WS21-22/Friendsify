@@ -9,10 +9,14 @@ import org.springframework.stereotype.Service;
 @Service("SendService")
 public class EmailServiceImpl implements EmailService {
 
-    private static final String NO_REPLY = "noreply@friendsify.com";
+    public static final String NO_REPLY = "noreply@friendsify.com";
 
     @Autowired
     private JavaMailSender emailSender;
+
+    public EmailServiceImpl(JavaMailSender emailSender) {
+        this.emailSender = emailSender;
+    }
 
     @Override
     public void sendEmail(String to, String from, String subject, String text) {
