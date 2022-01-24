@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,21 @@ public class FriendsController {
         Friends f = friendsDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Friendship not found for id: " + id));
         return ResponseEntity.ok(f);
+    }
+
+    @GetMapping("/query")
+    public List<Friends> getFriendshipsByEmailInitiator(@RequestParam String email)
+            throws ResourceNotFoundException {
+        List<Friends> friends = new ArrayList<>();
+        for(Friends f: friendsDao.findAll()){
+            if(f.getEmail_p_initiator().equals(email)){
+                friends.add(f);
+            }
+        }
+        if(friends.isEmpty()){
+            throw  new ResourceNotFoundException("No Friendships with this initator email found: "+email);
+        }
+        return friends;
     }
 
     @PostMapping()
