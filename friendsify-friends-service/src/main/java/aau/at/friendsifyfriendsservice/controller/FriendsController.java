@@ -38,7 +38,7 @@ public class FriendsController {
         return ResponseEntity.ok(f);
     }
 
-    @GetMapping("/query")
+    @GetMapping(params = "email")
     public List<Friends> getFriendshipsByEmailInitiator(@RequestParam String email)
             throws ResourceNotFoundException {
         List<Friends> friends = new ArrayList<>();
@@ -51,6 +51,16 @@ public class FriendsController {
             throw  new ResourceNotFoundException("No Friendships with this initator email found: "+email);
         }
         return friends;
+    }
+
+    @GetMapping(params = { "email_initiator", "email_friend" })
+    public Long getID(@RequestParam String email_initiator, @RequestParam String email_friend) throws  ResourceNotFoundException{
+        for(Friends f: friendsDao.findAll()){
+            if(f.getEmail_p_initiator().equals(email_initiator) && f.getEmail_p_friend().equals(email_friend)){
+                return f.getId_friend();
+            }
+        }
+        throw new ResourceNotFoundException("Friendship with email_initiator = "+email_initiator+" and email_friend = "+email_friend+" was not found.");
     }
 
     @PostMapping()
