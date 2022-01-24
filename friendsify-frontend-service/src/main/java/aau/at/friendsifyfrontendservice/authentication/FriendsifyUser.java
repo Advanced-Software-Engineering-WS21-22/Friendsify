@@ -12,16 +12,16 @@ public class FriendsifyUser extends User implements UserDetails {
     private Person person;
 
     public FriendsifyUser(Person person, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
-        super(person.getEmail(), person.getPassword_hash(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
+        super(person.getEmail(), person.getPassword(), enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
         this.person = person;
     }
 
     public String getFirstName() {
-        return this.person.getFirstName();
+        return this.person.getFirst_name();
     }
 
     public String getLastName() {
-        return this.person.getLastName();
+        return this.person.getLast_name();
     }
 
     public Person getPerson() {
@@ -30,6 +30,6 @@ public class FriendsifyUser extends User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return this.person.getPassword_hash();
+        return this.person.getPassword();
     }
 }

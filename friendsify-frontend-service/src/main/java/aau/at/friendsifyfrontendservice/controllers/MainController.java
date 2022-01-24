@@ -19,7 +19,7 @@ public class MainController {
     @GetMapping("/home")
     public String main(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        FriendsifyUser currentUser = (FriendsifyUser)auth.getPrincipal();
+        FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
 
         model.addAttribute("userFirstName", currentUser.getFirstName());
         model.addAttribute("userLastName", currentUser.getLastName());

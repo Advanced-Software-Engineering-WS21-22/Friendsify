@@ -1,10 +1,8 @@
 package aau.at.friendsifyfrontendservice.models;
 
+import aau.at.friendsifyfrontendservice.inputs.PersonInput;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -14,13 +12,12 @@ public class Person {
 
     private Long id_p;
 
-    private String firstName;
+    private String first_name;
 
-    private String lastName;
+    private String last_name;
 
     private String email;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
     private String id_geoDB;
@@ -29,43 +26,40 @@ public class Person {
 
     private String password;
 
-    private String repeat_password;
-
-    private String password_hash;
-
     public Person() {
 
     }
 
-    public Person(Long id_p, String firstName, String lastName, String email, LocalDate birthday, String id_geoDB, String city, String password, String repeat_password) {
-        this.id_p = id_p;
-        this.firstName = firstName;
-        this.lastName = lastName;
+
+    public Person(String first_name, String last_name, String email, LocalDate birthday, String id_geoDB, String city, String password) {
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
         this.birthday = birthday;
         this.id_geoDB = id_geoDB;
         this.city = city;
         this.password = password;
-        this.repeat_password = repeat_password;
     }
 
-    public Person(Long id_p, String firstName, String lastName, String email, LocalDate birthday, String id_geoDB, String city, String password_hash) {
+    public Person(Long id_p, String first_name, String last_name, String email, LocalDate birthday, String id_geoDB, String city, String password) {
         this.id_p = id_p;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.first_name = first_name;
+        this.last_name = last_name;
         this.email = email;
         this.birthday = birthday;
         this.id_geoDB = id_geoDB;
         this.city = city;
-        this.password_hash = password_hash;
+        this.password = password;
     }
 
-    public String getPassword_hash() {
-        if(this.password_hash != null) {
-            return this.password_hash;
-        } else {
-            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            return passwordEncoder.encode(this.password);
-        }
+    public static Person fromPersonInput(PersonInput person) {
+        return new Person(person.getFirst_name(),
+                person.getLast_name(),
+                person.getEmail(),
+                person.getBirthday(),
+                person.getId_geoDB(),
+                person.getCity(),
+                person.getPassword_hash()
+        );
     }
 }

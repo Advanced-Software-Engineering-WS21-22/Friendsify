@@ -27,12 +27,12 @@ public class FriendsRepository {
     }
 
     private void fillWithSamples() {
-        Friends fs1 = new Friends(Long.valueOf(0), Long.valueOf(3), Long.valueOf(4), LocalDate.of(2019,1,31), false);
-        Friends fs2 = new Friends(Long.valueOf(1), Long.valueOf(1), Long.valueOf(0), LocalDate.of(2020,6,1), false);
-        Friends fs3 = new Friends(Long.valueOf(2), Long.valueOf(6), Long.valueOf(5), LocalDate.of(2021,2,18), false);
-        Friends fs4 = new Friends(Long.valueOf(3), Long.valueOf(4), Long.valueOf(5), LocalDate.of(2020,8,21), true);
-        Friends fs5 = new Friends(Long.valueOf(4), Long.valueOf(0), Long.valueOf(2), LocalDate.of(2020,8,21), true);
-        Friends fs6 = new Friends(Long.valueOf(5), Long.valueOf(0), Long.valueOf(5), LocalDate.of(2021,9,16), true);
+        Friends fs1 = new Friends(Long.valueOf(0), "hans.m@gmail.com", "max@mustermann.de", LocalDate.of(2019,1,31), false);
+        Friends fs2 = new Friends(Long.valueOf(1), "anna@mustermann.de", "hans.m@gmail.com", LocalDate.of(2020,6,1), false);
+        Friends fs3 = new Friends(Long.valueOf(2), "max@mustermann.de", "john.doe@email.com", LocalDate.of(2021,2,18), false);
+        Friends fs4 = new Friends(Long.valueOf(3), "hans.m@gmail.com", "anna@mustermann.de", LocalDate.of(2020,8,21), false);
+        Friends fs5 = new Friends(Long.valueOf(4), "max@mustermann.de", "john.doe@email.com", LocalDate.of(2020,8,21), false);
+        Friends fs6 = new Friends(Long.valueOf(5), "max@mustermann.de", "anna@mustermann.de", LocalDate.of(2021,9,16), false);
 
         this.friends.add(fs1);
         this.friends.add(fs2);
@@ -42,10 +42,10 @@ public class FriendsRepository {
         this.friends.add(fs6);
     }
 
-    public ArrayList<Friends> getFriendsActive(Long id_initiator) {
+    public ArrayList<Friends> getFriendsActive(String email_p_initiator) {
         ArrayList<Friends> friends_active = new ArrayList<>();
         for (Friends fs: this.friends) {
-            if(fs.getId_initiator() == id_initiator) {
+            if(fs.getEmail_p_initiator().equals(email_p_initiator)) {
                 friends_active.add(fs);
             }
         }
@@ -53,10 +53,10 @@ public class FriendsRepository {
         return friends_active;
     }
 
-    public ArrayList<Friends> getFriendsPassive(Long id_receiver) {
+    public ArrayList<Friends> getFriendsPassive(String email_p_friend) {
         ArrayList<Friends> friends_passive = new ArrayList<>();
         for (Friends fs: this.friends) {
-            if(fs.getId_receiver() == id_receiver) {
+            if(fs.getEmail_p_friend().equals(email_p_friend)) {
                 friends_passive.add(fs);
             }
         }

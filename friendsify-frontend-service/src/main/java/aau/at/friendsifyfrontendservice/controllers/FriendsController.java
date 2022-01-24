@@ -31,13 +31,14 @@ public class FriendsController {
 
     @GetMapping
     public String friends(Model model) {
+        friendsToPersonService.loadPersons();
         model.addAttribute("module", "friends");
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
 
-        this.friendsList_active = this.friendsRepository.getFriendsActive(currentUser.getPerson().getId_p());
-        this.friendsList_passive = this.friendsRepository.getFriendsPassive(currentUser.getPerson().getId_p());
+        this.friendsList_active = this.friendsRepository.getFriendsActive(currentUser.getPerson().getEmail());
+        this.friendsList_passive = this.friendsRepository.getFriendsPassive(currentUser.getPerson().getEmail());
 
         model.addAttribute("friendsList_active", this.friendsList_active);
         model.addAttribute("friendsList_passive", this.friendsList_passive);
@@ -47,17 +48,6 @@ public class FriendsController {
     @GetMapping("/new")
     public String newFriend(Model model) {
         model.addAttribute("module", "newFriends");
-        /*
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
-
-        this.friendsList_active = this.friendsRepository.getFriendsActive(currentUser.getPerson().getId_p());
-        this.friendsList_passive = this.friendsRepository.getFriendsPassive(currentUser.getPerson().getId_p());
-
-        model.addAttribute("friendsList_active", this.friendsList_active);
-        model.addAttribute("friendsList_passive", this.friendsList_passive);
-        return "friends";
-        */
         return "addFriend";
     }
 }

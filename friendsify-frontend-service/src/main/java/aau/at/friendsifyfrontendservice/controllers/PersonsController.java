@@ -3,12 +3,14 @@ package aau.at.friendsifyfrontendservice.controllers;
 
 import aau.at.friendsifyfrontendservice.dataSamples.PersonRepository;
 import aau.at.friendsifyfrontendservice.exceptions.PasswordMatchException;
+import aau.at.friendsifyfrontendservice.inputs.PersonInput;
 import aau.at.friendsifyfrontendservice.models.Person;
 import aau.at.friendsifyfrontendservice.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.view.RedirectView;
 import java.time.LocalDate;
 import java.time.Period;
@@ -35,28 +37,20 @@ public class PersonsController {
 
     @GetMapping
     public String persons(Model model) {
-        this.personArrayList = this.personRepository.getPersons();
-        model.addAttribute("personList", this.personArrayList);
 
-        Person personForm = new Person();
-        model.addAttribute("personForm", personForm);
-        return "persons";
-
-        /*
         this.allPersons = this.personService.getPersons();
 
-        Person personForm = new Person();
+        PersonInput personForm = new PersonInput();
         model.addAttribute("personForm", personForm);
         model.addAttribute("personList", this.allPersons);
+
         return "persons";
-        */
     }
 
     @GetMapping("{id_p}")
     public String person(Model model, @PathVariable("id_p") Long id_p) {
-        Integer key = (int) (long) id_p;
 
-        Person person = personArrayList.get(key);
+        Person person = personService.getPersonById(id_p);
 
         int age = Period.between(person.getBirthday(), LocalDate.now()).getYears();
 
@@ -66,14 +60,12 @@ public class PersonsController {
     }
 
     @PostMapping()
-    public RedirectView addPerson (@ModelAttribute(value="personForm") Person personForm, Model model) throws PasswordMatchException {
+    public RedirectView addPerson(@ModelAttribute(value="personForm") PersonInput personForm, Model model) throws PasswordMatchException, HttpServerErrorException.InternalServerError {
 
         if(!personForm.getPassword().equals(personForm.getRepeat_password())) {
-            System.out.println("Passwords: " + personForm.getPassword() + " " + personForm.getRepeat_password());
             throw new PasswordMatchException("Passwords don't match.");
         } else {
-            personForm.setId_p(new Long(this.personArrayList.size()));
-            this.personArrayList.add(personForm);
+            this.personService.addPerson(Person.fromPersonInput(personForm));
         }
 
         return new RedirectView("./persons");

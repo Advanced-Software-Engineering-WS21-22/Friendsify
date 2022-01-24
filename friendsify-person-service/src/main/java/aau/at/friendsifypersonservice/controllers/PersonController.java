@@ -23,16 +23,16 @@ public class PersonController {
         System.out.println("Hey!");
         return personDao.findAll();}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Person> getPersonByID(@PathVariable("id")Long id) throws PersonNotFoundException {
+    @GetMapping(params = "id")
+    public ResponseEntity<Person> getPersonByID(@RequestParam Long id) throws PersonNotFoundException {
 
         Person p = personDao.findById(id)
                 .orElseThrow(()-> new PersonNotFoundException("Person not found by id: "+id));
         return ResponseEntity.ok(p);
     }
 
-    @GetMapping("/{email}")
-    public ResponseEntity<Person> getPersonByEmail(@PathVariable("email")String email) throws PersonNotFoundException {
+    @GetMapping(params = "email")
+    public ResponseEntity<Person> getPersonByEmail(@RequestParam String email) throws PersonNotFoundException {
 
         Person p = personDao.findByEmail(email);
         if (p == null){

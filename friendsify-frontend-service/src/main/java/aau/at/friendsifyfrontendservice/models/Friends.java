@@ -9,13 +9,13 @@ import java.time.LocalDate;
 @Setter
 public class Friends {
 
-    private Long id_fs;
+    private Long id_friend;
 
-    private Long id_initiator;
+    private String email_p_initiator;
 
-    private Long id_receiver;
+    private String email_p_friend;
 
-    private LocalDate fs_start;
+    private LocalDate fs_start_date;
 
     private boolean is_timed_out;
 
@@ -23,11 +23,18 @@ public class Friends {
 
     }
 
-    public Friends(Long id_fs, Long id_initiator, Long id_receiver, LocalDate fs_start, boolean is_timed_out) {
-        this.id_fs = id_fs;
-        this.id_initiator = id_initiator;
-        this.id_receiver = id_receiver;
-        this.fs_start = fs_start;
+    public Friends(Long id_friend, String email_p_initiator, String email_p_friend, LocalDate fs_start_date, boolean is_timed_out) {
+        this.id_friend = id_friend;
+        this.email_p_initiator = email_p_initiator;
+        this.email_p_friend = email_p_friend;
+        this.fs_start_date = fs_start_date;
+        this.is_timed_out = is_timed_out;
+    }
+
+    public Friends(String email_p_initiator, String email_p_friend, LocalDate fs_start_date, boolean is_timed_out) {
+        this.email_p_initiator = email_p_initiator;
+        this.email_p_friend = email_p_friend;
+        this.fs_start_date = fs_start_date;
         this.is_timed_out = is_timed_out;
     }
 }

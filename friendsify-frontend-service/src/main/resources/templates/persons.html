@@ -26,13 +26,13 @@
                     <div class="form-group row">
                         <label for="firstName" class="col-sm-2 col-form-label">First Name:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="firstName" placeholder="John" th:field="*{firstName}">
+                            <input type="text" class="form-control" id="firstName" placeholder="John" th:field="*{first_name}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="lastName" class="col-sm-2 col-form-label">Last Name:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="lastName" placeholder="Doe" th:field="*{lastName}">
+                            <input type="text" class="form-control" id="lastName" placeholder="Doe" th:field="*{last_name}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -95,8 +95,8 @@
             <tbody>
                 <tr th:each="person : ${personList}">
                     <td th:text="${person.getId_p()}"></td>
-                    <td th:text="${person.getFirstName()}"></td>
-                    <td th:text="${person.getLastName()}"></td>
+                    <td th:text="${person.getFirst_name()}"></td>
+                    <td th:text="${person.getLast_name()}"></td>
                     <td th:text="${person.getEmail()}"></td>
                     <td th:text="${#temporals.format(person.getBirthday(), 'dd.MM.yyyy')}"></td>
                     <td th:text="${person.getCity()}"></td>
