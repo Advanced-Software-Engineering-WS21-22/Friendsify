@@ -38,17 +38,32 @@ public class FriendsController {
         return ResponseEntity.ok(f);
     }
 
-    @GetMapping(params = "email")
-    public List<Friends> getFriendshipsByEmailInitiator(@RequestParam String email)
+    @GetMapping(params = "email_initiator")
+    public List<Friends> getFriendshipsByEmailInitiator(@RequestParam String email_initiator)
+            throws ResourceNotFoundException {
+        List<Friends> friends_of_initiator = new ArrayList<>();
+        for(Friends f: friendsDao.findAll()){
+            if(f.getEmail_p_initiator().equals(email_initiator)){
+                friends_of_initiator.add(f);
+            }
+        }
+        if(friends_of_initiator.isEmpty()){
+            throw  new ResourceNotFoundException("No Friendships with this initator email found: "+ email_initiator);
+        }
+        return friends_of_initiator;
+    }
+
+    @GetMapping(params = "email_friend")
+    public List<Friends> getFriendshipsByEmailFriend(@RequestParam String email_friend)
             throws ResourceNotFoundException {
         List<Friends> friends = new ArrayList<>();
         for(Friends f: friendsDao.findAll()){
-            if(f.getEmail_p_initiator().equals(email)){
+            if(f.getEmail_p_initiator().equals(email_friend)){
                 friends.add(f);
             }
         }
         if(friends.isEmpty()){
-            throw  new ResourceNotFoundException("No Friendships with this initator email found: "+email);
+            throw  new ResourceNotFoundException("No Friendships with this initator email found: "+ email_friend);
         }
         return friends;
     }

@@ -13,7 +13,8 @@
 ##Paths
 * GET /friends
 * GET /friends?id={value}
-* GET /friends?email={value}
+* GET /friends?email_initiator={value}
+* GET /friends?email_friends={value}
 * GET /friends?email_initiator={value}&email_friend={value} 
 * POST /friends
 * PUT /friends?id={value}
