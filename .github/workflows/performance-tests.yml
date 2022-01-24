@@ -26,6 +26,5 @@ jobs:
         uses: rbhadti94/apache-jmeter-action@v0.5.0
         with:
           testFilePath: friendsify-email-service/src/test/jmeter/performance-test.jmx
-          outputReportsFolder: reports
       - name: Stop docker compose
         run: docker-compose down
