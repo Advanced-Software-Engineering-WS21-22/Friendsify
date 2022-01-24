@@ -11,7 +11,7 @@ public class Friends {
     private Long id_friend;
 
     @Email
-    @NotBlank(message = "Email_Initator is mandatory!")
+    @NotBlank(message = "Email_Initiator is mandatory!")
     private String email_p_initiator;
 
     @Email
