@@ -23,7 +23,7 @@ jobs:
       - name: Run docker compose
         run: docker-compose -f docker-compose.yml up -d
       - name: check for service with curl
-        run: curl http://${host.docker.internal}:9002/email
+        run: curl http://0.0.0.0:9002/email
       - name: Run performance tests
         uses: rbhadti94/apache-jmeter-action@v0.5.0
         with:
