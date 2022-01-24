@@ -4,6 +4,7 @@ import aau.at.friendsifyfrontendservice.models.Person;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 @Service
@@ -35,7 +36,7 @@ public class PersonService {
         return person;
     }
 
-    public void addPerson(Person person) {
+    public void addPerson(Person person) throws HttpServerErrorException {
         restTemplate.postForObject(personServiceEndpoint, person, Person.class);
     }
 
