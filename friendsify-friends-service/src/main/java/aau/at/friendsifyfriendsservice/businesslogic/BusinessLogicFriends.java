@@ -3,7 +3,6 @@ package aau.at.friendsifyfriendsservice.businesslogic;
 import aau.at.friendsifyfriendsservice.exceptions.*;
 import aau.at.friendsifyfriendsservice.model.Friends;
 import aau.at.friendsifyfriendsservice.repositories.FriendsDao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -12,10 +11,12 @@ import java.util.List;
 @Service
 public class BusinessLogicFriends {
 
-    @Autowired
+//    @Autowired
     private final FriendsDao friendsDao;
 
-    public BusinessLogicFriends (){}
+    public BusinessLogicFriends (FriendsDao friendsDao){
+        this.friendsDao = friendsDao;
+    }
 
     public List<Friends> getAllFriendship(){
         return friendsDao.findAll();
