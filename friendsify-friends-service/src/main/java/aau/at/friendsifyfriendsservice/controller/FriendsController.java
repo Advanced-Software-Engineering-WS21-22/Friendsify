@@ -4,8 +4,6 @@ import aau.at.friendsifyfriendsservice.exceptions.InvalidDataException;
 import aau.at.friendsifyfriendsservice.exceptions.ResourceNotFoundException;
 import aau.at.friendsifyfriendsservice.model.Friends;
 import aau.at.friendsifyfriendsservice.repositories.FriendsDao;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +17,6 @@ import java.util.Map;
 @RestController()
 @RequestMapping("/friends")
 public class FriendsController {
-    private static final Logger LOG = LoggerFactory.getLogger(FriendsController.class);
 
     @Autowired
     private FriendsDao friendsDao;
@@ -48,7 +45,7 @@ public class FriendsController {
             }
         }
         if(friends_of_initiator.isEmpty()){
-            throw  new ResourceNotFoundException("No Friendships with this initator email found: "+ email_initiator);
+            throw  new ResourceNotFoundException("No Friendships with this initiator email found: "+ email_initiator);
         }
         return friends_of_initiator;
     }
@@ -63,7 +60,7 @@ public class FriendsController {
             }
         }
         if(friends.isEmpty()){
-            throw  new ResourceNotFoundException("No Friendships with this initator email found: "+ email_friend);
+            throw  new ResourceNotFoundException("No Friendships with this initiator email found: "+ email_friend);
         }
         return friends;
     }
@@ -113,10 +110,10 @@ public class FriendsController {
     public Map<String, Boolean> deleteFriendship(@PathVariable("id") Long id)
             throws ResourceNotFoundException {
 
-        Friends origfriends = friendsDao.findById(id)
+        Friends origFriends = friendsDao.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Friendship not found for id: " + id));
 
-        friendsDao.delete(origfriends);
+        friendsDao.delete(origFriends);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return response;
