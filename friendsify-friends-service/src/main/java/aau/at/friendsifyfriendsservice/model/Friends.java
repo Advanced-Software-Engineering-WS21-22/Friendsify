@@ -89,4 +89,14 @@ public class Friends {
                 ", timed_out='" + is_timed_out + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Friends){
+            if(this.email_p_initiator.equals(((Friends) obj).email_p_initiator) && this.email_p_friend.equals(((Friends) obj).email_p_friend) && this.is_timed_out == ((Friends) obj).is_timed_out && this.fs_start_date.equals(((Friends) obj).fs_start_date)){
+                return true;
+            }
+        }
+        return false;
+    }
 }
