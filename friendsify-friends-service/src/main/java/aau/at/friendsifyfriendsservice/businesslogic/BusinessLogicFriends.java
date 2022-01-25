@@ -23,7 +23,7 @@ public class BusinessLogicFriends {
     }
 
     public Friends getById(Long id) throws ResourceNotFoundException{
-        if(friendsDao.getById(id)!=null){
+        if(friendsDao.findById(id)!=null){
             return friendsDao.getById(id);
         }
         throw new ResourceNotFoundException("Friendship not found for id: " + id);
@@ -44,7 +44,7 @@ public class BusinessLogicFriends {
     public List<Friends> getByEmailFriend(String email_friend) throws ResourceNotFoundException{
         List<Friends> friends = new ArrayList<>();
         for(Friends f: friendsDao.findAll()){
-            if(f.getEmail_p_initiator().equals(email_friend)){
+            if(f.getEmail_p_friend().equals(email_friend)){
                 friends.add(f);
             }
         }
@@ -81,7 +81,7 @@ public class BusinessLogicFriends {
 
         origFriends.updateFromDto(friends);
 
-        return saveFriendship(origFriends);
+        return friendsDao.save(origFriends);
     }
 
     public void delete(Long id) throws ResourceNotFoundException {
