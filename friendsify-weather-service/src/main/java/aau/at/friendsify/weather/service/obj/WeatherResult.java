@@ -24,7 +24,7 @@ public class WeatherResult {
         this.iconUrl = weather.map(Weather::getIconUrl).orElse(null);
         this.description = weather.map(Weather::getDescription).orElse(null);
         this.temperatureMin = main.map(WeatherData::getTemperatureMin).orElse(null);
-        this.temperatureMax = main.map(WeatherData::getTemperatureMax).orElse(null);;
+        this.temperatureMax = main.map(WeatherData::getTemperatureMax).orElse(null);
         this.humidity = main.map(WeatherData::getHumidity).orElse(null);
         this.pressure = main.map(WeatherData::getPressure).orElse(null);
         this.windSpeed = Optional.ofNullable(resp.getWind()).map(WindData::getSpeed).orElse(null);

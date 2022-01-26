@@ -14,7 +14,7 @@ public class WeatherClient {
 
     private final WebClient webClient;
 
-    public static String baseUrlIcons = "http://openweathermap.org/img/wn/%s@2x.png";
+    public static final String BASE_URL_ICONS = "http://openweathermap.org/img/wn/%s@2x.png";
 
     @Value("#{environment.WEATHER_API_TOKEN}")
     private String token;

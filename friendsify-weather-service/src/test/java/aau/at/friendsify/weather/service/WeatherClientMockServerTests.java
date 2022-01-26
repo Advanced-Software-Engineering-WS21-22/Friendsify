@@ -38,7 +38,7 @@ public class WeatherClientMockServerTests implements ITestValues {
     }
 
     @Test
-    public void testValidCity() {
+    void testValidCity() {
         String response
                 = "{\"coord\":{\"lon\":13.8558,\"lat\":46.6103},\"weather\":[{\"id\":800,\"main\":\"Clear\",\"description\":\"clear sky\",\"icon\":\"01d\"}],\"base\":\"stations\",\"main\":{\"temp\":2.88,\"feels_like\":2.88,\"temp_min\":-3.33,\"temp_max\":6.62,\"pressure\":1029,\"humidity\":68,\"sea_level\":1029,\"grnd_level\":969},\"visibility\":10000,\"wind\":{\"speed\":0.5,\"deg\":22,\"gust\":0.76},\"clouds\":{\"all\":5},\"dt\":1643186897,\"sys\":{\"type\":2,\"id\":2011437,\"country\":\"AT\",\"sunrise\":1643178936,\"sunset\":1643212698},\"timezone\":3600,\"id\":2762372,\"name\":\"Villach\",\"cod\":200}";
         backend.enqueue(new MockResponse().setBody(response).setResponseCode(200).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
@@ -51,7 +51,7 @@ public class WeatherClientMockServerTests implements ITestValues {
     }
 
     @Test
-    public void testInValidCity() {
+    void testInValidCity() {
         String response
                 = "{\"cod\":\"404\",\"message\":\"city not found\"}";
         backend.enqueue(new MockResponse().setBody(response).setResponseCode(404).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));

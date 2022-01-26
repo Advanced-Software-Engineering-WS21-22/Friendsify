@@ -10,6 +10,6 @@ public class Weather {
     private String icon;
 
     public String getIconUrl() {
-        return String.format(WeatherClient.baseUrlIcons, icon);
+        return String.format(WeatherClient.BASE_URL_ICONS, icon);
     }
 }

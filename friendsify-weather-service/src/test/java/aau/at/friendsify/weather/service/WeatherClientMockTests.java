@@ -3,28 +3,23 @@ package aau.at.friendsify.weather.service;
 import aau.at.friendsify.weather.service.exception.CityNotFoundException;
 import aau.at.friendsify.weather.service.obj.WeatherResult;
 import aau.at.friendsify.weather.service.service.WeatherClient;
-import okhttp3.mockwebserver.MockWebServer;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.IOException;
-
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class WeatherClientMockTests implements ITestValues {
+class WeatherClientMockTests implements ITestValues {
 
     @Mock
     private WeatherClient weatherClient;
 
     @Test
-    public void testValidCity() {
+    void testValidCity() {
         WeatherResult result = new WeatherResult();
         when(weatherClient.byCityName(CITY)).thenReturn(result);
 
@@ -32,7 +27,7 @@ public class WeatherClientMockTests implements ITestValues {
     }
 
     @Test
-    public void testInvalidCity() {
+    void testInvalidCity() {
         when(weatherClient.byCityName(INVALID_CITY)).thenThrow(new CityNotFoundException(INVALID_CITY));
 
         assertThrows(CityNotFoundException.class, () -> {
