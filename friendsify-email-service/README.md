@@ -8,7 +8,7 @@
 * GET  --> returns body { emails }
 * POST --> send email via Friendsify gmail account 
   * Sample request body:
-    ```json 
+    ``` 
      {
         from:     'sender@mail'
         to:       'receiver@mail'
