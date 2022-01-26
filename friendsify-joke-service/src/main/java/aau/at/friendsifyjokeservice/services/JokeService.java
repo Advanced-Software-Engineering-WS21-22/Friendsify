@@ -22,7 +22,7 @@ public class JokeService {
     private final WebClient jokesOneClient;
     private final WebClient jokeApiClient;
 
-    @Value("#{environment.JOKE_API_TOKEN}")
+    @Value("${joke.api.token}")
     private String token;
 
     public JokeService(WebClient.Builder webClientBuilder) {

@@ -69,13 +69,14 @@ services:
     - "9004:9004"
    environment:
      - EMAIL_HOST=friendsify-email
-     - EMAIL_PORT=9001
+     - EMAIL_PORT=9002
      - PERSON_HOST=friendsify-person
-     - PERSON_PORT=9002
+     - PERSON_PORT=9001
    env_file:
      - .env
    depends_on:
-     - friendsify-friends
+     - friendsify-person
+     - friendsify-email
    restart: on-failure
 
   friendsify-birthday:

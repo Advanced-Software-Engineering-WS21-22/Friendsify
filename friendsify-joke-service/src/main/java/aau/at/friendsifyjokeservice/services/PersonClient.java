@@ -4,27 +4,22 @@ import aau.at.friendsifyjokeservice.exception.PersonNotFoundException;
 import aau.at.friendsifyjokeservice.obj.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 @Slf4j
 public class PersonClient {
 
-    private final WebClient webClient;
+    private final RestTemplate rt;
 
-    @Value("${person.host}")
+    @Value("${person.host.url}")
     private String host;
 
     public PersonClient() {
-        this.webClient = WebClient.builder().build();
+        this.rt = new RestTemplateBuilder().build();
     }
 
     public String emailOfPerson(Long id) throws PersonNotFoundException {
@@ -34,14 +29,11 @@ public class PersonClient {
     }
 
     private Person getPerson(Long id) throws PersonNotFoundException {
-        return this.webClient
-                .get()
-                .uri(host, uriBuilder -> uriBuilder.queryParam("id", id).build())
-                .retrieve()
-                .onStatus(HttpStatus::is4xxClientError, clientResponse -> {
-                    throw new PersonNotFoundException();
-                })
-                .bodyToMono(Person.class)
-                .block();
+        try {
+            return this.rt.getForObject(host + "?id={id}", Person.class, id);
+        } catch (HttpClientErrorException exception) {
+            log.error("client error", exception);
+            throw new PersonNotFoundException();
+        }
     }
 }

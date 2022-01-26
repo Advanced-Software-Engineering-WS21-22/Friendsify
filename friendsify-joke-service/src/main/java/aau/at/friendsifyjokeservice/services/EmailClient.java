@@ -1,10 +1,15 @@
 package aau.at.friendsifyjokeservice.services;
 
+import aau.at.friendsifyjokeservice.exception.PersonNotFoundException;
+import aau.at.friendsifyjokeservice.obj.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -15,13 +20,13 @@ import java.util.Map;
 @Slf4j
 public class EmailClient {
 
-    private final WebClient webClient;
+    private final RestTemplate rt;
 
-    @Value("${email.host}")
+    @Value("${email.host.url}")
     private String host;
 
     public EmailClient() {
-        this.webClient = WebClient.builder().build();
+        this.rt = new RestTemplateBuilder().build();
     }
 
     public void send(String from, String to, String subject, String text) {
@@ -30,14 +35,8 @@ public class EmailClient {
         data.put("to", to);
         data.put("subject", subject);
         data.put("text", text);
-        this.webClient
-            .post()
-            .uri(host)
-            .accept(MediaType.APPLICATION_JSON)
-            .body(BodyInserters.fromValue(data))
-            .retrieve()
-            .bodyToMono(String.class)
-            .block()
-        ;
+
+        String result = this.rt.postForObject(host, data, String.class);
+        log.info(result);
     }
 }
