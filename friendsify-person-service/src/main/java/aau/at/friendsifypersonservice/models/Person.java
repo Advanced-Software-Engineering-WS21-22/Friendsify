@@ -19,7 +19,7 @@ public class Person {
 
     @Email
     @NotBlank(message = "Email is mandatory!")
-    @Column(unique=true)
+    @Column(unique = true)
     private String email;
 
     private String password;
@@ -41,7 +41,7 @@ public class Person {
         this.city = city;
     }
 
-    public void update(Person updatedPerson){
+    public void update(Person updatedPerson) {
         this.setFirst_name(updatedPerson.getFirst_name());
         this.setLast_name(updatedPerson.getLast_name());
         this.setEmail(updatedPerson.getEmail());
@@ -55,9 +55,6 @@ public class Person {
         return id_p;
     }
 
-    public void setId_p(Long id) {
-        this.id_p = id;
-    }
 
     public String getFirst_name() {
         return first_name;
@@ -125,5 +122,43 @@ public class Person {
                 ", birthday=" + birthday +
                 ", place='" + city + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Person) {
+            if ((this.id_p != null && ((Person) obj).getId_p() != null && this.id_p.equals(((Person) obj).getId_p())
+                    || this.id_p == ((Person) obj).getId_p()) &&
+                    ((this.first_name != null && ((Person) obj).getFirst_name() != null &&
+                            this.first_name.equals(((Person) obj).getFirst_name())) ||
+                            this.first_name == ((Person) obj).getFirst_name()
+                    ) &&
+                    ((this.last_name != null && ((Person) obj).getLast_name() != null &&
+                            this.last_name.equals(((Person) obj).getLast_name())) ||
+                            this.last_name == (((Person) obj).getLast_name())
+                    ) &&
+                    (this.email != null && ((Person) obj).getEmail() != null &&
+                            this.email.equals(((Person) obj).getEmail())
+                    ) &&
+                    ((this.birthday != null && ((Person) obj).getBirthday() != null &&
+                            this.birthday.equals(((Person) obj).getBirthday())) ||
+                            this.birthday == (((Person) obj).getBirthday())
+                    ) &&
+                    ((this.city != null && ((Person) obj).getCity() != null &&
+                            this.city.equals(((Person) obj).getCity())) ||
+                            this.city == (((Person) obj).getCity())
+                    ) &&
+                    ((this.id_geoDB != null && ((Person) obj).getId_geoDB() != null &&
+                            this.id_geoDB.equals(((Person) obj).getId_geoDB())) ||
+                            this.id_geoDB == (((Person) obj).getId_geoDB())
+                    ) &&
+                    ((this.password != null && ((Person) obj).getPassword() != null &&
+                            this.password.equals(((Person) obj).getPassword())) ||
+                            this.password == (((Person) obj).getPassword()))
+            ) {
+                return true;
+            }
+        }
+        return false;
     }
 }
