@@ -2,11 +2,11 @@ package aau.at.friendsifyfriendsservice.unittest;
 
 import aau.at.friendsifyfriendsservice.businesslogic.BusinessLogicFriends;
 import aau.at.friendsifyfriendsservice.controller.FriendsController;
-import aau.at.friendsifyfriendsservice.exceptions.ResourceNotFoundException;
 import aau.at.friendsifyfriendsservice.model.Friends;
 
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,13 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.jmx.export.naming.IdentityNamingStrategy;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -209,7 +207,25 @@ public class FriendsControllerTest {
 
     }
     @Test
-    public void updateFriendshipTest(){
+    public void updateFriendshipTest() throws Exception {
+        Friends f = new Friends(6L,true,"tester_initiator@gmail.com", "friend@gmail.com", LocalDate.of(2001,1,1));
+        String json = "{\n" +
+                "    \"id_friend\": 6,\n" +
+                "    \"email_p_initiator\": \"tester_initiator@gmail.com\",\n" +
+                "    \"email_p_friend\": \"friend@gmail.com\",\n" +
+                "    \"fs_start_date\": \"2001-1-1\",\n" +
+                "    \"is_timed_out\": true \n" +
+                "}";
+
+        final String link = "/friends/"+default_id_friend;
+
+        Mockito.when(this.businessLogicFriends.update(default_id_friend,f)).thenReturn(f);
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+        .put(link)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json))
+                .andExpect(status().isBadRequest());
 
     }
     @Test
