@@ -229,7 +229,15 @@ public class FriendsControllerTest {
 
     }
     @Test
-    public void deleteFriendshipTest(){
+    public void deleteFriendshipTest() throws Exception {
+
+        Mockito.when(this.businessLogicFriends.delete(default_id_friend)).thenReturn("deleted");
+
+        final  String link = "/friends/"+default_id_friend;
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+        .delete(link))
+                .andExpect(status().isOk());
 
     }
 
