@@ -182,7 +182,30 @@ public class FriendsControllerTest {
 
     }
     @Test
-    public void createFriendshipTest(){
+    public void createFriendshipTest() throws Exception {
+
+        Mockito.when(this.businessLogicFriends.saveFriendship(defaultFriends)).thenReturn(defaultFriends);
+        final String link = "/friends";
+
+        String json = "{\n" +
+                "    \"id_friend\": 5,\n" +
+                "    \"email_p_initiator\": \"lariTest@gmail.com\",\n" +
+                "    \"email_p_friend\": \"maier@test.com\",\n" +
+                "    \"fs_start_date\": \"2020-12-12\",\n" +
+                "    \"is_timed_out\": false \n" +
+                "}";
+
+
+        MvcResult result = this.mockMvc.perform(MockMvcRequestBuilders
+        .post(link)
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(json)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding("utf-8"))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        Assertions.assertNotNull(result);
 
     }
     @Test
