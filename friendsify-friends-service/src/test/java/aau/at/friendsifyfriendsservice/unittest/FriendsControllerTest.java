@@ -38,7 +38,7 @@ public class FriendsControllerTest {
     private Friends defaultFriends;
     private String defaultEmailInitiator = "default@gmx.at";
     private String defaultEmailFriend = "default_1@gmail.com";
-    private boolean default_is_timed_out = false;
+    private boolean default_is_timed_out = true;
     private LocalDate default_fs_start_date = LocalDate.of(2021,12,12);
     private Long default_id_friend = 0L;
 
@@ -160,7 +160,25 @@ public class FriendsControllerTest {
 
     }
     @Test
-    public void getIDTest(){
+    public void getIDTest() throws Exception {
+        List<Friends> friendships = new ArrayList<>();
+        friendships.add(defaultFriends);
+
+        for(Long i = 1L ;i<4;i++){
+            Friends f = new Friends(i,default_is_timed_out,defaultEmailFriend,defaultEmailInitiator,default_fs_start_date);
+            friendships.add(f);
+        }
+
+        Mockito.when(this.businessLogicFriends.getID(defaultEmailInitiator,defaultEmailFriend)).thenReturn(defaultFriends.getId_friend());
+
+        final String link = "/friends/?email_initiator="+defaultEmailInitiator+"&email_friend="+defaultEmailFriend;
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .get(link)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", is(defaultFriends.getId_friend().intValue())));
+
 
     }
     @Test
