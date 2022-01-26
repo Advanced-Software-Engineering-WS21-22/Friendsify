@@ -3,6 +3,7 @@ package aau.at.friendsifyfriendsservice.model;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Friends {
@@ -18,14 +19,14 @@ public class Friends {
     @NotBlank(message = "Email_friend is mandatory!")
     private String email_p_friend;
 
-    private Date fs_start_date;
+    private LocalDate fs_start_date;
 
     private boolean is_timed_out;
 
     public Friends() {
     }
 
-    public Friends(Long id_friend, boolean is_timed_out, String email_p_initiator, String email_p_friend, Date fs_start_date) {
+    public Friends(Long id_friend, boolean is_timed_out, String email_p_initiator, String email_p_friend, LocalDate fs_start_date) {
         this.id_friend = id_friend;
         this.is_timed_out = is_timed_out;
         this.email_p_initiator = email_p_initiator;
@@ -35,10 +36,6 @@ public class Friends {
 
     public Long getId_friend() {
         return id_friend;
-    }
-
-    public void setId_friend(Long id) {
-        this.id_friend = id;
     }
 
     public boolean isIs_timed_out() {
@@ -65,11 +62,11 @@ public class Friends {
         this.email_p_friend = id_p_friend;
     }
 
-    public Date getFs_start_date() {
+    public LocalDate getFs_start_date() {
         return fs_start_date;
     }
 
-    public void setFs_start_date(Date fs_start_date) {
+    public void setFs_start_date(LocalDate fs_start_date) {
         this.fs_start_date = fs_start_date;
     }
 

@@ -4,6 +4,7 @@ import aau.at.friendsifyfriendsservice.model.Friends;
 import org.junit.jupiter.api.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class FriendsModelTest {
     private Friends friends1;
@@ -11,8 +12,8 @@ public class FriendsModelTest {
 
     @BeforeEach
     public void setUp(){
-        friends1 = new Friends(0L,false,"hans.m@gmail.com","anna@mail.com", new Date(2021,4,12));
-        friends2 = new Friends(3L,true,"anna@gmail.com","hans.m@gmail.com",new Date(2019,8,19));
+        friends1 = new Friends(0L,false,"hans.m@gmail.com","anna@mail.com", LocalDate.of(2021,4,12));
+        friends2 = new Friends(3L,true,"anna@gmail.com","hans.m@gmail.com",LocalDate.of(2019,8,19));
     }
     @AfterEach
     public void shutDown(){
@@ -27,16 +28,6 @@ public class FriendsModelTest {
     @Test
     public void getIDTest_2(){
         Assertions.assertEquals(3L, friends2.getId_friend());
-    }
-    @Test
-    public void setIDTest_1(){
-        friends1.setId_friend(7L);
-        Assertions.assertEquals(7L,friends1.getId_friend());
-    }
-    @Test
-    public void setIDTest_2(){
-        friends2.setId_friend(12L);
-        Assertions.assertEquals(12L,friends2.getId_friend());
     }
     @Test
     public void setTimeOutTest_1(){
@@ -98,25 +89,25 @@ public class FriendsModelTest {
     }
     @Test
     public void setFsStartDateTest_1(){
-        Date date1 = new Date(9999,9,9);
+        LocalDate date1 = LocalDate.of(9999,9,9);
         Assertions.assertNotEquals(date1, friends1.getFs_start_date());
         friends1.setFs_start_date(date1);
         Assertions.assertEquals(date1,friends1.getFs_start_date());
     }
     @Test
     public void setFsStartDateTest_2(){
-        Date date2 = new Date(2000,1,1);
+        LocalDate date2 = LocalDate.of(2000,1,1);
         Assertions.assertNotEquals(date2, friends2.getFs_start_date());
         friends2.setFs_start_date(date2);
         Assertions.assertEquals(date2,friends2.getFs_start_date());
     }
     @Test
     public void getFsStartDateTest_1(){
-        Assertions.assertEquals(new Date(2021,4,12),friends1.getFs_start_date());
+        Assertions.assertEquals(LocalDate.of(2021,4,12),friends1.getFs_start_date());
     }
     @Test
     public void getFsStartDateTest_2(){
-        Assertions.assertEquals(new Date(2019,8,19),friends2.getFs_start_date());
+        Assertions.assertEquals(LocalDate.of(2019,8,19),friends2.getFs_start_date());
     }
     @Test
     public void updateFromDtoTest(){
@@ -128,7 +119,7 @@ public class FriendsModelTest {
         String f1 = "Friends{" +
                 "id_p_initiator='" + "hans.m@gmail.com" + '\'' +
                 ", id_p_friend='" + "anna@mail.com" + '\'' +
-                ", fs_start_date='" + new Date(2021,4,12) + '\'' +
+                ", fs_start_date='" + LocalDate.of(2021,4,12) + '\'' +
                 ", timed_out='" +false  + '\'' +
                 '}';
 
@@ -139,7 +130,7 @@ public class FriendsModelTest {
         String f2 = "Friends{" +
                 "id_p_initiator='" + "anna@gmail.com" + '\'' +
                 ", id_p_friend='" + "hans.m@gmail.com" + '\'' +
-                ", fs_start_date='" + new Date(2019,8,19) + '\'' +
+                ", fs_start_date='" + LocalDate.of(2019,8,19) + '\'' +
                 ", timed_out='" +true  + '\'' +
                 '}';
 
