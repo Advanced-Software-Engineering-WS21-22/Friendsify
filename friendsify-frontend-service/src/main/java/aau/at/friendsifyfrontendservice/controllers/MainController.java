@@ -29,9 +29,7 @@ public class MainController {
 
         WeatherResult weatherResult = this.weatherService.getWeatherByLocation(currentUser.getPerson().getCity());
 
-        System.out.println("Weather Summary: " + this.weatherService.weatherSummary(weatherResult));
-
-        model.addAttribute("weatherResult", this.weatherService.weatherSummary(weatherResult));
+        model.addAttribute("weatherResult", weatherResult);
         model.addAttribute("location", currentUser.getPerson().getCity());
         model.addAttribute("userFirstName", currentUser.getFirstName());
         model.addAttribute("userLastName", currentUser.getLastName());

@@ -36,7 +36,7 @@ public class FriendsService {
     //Returns Friendship where person is the friend
     public Friends[] getFriendsByReceiver(String email) {
         Friends[] friends = null;
-        friends = restTemplate.getForObject(friendsServiceEndpoint + "?email_friends=" + email, Friends[].class);
+        friends = restTemplate.getForObject(friendsServiceEndpoint + "?email_friend=" + email, Friends[].class);
         return friends;
     }
 
