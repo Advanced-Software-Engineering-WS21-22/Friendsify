@@ -1,16 +1,11 @@
 package aau.at.friendsifybirthdayservice.controller;
 
-import aau.at.friendsifybirthdayservice.exception.NoBirthdayException;
-import aau.at.friendsifybirthdayservice.exception.ResourceNotFoundException;
 import aau.at.friendsifybirthdayservice.obj.Person;
-import aau.at.friendsifybirthdayservice.service.EmailClient;
-import aau.at.friendsifybirthdayservice.service.PersonClient;
+import aau.at.friendsifybirthdayservice.service.BirthdayService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,30 +13,23 @@ import java.util.List;
 public class BirthdayController {
 
     @Autowired
-    private EmailClient emailClient;
-
-    @Autowired
-    private PersonClient personClient;
+    private BirthdayService birthdayService;
 
     @GetMapping()
     public List<Person> listBirthdays() {
-        return personClient.findByBirthday(LocalDate.now());
+        return birthdayService.listBirthdayKids();
     }
 
-    @PutMapping("/{personId}")
-    public ResponseEntity<Void> happyBirthday(@PathVariable("personId") Long personId) throws Exception {
-        Person birthdayKid = personClient.getPersonById(personId)
-                .orElseThrow(() -> new ResourceNotFoundException("Couldn't find person"));
-        if (!LocalDate.now().equals(birthdayKid.getBirthday())) {
-            throw new NoBirthdayException();
-        }
+    @GetMapping("/{personId}")
+    public List<Person> listBirthdayOfFriends(@PathVariable("personId") Long personId) {
+        return birthdayService.listBirthdayOfFriends(personId);
+    }
 
-        ResponseEntity<Void> resp = emailClient.sendBirthdayWish(birthdayKid.getEmail());
-        if (resp.getStatusCode() != HttpStatus.OK){
-            return ResponseEntity.internalServerError().build();
-        }
+    @PutMapping("/{personId}/{birthdayKidId}")
+    public ResponseEntity<Void> happyBirthday(@PathVariable("personId") Long personId, @PathVariable("personId") Long birthdayKidId) throws Exception {
+        birthdayService.happyBirthday(personId, birthdayKidId);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
 }

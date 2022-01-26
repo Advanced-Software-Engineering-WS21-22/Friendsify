@@ -1,36 +1,65 @@
 package aau.at.friendsifybirthdayservice.service;
 
+import aau.at.friendsifybirthdayservice.exception.ResourceNotFoundException;
+import aau.at.friendsifybirthdayservice.obj.Friend;
 import aau.at.friendsifybirthdayservice.obj.Person;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
 public class PersonClient {
 
-    private final WebClient webClient;
+    private final RestTemplate rt;
 
-    public PersonClient(WebClient.Builder webClientBuilder) {
-        String host = System.getProperty("person.host");
-        this.webClient = webClientBuilder.baseUrl(host).build();
+    @Value("${person.host.url}")
+    private String host;
+
+
+    public PersonClient() {
+        this.rt = new RestTemplateBuilder().build();
+    }
+    public PersonClient(String host) {
+        this();
+        this.host = host;
     }
 
-    public Optional<Person> getPersonById(Long personId) {
-        return Optional.ofNullable(new Person());
+
+    public Person getPerson(Long id) throws ResourceNotFoundException {
+        return getPerson("id", id);
     }
 
-    public List<Person> getTodaysBirthdayKids() {
-        return findByBirthday(LocalDate.now());
+    public Person getPerson(String email) throws ResourceNotFoundException {
+        return getPerson("email", email);
     }
 
-    public List<Person> findByBirthday(LocalDate birthday) {
-        return Arrays.asList(new Person());
+    private Person getPerson(String filter, Object value) {
+        try {
+            String queryParam = String.format("?%s={%s}", filter, filter);
+            return this.rt.getForObject(host + queryParam, Person.class, value);
+        } catch (HttpClientErrorException exception) {
+            log.error("client error", exception);
+            throw new ResourceNotFoundException();
+        }
     }
+
+    public List<Person> getPersons() {
+        return Arrays.asList(Objects.requireNonNull(this.rt.getForObject(host, Person[].class)));
+    }
+
+    public List<Person> getPersonsForFriendList(List<Friend> friendList) {
+        return friendList.stream().map(f -> this.getPerson(f.getEmailFriend())).collect(Collectors.toList());
+    }
+
+
+
 }
