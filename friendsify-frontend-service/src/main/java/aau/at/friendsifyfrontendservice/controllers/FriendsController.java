@@ -7,6 +7,7 @@ import aau.at.friendsifyfrontendservice.inputs.PersonInput;
 import aau.at.friendsifyfrontendservice.models.Email;
 import aau.at.friendsifyfrontendservice.models.Friends;
 import aau.at.friendsifyfrontendservice.models.Person;
+import aau.at.friendsifyfrontendservice.services.EmailService;
 import aau.at.friendsifyfrontendservice.services.FindFriendsService;
 import aau.at.friendsifyfrontendservice.services.FriendsService;
 import aau.at.friendsifyfrontendservice.services.FriendsToPersonService;
@@ -35,6 +36,9 @@ public class FriendsController {
 
     @Autowired
     private FriendsService friendsService;
+
+    @Autowired
+    private EmailService emailService;
 
     private ArrayList<Friends> friendsList_active;
     private ArrayList<Friends> friendsList_passive;
@@ -100,6 +104,7 @@ public class FriendsController {
 
     @PostMapping("/sendMail")
     public RedirectView sendMail(@ModelAttribute(value="mail") Email email, Model model) {
+        this.emailService.sendEmail(email);
         return new RedirectView("./");
     }
 }
