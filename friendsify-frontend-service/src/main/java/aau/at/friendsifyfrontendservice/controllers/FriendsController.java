@@ -40,8 +40,8 @@ public class FriendsController {
     @Autowired
     private EmailService emailService;
 
-    private ArrayList<Friends> friendsList_active;
-    private ArrayList<Friends> friendsList_passive;
+    private Friends[] friendsList_active;
+    private Friends[] friendsList_passive;
     private Person[] selectable_persons;
 
     @GetMapping
@@ -52,8 +52,13 @@ public class FriendsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
 
+        /*
         this.friendsList_active = this.friendsRepository.getFriendsActive(currentUser.getPerson().getEmail());
         this.friendsList_passive = this.friendsRepository.getFriendsPassive(currentUser.getPerson().getEmail());
+        */
+
+        this.friendsList_active = this.friendsService.getFriendsByInitiator(currentUser.getPerson().getEmail());
+        this.friendsList_passive = this.friendsService.getFriendsByReceiver(currentUser.getPerson().getEmail());
 
         model.addAttribute("friendsList_active", this.friendsList_active);
         model.addAttribute("friendsList_passive", this.friendsList_passive);

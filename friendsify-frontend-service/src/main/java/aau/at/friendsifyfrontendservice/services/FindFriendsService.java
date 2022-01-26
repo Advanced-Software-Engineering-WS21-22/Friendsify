@@ -4,10 +4,7 @@ import aau.at.friendsifyfrontendservice.models.Friends;
 import aau.at.friendsifyfrontendservice.models.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class FindFriendsService {
@@ -27,22 +24,30 @@ public class FindFriendsService {
 
     public void loadData(String email) {
         this.allPersons = personService.getPersons();
-        //this.alreadyFriends = this.friendsService.getFriendsByInitiator(email);
+        this.alreadyFriends = this.friendsService.getFriendsByInitiator(email);
     }
 
     public Person[] findSelectablePersons(String email_initiator) {
+        ArrayList<Person> selectable = new ArrayList<>();
+        ArrayList<Person> alreadyFriends = new ArrayList<>();
 
-        /*
-        ArrayList<Person> all = new ArrayList<Person>(Arrays.asList(this.allPersons));
-
-        for (Person p: all) {
+        for (Person p: this.allPersons) {
             for(Friends f : this.alreadyFriends) {
-                if(p.getEmail() == f.getEmail_p_friend()) {
-                    all.remove(p);
+                if(f.getEmail_p_friend().equals(p.getEmail())) {
+                    alreadyFriends.add(p);
                 }
             }
-        } */
+        }
 
-        return this.allPersons;
+        for (Person p: this.allPersons) {
+            if(!alreadyFriends.contains(p)) {
+                selectable.add(p);
+            }
+        }
+
+        Person[] selectables = new Person[selectable.size()];
+        selectables = selectable.toArray(selectables);
+
+        return selectables;
     }
 }
