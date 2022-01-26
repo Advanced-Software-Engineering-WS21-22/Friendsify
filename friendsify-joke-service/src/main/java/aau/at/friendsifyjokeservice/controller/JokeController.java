@@ -1,8 +1,7 @@
 package aau.at.friendsifyjokeservice.controller;
 
-import aau.at.friendsifyjokeservice.services.EmailClient;
+import aau.at.friendsifyjokeservice.exception.PersonNotFoundException;
 import aau.at.friendsifyjokeservice.services.JokeService;
-import aau.at.friendsifyjokeservice.services.PersonClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +12,16 @@ import org.springframework.web.bind.annotation.*;
 public class JokeController {
 
     @Autowired
-    private JokeService service;
-
-    @Autowired
-    private EmailClient emailClient;
-
-    @Autowired
-    private PersonClient personClient;
+    private JokeService jokeService;
 
     @GetMapping(value = "/")
     public ResponseEntity<String> getJoke() {
         return getJoke(null);
     }
+
     @GetMapping(value = "/{type}")
     public ResponseEntity<String> getJoke(@PathVariable(name = "type", required = false) String type) {
-        String joke = service.getJokebyType(type);
+        String joke = jokeService.getJokebyType(type);
         if (StringUtils.isBlank(joke)) {
             return ResponseEntity.notFound().build();
         }
@@ -35,25 +29,13 @@ public class JokeController {
         return ResponseEntity.ok().body(joke);
     }
 
-    @PostMapping(value = { "/{personId}"})
-    public ResponseEntity<String> tellYourFriendAJoke(
-            @PathVariable("personId") Long personId
-    ) throws Exception {
-        return tellYourFriendAJoke(personId, null);
-    }
-
-    @PostMapping(value = "/{personId}/{type}")
-    public ResponseEntity<String> tellYourFriendAJoke(
+    @PutMapping(value = { "/{personId}/{friendId}"})
+    public ResponseEntity<Void> tellYourFriendAJoke(
             @PathVariable("personId") Long personId,
-            @PathVariable(name = "type", required = false) String type
-    ) throws Exception {
-        // call Person service
-        String email = personClient.emailOfPerson(personId);
-        // call joke service
-        String joke = service.getJokebyType(type);
-        // call Email Service
-        emailClient.send(email, joke);
+            @PathVariable("friendId") Long friendId
+    ) throws PersonNotFoundException {
+        jokeService.tellYourFriendAJoke(personId, friendId);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build();
     }
 }

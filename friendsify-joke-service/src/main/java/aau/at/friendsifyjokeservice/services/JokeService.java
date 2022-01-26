@@ -2,15 +2,23 @@ package aau.at.friendsifyjokeservice.services;
 
 import aau.at.friendsifyjokeservice.enums.JokeTypes;
 import aau.at.friendsifyjokeservice.obj.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Optional;
 
 @Service
 public class JokeService {
+
+    @Autowired
+    private EmailClient emailClient;
+
+    @Autowired
+    private PersonClient personClient;
     private final WebClient jokesOneClient;
     private final WebClient jokeApiClient;
 
@@ -69,5 +77,15 @@ public class JokeService {
                 break;
         }
         return joke;
+    }
+
+    public void tellYourFriendAJoke(Long personId, Long friendId) {
+        // call Person service
+        String from = personClient.emailOfPerson(personId);
+        String to = personClient.emailOfPerson(friendId);
+        // call joke service
+        String joke = this.getJokebyType(null);
+        // call Email Service
+        emailClient.send(from, to, "Joke from your friend", joke);
     }
 }

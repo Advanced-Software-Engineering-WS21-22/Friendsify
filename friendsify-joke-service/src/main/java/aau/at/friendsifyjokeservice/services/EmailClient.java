@@ -16,24 +16,28 @@ import java.util.Map;
 public class EmailClient {
 
     private final WebClient webClient;
-    @Value("email.host")
+
+    @Value("${email.host}")
     private String host;
 
-    public EmailClient(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.baseUrl(host).build();
+    public EmailClient() {
+        this.webClient = WebClient.builder().build();
     }
 
-    public ResponseEntity<Void> send(String email, String text) {
+    public void send(String from, String to, String subject, String text) {
         Map<String, String> data = new HashMap<>();
-        data.put("email", email);
+        data.put("from", from);
+        data.put("to", to);
+        data.put("subject", subject);
         data.put("text", text);
-        ResponseEntity<Void> resp = this.webClient
-            .put()
+        this.webClient
+            .post()
+            .uri(host)
             .accept(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(data))
-            .retrieve().toBodilessEntity()
+            .retrieve()
+            .bodyToMono(String.class)
             .block()
         ;
-        return resp;
     }
 }
