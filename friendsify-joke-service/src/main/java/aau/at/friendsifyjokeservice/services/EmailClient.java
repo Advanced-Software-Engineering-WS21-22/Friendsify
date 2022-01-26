@@ -1,6 +1,7 @@
 package aau.at.friendsifyjokeservice.services;
 
 import aau.at.friendsifyjokeservice.exception.PersonNotFoundException;
+import aau.at.friendsifyjokeservice.obj.Email;
 import aau.at.friendsifyjokeservice.obj.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
-public class EmailClient {
+public class EmailClient  {
 
     private final RestTemplate rt;
 
@@ -29,14 +30,12 @@ public class EmailClient {
         this.rt = new RestTemplateBuilder().build();
     }
 
-    public void send(String from, String to, String subject, String text) {
-        Map<String, String> data = new HashMap<>();
-        data.put("from", from);
-        data.put("to", to);
-        data.put("subject", subject);
-        data.put("text", text);
+    public EmailClient(String host) {
+        this();
+        this.host = host;
+    }
 
-        String result = this.rt.postForObject(host, data, String.class);
-        log.info(result);
+    public String send(Email email) {
+        return this.rt.postForObject(host, email, String.class);
     }
 }

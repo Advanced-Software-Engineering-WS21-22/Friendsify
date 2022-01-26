@@ -1,7 +1,7 @@
 package aau.at.friendsifyjokeservice.controller;
 
 import aau.at.friendsifyjokeservice.exception.PersonNotFoundException;
-import aau.at.friendsifyjokeservice.services.JokeService;
+import aau.at.friendsifyjokeservice.services.JokeClient;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class JokeController {
 
     @Autowired
-    private JokeService jokeService;
+    private JokeClient jokeClient;
 
     @GetMapping(value = "/")
     public ResponseEntity<String> getJoke() {
@@ -21,7 +21,7 @@ public class JokeController {
 
     @GetMapping(value = "/{type}")
     public ResponseEntity<String> getJoke(@PathVariable(name = "type", required = false) String type) {
-        String joke = jokeService.getJokebyType(type);
+        String joke = jokeClient.getJokebyType(type);
         if (StringUtils.isBlank(joke)) {
             return ResponseEntity.notFound().build();
         }
@@ -34,9 +34,8 @@ public class JokeController {
             @PathVariable("personId") Long personId,
             @PathVariable("friendId") Long friendId
     ) throws PersonNotFoundException {
-        System.out.println("Here!");
-        jokeService.tellYourFriendAJoke(personId, friendId);
+        jokeClient.tellYourFriendAJoke(personId, friendId);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 }

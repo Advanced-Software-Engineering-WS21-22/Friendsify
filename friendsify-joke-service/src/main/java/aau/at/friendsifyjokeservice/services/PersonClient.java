@@ -21,6 +21,10 @@ public class PersonClient {
     public PersonClient() {
         this.rt = new RestTemplateBuilder().build();
     }
+    public PersonClient(String host) {
+        this();
+        this.host = host;
+    }
 
     public String emailOfPerson(Long id) throws PersonNotFoundException {
         Person p = this.getPerson(id);
