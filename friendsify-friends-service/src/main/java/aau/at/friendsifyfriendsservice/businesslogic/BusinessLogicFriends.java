@@ -84,9 +84,10 @@ public class BusinessLogicFriends {
         return friendsDao.save(origFriends);
     }
 
-    public void delete(Long id) throws ResourceNotFoundException {
+    public String delete(Long id) throws ResourceNotFoundException {
         Friends origFriends = getById(id);
         friendsDao.delete(origFriends);
+        return "deleted";
     }
 
 

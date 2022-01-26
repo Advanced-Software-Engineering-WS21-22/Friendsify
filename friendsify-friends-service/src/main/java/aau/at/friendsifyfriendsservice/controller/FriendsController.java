@@ -125,9 +125,9 @@ public class FriendsController {
 //                .orElseThrow(() -> new ResourceNotFoundException("Friendship not found for id: " + id));
 //
 //        friendsDao.delete(origFriends);
-        businessLogicFriends.delete(id);
+        String ms = businessLogicFriends.delete(id);
         Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
+        response.put(ms, Boolean.TRUE);
         return response;
     }
 

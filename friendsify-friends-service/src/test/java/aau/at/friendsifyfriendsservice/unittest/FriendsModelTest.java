@@ -21,6 +21,8 @@ public class FriendsModelTest {
         friends2 = null;
     }
 
+    //TODO: Add Tests with not allowed values, like null values, blank email ...
+
     @Test
     public void getIDTest_1(){
         Assertions.assertEquals(0L,friends1.getId_friend());
