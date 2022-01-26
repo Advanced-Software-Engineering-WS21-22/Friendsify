@@ -38,7 +38,7 @@ class PersonClientTests {
     }
 
     @Test
-    public void testPersonValid() {
+    void testPersonValid() {
         String email = "test.mann@email.com";
         String response
                 = "{\"id_p\":4,\"first_name\":\"Test\",\"last_name\":\"Mann\",\"birthday\":\"2002-01-26\",\"email\":\""+email+"\",\"password\":\"cGFzc3dvcmQ=\",\"id_geoDB\":\"Q41753\",\"city\":\"Klagenfurt\"}";
@@ -51,7 +51,7 @@ class PersonClientTests {
     }
 
     @Test
-    public void testPersonInValid() {
+    void testPersonInValid() {
         backend.enqueue(new MockResponse().setResponseCode(404).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
 
         assertThrows(PersonNotFoundException.class, () -> {

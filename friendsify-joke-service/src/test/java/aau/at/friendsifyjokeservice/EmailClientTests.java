@@ -39,7 +39,7 @@ class EmailClientTests {
     }
 
     @Test
-    public void testSendMail() {
+    void testSendMail() {
         Email email = new Email("from", "to", "subject", "text");
         backend.enqueue(new MockResponse().setBody(email.toString()).setResponseCode(200).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
 

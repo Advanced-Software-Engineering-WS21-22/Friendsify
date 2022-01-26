@@ -1,5 +1,6 @@
 package aau.at.friendsifyjokeservice.obj;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
@@ -9,5 +10,6 @@ public class Joke{
     private String background;
     private String category;
     private String date;
-    private JokeContent joke;
+    @JsonProperty("joke")
+    private JokeContent jokeContent;
 }

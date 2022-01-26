@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 public class PersonClient {
@@ -29,7 +31,7 @@ public class PersonClient {
     public String emailOfPerson(Long id) throws PersonNotFoundException {
         Person p = this.getPerson(id);
 
-        return p.getEmail();
+        return Optional.ofNullable(p).map(Person::getEmail).orElseThrow(PersonNotFoundException::new);
     }
 
     private Person getPerson(Long id) throws PersonNotFoundException {

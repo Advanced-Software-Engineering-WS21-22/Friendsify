@@ -38,7 +38,7 @@ class JokeClientMockTests {
     }
 
     @Test
-    public void testTellYourFriendAJoke() {
+    void testTellYourFriendAJoke() {
         Long personId = 1l;
         Long friendId = 2l;
         when(personClient.emailOfPerson(personId)).thenReturn("person@email.com");
@@ -59,7 +59,7 @@ class JokeClientMockTests {
     }
 
     @Test
-    public void testGetJokeByType() {
+    void testGetJokeByType() {
         String joke = "joke";
         String jokeRandom = joke + "Random";
         String jokeJod = joke + "Jod";
@@ -78,7 +78,7 @@ class JokeClientMockTests {
     }
 
     @Test
-    public void testJokeTypeDetermination() {
+    void testJokeTypeDetermination() {
         assertEquals(JokeTypes.RANDOM, JokeTypes.find("default"));
         assertEquals(JokeTypes.RANDOM, JokeTypes.find("random"));
         assertEquals(JokeTypes.JOD, JokeTypes.find("jod"));

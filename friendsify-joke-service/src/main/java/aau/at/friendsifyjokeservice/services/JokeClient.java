@@ -11,7 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import java.util.Optional;
 
 @Service
-public class JokeClient  {
+public class JokeClient {
 
     @Autowired
     private EmailClient emailClient;
@@ -53,7 +53,7 @@ public class JokeClient  {
                 .map(JokeResponse::getContents)
                 .map(Contents::getJokes)
                 .flatMap(j -> j.stream().limit(1).findFirst())
-                .map(Joke::getJoke)
+                .map(Joke::getJokeContent)
                 .map(JokeContent::getText)
                 .orElse(null);
     }
@@ -71,16 +71,8 @@ public class JokeClient  {
 
     public String getJokebyType(String type) {
         JokeTypes jt = JokeTypes.find(type);
-        String joke = null;
-        switch (jt) {
-            case JOD:
-                joke = jokeOfTheDay();
-                break;
-            case RANDOM:
-                joke = randomJoke();
-                break;
-        }
-        return joke;
+
+        return (jt == JokeTypes.JOD) ? jokeOfTheDay() : randomJoke();
     }
 
     public String tellYourFriendAJoke(Long personId, Long friendId) {

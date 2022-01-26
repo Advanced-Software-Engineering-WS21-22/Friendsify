@@ -38,7 +38,7 @@ class JokeClientTests {
     }
 
     @Test
-    public void testJokeOfTheDay() {
+    void testJokeOfTheDay() {
         String joke = "Q. Why shouldn't you marry a tennis player? A. Because Love means nothing to them.";
         String response = "{\"success\":{\"total\":1},\"contents\":{\"jokes\":[{\"category\":\"jod\",\"title\":\"Joke of the day \",\"description\":\"Joke of the day \",\"background\":\"\",\"date\":\"2019-01-23\",\"joke\":{\"title\":\"Courtship Signals\",\"length\":\"83\",\"clean\":\"1\",\"racial\":\"0\",\"date\":\"2019-01-23\",\"id\":\"He3_WpaNfBV1Hs7zMLsR4QeF\",\"text\":\"" +joke+ "\"}}],\"copyright\":\"2018-20 https://jokes.one\"}}";
         backend.enqueue(new MockResponse().setBody(response).setResponseCode(200).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
@@ -50,7 +50,7 @@ class JokeClientTests {
     }
 
     @Test
-    public void testRandomJoke() {
+    void testRandomJoke() {
         String joke = "How do you tell HTML from HTML5? - Try it out in Internet Explorer - Did it work? - No? - It's HTML5.";
         String response = "{\"error\":false,\"category\":\"Programming\",\"type\":\"single\",\"joke\":\"" + joke +"\",\"flags\":{\"nsfw\":false,\"religious\":false,\"political\":false,\"racist\":false,\"sexist\":false,\"explicit\":false},\"id\":43,\"safe\":true,\"lang\":\"en\"}";
         backend.enqueue(new MockResponse().setBody(response).setResponseCode(200).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
