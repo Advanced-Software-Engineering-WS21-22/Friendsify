@@ -1,9 +1,9 @@
 package aau.at.friendsifybirthdayservice;
-;
+
 import aau.at.friendsifybirthdayservice.obj.Email;
 import aau.at.friendsifybirthdayservice.obj.Person;
 import aau.at.friendsifybirthdayservice.service.EmailClient;
-import aau.at.friendsifybirthdayservice.service.IEmailConstants;
+import aau.at.friendsifybirthdayservice.constants.EmailConstants;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.jupiter.api.AfterAll;
@@ -17,6 +17,8 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+;
 
 class EmailClientTests {
 
@@ -54,7 +56,7 @@ class EmailClientTests {
     @Test
     void testSendBirthdayWish() {
         String em ="test.mann@email.com";
-        Email email = new Email(em, em, IEmailConstants.BIRTHDAY_SUBJECT, IEmailConstants.BIRTHDAY_WISH);
+        Email email = new Email(em, em, EmailConstants.BIRTHDAY_SUBJECT, EmailConstants.BIRTHDAY_WISH);
         backend.enqueue(new MockResponse().setBody(email.toString()).setResponseCode(200).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
 
         String result = emailClient.sendBirthdayWish(em, em);
@@ -69,7 +71,7 @@ class EmailClientTests {
         bk.setFirstName("Test");
         bk.setLastName("Mann");
         bk.setEmail("test.mann@email.com");
-        Email email = new Email(IEmailConstants.DEFAULT_FROM, bk.getEmail(), IEmailConstants.BIRTHDAY_REMINDER, String.format(IEmailConstants.BIRTHDAY_REMINDER_TEXT, bk.getFullName()));
+        Email email = new Email(EmailConstants.DEFAULT_FROM, bk.getEmail(), EmailConstants.BIRTHDAY_REMINDER, String.format(EmailConstants.BIRTHDAY_REMINDER_TEXT, bk.getFullName()));
         backend.enqueue(new MockResponse().setBody(email.toString()).setResponseCode(200).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
 
         String result = emailClient.sendBirthdayReminder(bk.getEmail(), bk);

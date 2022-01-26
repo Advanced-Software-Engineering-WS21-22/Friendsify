@@ -74,11 +74,9 @@ class FriendClientTests {
 
     @Test
     void testPersonInValid() {
+        Person p = new Person();
         backend.enqueue(new MockResponse().setResponseCode(404).setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE));
 
-        assertThrows(ResourceNotFoundException.class, () -> {
-            friendClient.getFriendsOfPerson(new Person());
-        });
-
+        assertThrows(ResourceNotFoundException.class, () -> friendClient.getFriendsOfPerson(p));
     }
 }

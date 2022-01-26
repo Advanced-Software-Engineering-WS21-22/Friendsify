@@ -1,5 +1,6 @@
 package aau.at.friendsifybirthdayservice.service;
 
+import aau.at.friendsifybirthdayservice.constants.EmailConstants;
 import aau.at.friendsifybirthdayservice.obj.Email;
 import aau.at.friendsifybirthdayservice.obj.Person;
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +32,12 @@ public class EmailClient {
     }
 
     public String sendBirthdayWish(String from, String to) {
-         return send(new Email(from, to, IEmailConstants.BIRTHDAY_SUBJECT, IEmailConstants.BIRTHDAY_WISH));
+         return send(new Email(from, to, EmailConstants.BIRTHDAY_SUBJECT, EmailConstants.BIRTHDAY_WISH));
     }
 
     public String sendBirthdayReminder(String to, Person birthdayKid) {
-        return send(new Email(IEmailConstants.DEFAULT_FROM, to, IEmailConstants.BIRTHDAY_REMINDER,
-                String.format(IEmailConstants.BIRTHDAY_REMINDER_TEXT, birthdayKid.getFullName())
+        return send(new Email(EmailConstants.DEFAULT_FROM, to, EmailConstants.BIRTHDAY_REMINDER,
+                String.format(EmailConstants.BIRTHDAY_REMINDER_TEXT, birthdayKid.getFullName())
         ));
     }
 

@@ -1,5 +1,7 @@
 package aau.at.friendsifybirthdayservice.controller;
 
+import aau.at.friendsifybirthdayservice.exception.NoBirthdayException;
+import aau.at.friendsifybirthdayservice.exception.ResourceNotFoundException;
 import aau.at.friendsifybirthdayservice.obj.Person;
 import aau.at.friendsifybirthdayservice.service.BirthdayService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class BirthdayController {
     }
 
     @PutMapping("/{personId}/{birthdayKidId}")
-    public ResponseEntity<Void> happyBirthday(@PathVariable("personId") Long personId, @PathVariable("personId") Long birthdayKidId) throws Exception {
+    public ResponseEntity<Void> happyBirthday(@PathVariable("personId") Long personId, @PathVariable("personId") Long birthdayKidId) throws NoBirthdayException, ResourceNotFoundException {
         birthdayService.happyBirthday(personId, birthdayKidId);
 
         return ResponseEntity.ok().build();
