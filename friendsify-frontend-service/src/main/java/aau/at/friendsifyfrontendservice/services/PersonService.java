@@ -32,7 +32,7 @@ public class PersonService {
     }
 
     public Person getPersonById(Long id) {
-        Person person =  restTemplate.getForObject(personServiceEndpoint + "?id=" + id, Person.class);
+        Person person = restTemplate.getForObject(personServiceEndpoint + "?id=" + id, Person.class);
         return person;
     }
 

@@ -40,7 +40,7 @@ public class FindFriendsService {
         }
 
         for (Person p: this.allPersons) {
-            if(!alreadyFriends.contains(p)) {
+            if(!alreadyFriends.contains(p) && !p.getEmail().equals(email_initiator)) {
                 selectable.add(p);
             }
         }

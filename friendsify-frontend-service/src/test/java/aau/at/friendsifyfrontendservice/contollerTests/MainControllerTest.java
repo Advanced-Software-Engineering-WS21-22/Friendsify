@@ -3,6 +3,9 @@ package aau.at.friendsifyfrontendservice.contollerTests;
 import aau.at.friendsifyfrontendservice.authentication.FriendsifyUser;
 import aau.at.friendsifyfrontendservice.controllers.MainController;
 import aau.at.friendsifyfrontendservice.models.Person;
+import aau.at.friendsifyfrontendservice.models.WeatherResult;
+import aau.at.friendsifyfrontendservice.services.PersonService;
+import aau.at.friendsifyfrontendservice.services.WeatherService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -19,6 +22,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -34,6 +38,9 @@ public class MainControllerTest {
     @MockBean
     private UserDetailsService userDetailsServiceMock;
 
+    @MockBean
+    private WeatherService weatherServiceMock;
+
     @Mock
     Authentication authentication;
 
@@ -41,6 +48,7 @@ public class MainControllerTest {
     public void testPersonsRequest() throws Exception {
         List authorities = new ArrayList();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        when(weatherServiceMock.getWeatherByLocation("Klagenfurt")).thenReturn(new WeatherResult());
 
         authentication = mock(Authentication.class);
         Person person = new Person(0L, "Max", "Mustermann", "max@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "password_hash");

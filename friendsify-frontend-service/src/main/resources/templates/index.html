@@ -18,6 +18,15 @@
             <a class="btn btn-primary btn-lg" href="#" th:href="@{/persons}" role="button">Get started!</a>
         </p>
     </div>
+
+    <div class="card mt-5">
+        <div class="card-header">
+            <h3>Weather in <span th:text="${location}"></span></h3>
+        </div>
+        <div class="card-body">
+            <div class="card-text" th:text="${weatherResult}"></div>
+        </div>
+    </div>
 </div>
 
 </body>

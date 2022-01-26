@@ -1,6 +1,9 @@
 package aau.at.friendsifyfrontendservice.controllers;
 
 import aau.at.friendsifyfrontendservice.authentication.FriendsifyUser;
+import aau.at.friendsifyfrontendservice.models.WeatherResult;
+import aau.at.friendsifyfrontendservice.services.WeatherService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,11 +19,20 @@ public class MainController {
         return "home";
     }
 
+    @Autowired
+    private WeatherService weatherService;
+
     @GetMapping("/home")
     public String main(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
 
+        WeatherResult weatherResult = this.weatherService.getWeatherByLocation(currentUser.getPerson().getCity());
+
+        System.out.println("Weather Summary: " + this.weatherService.weatherSummary(weatherResult));
+
+        model.addAttribute("weatherResult", this.weatherService.weatherSummary(weatherResult));
+        model.addAttribute("location", currentUser.getPerson().getCity());
         model.addAttribute("userFirstName", currentUser.getFirstName());
         model.addAttribute("userLastName", currentUser.getLastName());
 
