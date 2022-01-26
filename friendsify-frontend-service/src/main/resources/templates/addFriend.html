@@ -10,6 +10,26 @@
 <div th:replace="fragments/header :: header"></div>
     <div class="container mt-5">
         <h1>Add new Friends!</h1>
+
+        <div class="container mt-3">
+            <form  action="#" th:action="@{/friends/new}" th:object="${friendsForm}" method="post">
+                <div class="form-group row">
+                    <label for="friends_initiator" class="col-sm-2 col-form-label">Friends Initiator</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="friends_initiator" th:field="*{email_p_initiator}" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="friends_new" class="col-sm-2 col-form-label">New Friend</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" id="friends_new" th:field="*{email_p_friend}">
+                            <option th:each="person : ${selectable_persons}" th:value="${person.getEmail()}" th:text="${person.getFirst_name()}"></option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" value="Submit" class="btn btn-primary mb-2">Submit</button>
+            </form>
+        </div>
     </div>
 
 </body>

@@ -1,9 +1,13 @@
 package aau.at.friendsifyfrontendservice.models;
 
+import aau.at.friendsifyfrontendservice.inputs.FriendsInput;
+import aau.at.friendsifyfrontendservice.inputs.PersonInput;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -36,5 +40,14 @@ public class Friends {
         this.email_p_friend = email_p_friend;
         this.fs_start_date = fs_start_date;
         this.is_timed_out = is_timed_out;
+    }
+
+    public static Friends fromFriendsInput(FriendsInput friendsInput) {
+        return new Friends(
+                friendsInput.getEmail_p_initiator(),
+                friendsInput.getEmail_p_friend(),
+                LocalDate.now(),
+                friendsInput.is_timed_out()
+        );
     }
 }

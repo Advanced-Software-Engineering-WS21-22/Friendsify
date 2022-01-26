@@ -29,6 +29,7 @@
                     <th scope="col">Friend Last Name</th>
                     <th scope="col">Friends since</th>
                     <th scope="col">Details</th>
+                    <th scope="col">Send Email</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,8 +40,15 @@
                     <td th:text="${#temporals.format(friend.getFs_start_date(), 'dd.MM.yyyy')}"></td>
                     <td>
                         <form action="#" th:action="@{./persons/} + ${{friend.getEmail_p_friend()}}" method="get">
-                            <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getEmail_p_friend()}" type="submit">
+                            <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_friend()}" type="submit">
                                 <i class="fas fa-info-circle"></i>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" th:action="@{./friends/sendMail/} + ${{friend.getEmail_p_initiator()}} + '/' + ${{friend.getEmail_p_friend()}}" method="get">
+                            <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_friend}" type="submit">
+                                <i class="fas fa-envelope-square"></i>
                             </button>
                         </form>
                     </td>
