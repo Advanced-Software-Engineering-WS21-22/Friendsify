@@ -134,7 +134,29 @@ public class FriendsControllerTest {
 
     }
     @Test
-    public void getFriendshipsByEmailFriendTest(){
+    public void getFriendshipsByEmailFriendTest() throws Exception {
+        List<Friends> friendships = new ArrayList<>();
+        friendships.add(defaultFriends);
+
+        List<String> emailFriendList = new ArrayList<>();
+        emailFriendList.add(defaultFriends.getEmail_p_friend());
+
+
+        for(Long i = 1L ;i<4;i++){
+            Friends f = new Friends(i,default_is_timed_out,defaultEmailInitiator,defaultEmailFriend,default_fs_start_date);
+            friendships.add(f);
+            emailFriendList.add(f.getEmail_p_friend());
+        }
+
+        Mockito.when(this.businessLogicFriends.getByEmailFriend(defaultEmailFriend)).thenReturn(friendships);
+
+        final String link = "/friends/?email_friend="+defaultEmailFriend;
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+                .get(link)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[*].email_p_friend", is(emailFriendList)));
 
     }
     @Test
