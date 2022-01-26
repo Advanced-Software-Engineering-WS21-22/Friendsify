@@ -19,6 +19,6 @@ public class EmailService {
     }
 
     public void sendEmail(Email email) {
-        restTemplate.postForObject(emailServiceEndpoint, email, Email.class);
+        restTemplate.postForObject(emailServiceEndpoint, email, String.class);
     }
 }
