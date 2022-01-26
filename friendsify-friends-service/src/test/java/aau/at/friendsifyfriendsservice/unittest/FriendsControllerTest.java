@@ -2,18 +2,34 @@ package aau.at.friendsifyfriendsservice.unittest;
 
 import aau.at.friendsifyfriendsservice.businesslogic.BusinessLogicFriends;
 import aau.at.friendsifyfriendsservice.controller.FriendsController;
+import aau.at.friendsifyfriendsservice.exceptions.ResourceNotFoundException;
 import aau.at.friendsifyfriendsservice.model.Friends;
+
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.jmx.export.naming.IdentityNamingStrategy;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultMatcher;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.Matchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(FriendsController.class)
