@@ -1,13 +1,13 @@
-package at.aau.ase;
+package aau.at.friendsify.weather.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AseApplication {
+public class App {
 
     public static void main(String[] args) {
-        SpringApplication.run(AseApplication.class, args);
+        SpringApplication.run(App.class, args);
     }
 
 }
