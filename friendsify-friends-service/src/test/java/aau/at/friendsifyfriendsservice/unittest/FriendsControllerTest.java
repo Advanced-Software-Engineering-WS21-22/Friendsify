@@ -50,7 +50,7 @@ public class FriendsControllerTest {
 
     @BeforeEach
     public void setUp(){
-        defaultFriends = new Friends(0L,false, "default1.m@gmail.com", "default2@gmx.at", LocalDate.of(2021,12,12));
+        defaultFriends = new Friends(0L,false, defaultEmailInitiator, defaultEmailFriend, LocalDate.of(2021,12,12));
     }
     @AfterEach
     public void setDown(){
@@ -108,7 +108,29 @@ public class FriendsControllerTest {
                 .andExpect(jsonPath("$[*]",hasSize(5)));
     }
     @Test
-    public void getFriendshipsByEmailInitiatorTest(){
+    public void getFriendshipsByEmailInitiatorTest() throws Exception {
+        List<Friends> friendships = new ArrayList<>();
+        friendships.add(defaultFriends);
+
+        List<String> emailInitiatorList = new ArrayList<>();
+        emailInitiatorList.add(defaultFriends.getEmail_p_initiator());
+
+
+        for(Long i = 1L ;i<4;i++){
+            Friends f = new Friends(i,default_is_timed_out,defaultEmailInitiator,defaultEmailFriend,default_fs_start_date);
+            friendships.add(f);
+            emailInitiatorList.add(f.getEmail_p_initiator());
+        }
+
+        Mockito.when(this.businessLogicFriends.getByEmailInitiator(defaultEmailInitiator)).thenReturn(friendships);
+
+        final String link = "/friends/?email_initiator="+defaultEmailInitiator;
+
+        this.mockMvc.perform(MockMvcRequestBuilders
+        .get(link)
+        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.[*].email_p_initiator", is(emailInitiatorList)));
 
     }
     @Test
