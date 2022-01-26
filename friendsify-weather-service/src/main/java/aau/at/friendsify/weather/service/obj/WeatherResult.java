@@ -1,10 +1,12 @@
 package aau.at.friendsify.weather.service.obj;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Optional;
 
 @Data
+@NoArgsConstructor
 public class WeatherResult {
     private Double temperature;
     private Double temperatureMin;

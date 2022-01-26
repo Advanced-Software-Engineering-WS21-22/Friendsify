@@ -1,5 +1,6 @@
 package aau.at.friendsify.weather.service.controller;
 
+import aau.at.friendsify.weather.service.exception.CityNotFoundException;
 import aau.at.friendsify.weather.service.obj.WeatherResult;
 import aau.at.friendsify.weather.service.service.WeatherClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,12 @@ public class WeatherController {
     private WeatherClient weatherClient;
 
     @GetMapping("/{cityName}")
-    public WeatherResult getWeather(@PathVariable("cityName") String cityName) {
+    public WeatherResult getWeather(@PathVariable("cityName") String cityName) throws CityNotFoundException {
         return weatherClient.byCityName(cityName);
     }
 
     @GetMapping("/{cityName}/{lang}")
-    public WeatherResult getWeather(@PathVariable("cityName") String cityName, @PathVariable("lang") String lang) {
+    public WeatherResult getWeather(@PathVariable("cityName") String cityName, @PathVariable("lang") String lang) throws CityNotFoundException {
         return weatherClient.byCityName(cityName, lang);
     }
 
