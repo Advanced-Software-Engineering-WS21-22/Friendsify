@@ -21,6 +21,7 @@
         <module>friendsify-friends-service</module>
         <module>friendsify-joke-service</module>
         <module>friendsify-birthday-service</module>
+        <module>friendsify-weather-service</module>
         <module>friendsify-recommendations-service</module>
         <module>friendsify-frontend-service</module>
     </modules>

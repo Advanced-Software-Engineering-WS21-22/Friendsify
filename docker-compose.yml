@@ -84,6 +84,15 @@ services:
      - "9006:9006"
     restart: on-failure
 
+  friendsify-weather:
+    image: friendsify-weather
+    build: friendsify-weather-service
+    ports:
+      - "9007:9007"
+    env_file:
+      - .env
+    restart: on-failure
+
 
   friendsify-frontend:
     image: friendsify-frontend
@@ -103,4 +112,6 @@ services:
       - BIRTHDAY_PORT=9005
       - RECOMMENDATIONS_HOST=friendsify-recommendations
       - RECOMMENDATIONS_PORT=9006
+      - WEATHER_HOST=friendsify-weather
+      - WEATHER_PORT=9007
     restart: on-failure
