@@ -1,12 +1,14 @@
 package aau.at.friendsifybirthdayservice.obj;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 
-@Data
+@Getter
+@Setter
 public class Person {
 
     @JsonProperty("first_name")

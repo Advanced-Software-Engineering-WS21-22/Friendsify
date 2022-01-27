@@ -51,25 +51,31 @@ class BirthdayServiceTest {
         this.p1 = new Person();
         this.p1.setBirthday(this.now);
         this.p1.setEmail("test.mann1@email.com");
+        this.p1.setFirstName("Test");
+        this.p1.setLastName("Mann1");
         this.p2 = new Person();
         this.p2.setEmail("test.mann2@email.com");
         this.p2.setBirthday(this.now.minusDays(1));
-
+        this.p2.setFirstName("Test");
+        this.p2.setLastName("Mann2");
         this.p3 = new Person();
         this.p3.setBirthday(this.now.plusDays(10));
         this.p3.setEmail("test.mann3@email.com");
+        this.p3.setFirstName("Test");
+        this.p3.setLastName("Mann3");
     }
 
     @Test
     void testFilterByBirthday() {
 
-        List<Person> ps = Arrays.asList(p1, p2);
+        List<Person> ps = Arrays.asList(p1, p2, p3);
 
         List<Person> result = birthdayService.filterByBirthday(now, ps);
 
         assertNotNull(result);
         assertEquals(2, result.size());
     }
+
 
     @Test
     void testSendBirthdayReminders() {
@@ -103,9 +109,7 @@ class BirthdayServiceTest {
         when(personClient.getPerson(1L)).thenReturn(p1);
         when(personClient.getPerson(3L)).thenReturn(p3);
 
-        assertThrows(NoBirthdayException.class, () -> {
-            birthdayService.happyBirthday(1L, 3L);
-        });
+        assertThrows(NoBirthdayException.class, () -> birthdayService.happyBirthday(1L, 3L));
     }
 
     @Test
