@@ -1,8 +1,8 @@
 package aau.at.friendsifyjokeservice.obj;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class JokeApiContent {
     private String joke;
 }

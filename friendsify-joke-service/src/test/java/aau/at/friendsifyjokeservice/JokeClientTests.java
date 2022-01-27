@@ -34,7 +34,7 @@ class JokeClientTests {
     @BeforeEach
     public void setUp() throws IOException {
         String url = "http://localhost:" + backend.getPort();
-        this.jokeClient = new JokeClient(url, url);
+        this.jokeClient = new JokeClient(url, url, null);
     }
 
     @Test

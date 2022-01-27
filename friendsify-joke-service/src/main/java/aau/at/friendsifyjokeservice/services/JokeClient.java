@@ -22,21 +22,17 @@ public class JokeClient {
     private final WebClient jokesOneClient;
     private final WebClient jokeApiClient;
 
-    @Value("${joke.api.token}")
-    private String token;
-
-    public JokeClient() {
-        this(
-                "https://api.jokes.one",
-                "https://jokeapi-v2.p.rapidapi.com/joke/Programming?type=single&format=json&blacklistFlags=nsfw,racist&safe-mode=true"
-        );
-    }
-
-    public JokeClient(String jokesOneUrl, String jokeApiUrl) {
+    @Autowired
+    public JokeClient(
+            @Value("${joke.one.url}") String jokesOneUrl,
+            @Value("${joke.api.url}") String jokeApiUrl,
+            @Value("${joke.api.token}") String token
+    ) {
         this.jokesOneClient = WebClient.builder().baseUrl(jokesOneUrl).build();
         this.jokeApiClient = WebClient.builder()
                 .baseUrl(jokeApiUrl)
                 .defaultHeader("x-rapidapi-host", "jokeapi-v2.p.rapidapi.com")
+                .defaultHeader("x-rapidapi-key", token)
                 .build();
     }
 
@@ -62,7 +58,6 @@ public class JokeClient {
         return Optional.ofNullable(
                 this.jokeApiClient
                         .get()
-                        .header("x-rapidapi-key", token)
                         .retrieve()
                         .bodyToMono(JokeApiContent.class)
                         .block()

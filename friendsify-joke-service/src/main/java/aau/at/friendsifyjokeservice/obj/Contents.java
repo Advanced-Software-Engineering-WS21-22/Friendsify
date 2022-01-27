@@ -1,10 +1,10 @@
 package aau.at.friendsifyjokeservice.obj;
 
-import lombok.Data;
-
 import java.util.List;
-@Data
+import lombok.Getter;
+
+@Getter
 public class Contents{
     private List<Joke> jokes;
-    private String copyright;
+
 }

@@ -1,9 +1,10 @@
 package aau.at.friendsifyjokeservice.obj;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class JokeResponse {
-    private Success success;
+
     private Contents contents;
+
 }
