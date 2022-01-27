@@ -1,10 +1,8 @@
 package aau.at.friendsify.weather.service.obj;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class WindData {
     private double speed;
-    private double deg;
-    private double gust;
 }

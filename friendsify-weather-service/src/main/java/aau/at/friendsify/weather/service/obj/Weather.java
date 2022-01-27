@@ -1,9 +1,9 @@
 package aau.at.friendsify.weather.service.obj;
 
 import aau.at.friendsify.weather.service.service.WeatherClient;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class Weather {
     private String main;
     private String description;
