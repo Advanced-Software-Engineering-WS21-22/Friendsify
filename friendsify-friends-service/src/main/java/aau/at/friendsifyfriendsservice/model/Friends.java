@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity
 public class Friends {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_friend;
 
     @Email
