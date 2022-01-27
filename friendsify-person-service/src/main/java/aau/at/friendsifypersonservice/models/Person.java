@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_p;
 
     private String first_name;
@@ -32,6 +32,17 @@ public class Person {
     }
 
     public Person(String first_name, String last_name, LocalDate birthday, String email, String password, String id_geoDB, String city) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.birthday = birthday;
+        this.email = email;
+        this.password = password;
+        this.id_geoDB = id_geoDB;
+        this.city = city;
+    }
+
+    public Person(Long id, String first_name, String last_name, LocalDate birthday, String email, String password, String id_geoDB, String city) {
+        this.id_p=id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.birthday = birthday;
