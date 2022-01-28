@@ -68,6 +68,14 @@ services:
    build: friendsify-joke-service
    ports:
     - "9004:9004"
+   environment:
+     - POSTGRES_DB=friendsify
+     - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
+     - POSTGRES_USER=admin
+     - EMAIL_HOST=friendsify-email
+     - EMAIL_PORT=9001
+   depends_on:
+     - friendsify-friends
    restart: on-failure
 
   friendsify-birthday:
@@ -75,6 +83,17 @@ services:
     build: friendsify-birthday-service
     ports:
      - "9005:9005"
+    environment:
+      - EMAIL_HOST=friendsify-email
+      - EMAIL_PORT=9002
+      - PERSON_HOST=friendsify-person
+      - PERSON_PORT=9001
+      - FRIENDS_HOST=friendsify-friends
+      - FRIENDS_PORT=9003
+    depends_on:
+      - friendsify-person
+      - friendsify-email
+      - friendsify-friends
     restart: on-failure
 
   friendsify-recommendations:
