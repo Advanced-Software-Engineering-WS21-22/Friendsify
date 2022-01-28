@@ -1,6 +1,6 @@
 # Friendsify - Core
 
-<p>This module contains core elements for the whole project, such as entities, common exceptions and other.</p>
+<p>This module contains core elements for the whole project, such as entities, common aau.at.friendsifypersonservice.exceptions and other.</p>
 
 ### Table of Contents
 
