@@ -4,7 +4,7 @@ version: '3'
 
 services:
   person-db:
-    image: postgres
+    image: postgres:alpine3.15
     restart: always
     volumes:
       - ./database/person/:/docker-entrypoint-initdb.d/
@@ -16,7 +16,7 @@ services:
      - POSTGRES_DB=friendsify
 
   friends-db:
-    image: postgres
+    image: postgres:alpine3.15
     restart: always
     volumes:
       - ./database/friends/:/docker-entrypoint-initdb.d/
@@ -37,7 +37,7 @@ services:
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
       - POSTGRES_USER=admin
       - DB_PORT=5001
-    depends_on: 
+    depends_on:
       - person-db
     restart: on-failure
 
@@ -62,20 +62,21 @@ services:
       - friends-db
     restart: on-failure
 
-
   friendsify-joke:
    image: friendsify-joke
    build: friendsify-joke-service
    ports:
     - "9004:9004"
    environment:
-     - POSTGRES_DB=friendsify
-     - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
-     - POSTGRES_USER=admin
      - EMAIL_HOST=friendsify-email
-     - EMAIL_PORT=9001
+     - EMAIL_PORT=9002
+     - PERSON_HOST=friendsify-person
+     - PERSON_PORT=9001
+   env_file:
+     - .env
    depends_on:
-     - friendsify-friends
+     - friendsify-person
+     - friendsify-email
    restart: on-failure
 
   friendsify-birthday:

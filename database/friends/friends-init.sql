@@ -1,6 +1,6 @@
 CREATE TABLE friends
 (
-    ID_FRIEND         int primary key not null,
+    ID_FRIEND         bigint primary key not null,
     EMAIL_P_INITIATOR varchar         not null,
     EMAIL_P_FRIEND    varchar         not null,
     FS_START_DATE     date            not null,
