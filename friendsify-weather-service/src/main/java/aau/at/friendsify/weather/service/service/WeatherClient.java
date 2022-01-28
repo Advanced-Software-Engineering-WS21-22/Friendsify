@@ -4,6 +4,7 @@ import aau.at.friendsify.weather.service.exception.CityNotFoundException;
 import aau.at.friendsify.weather.service.obj.WeatherResponse;
 import aau.at.friendsify.weather.service.obj.WeatherResult;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,8 @@ public class WeatherClient {
     @Value("#{environment.WEATHER_API_TOKEN}")
     private String token;
 
-    public WeatherClient() {
-        this("https://api.openweathermap.org/data/2.5/weather");
-    }
-
-    public WeatherClient(String url) {
+    @Autowired
+    public WeatherClient(@Value("${weather.api.url}") String url) {
         this.webClient = WebClient.builder().baseUrl(url).build();
     }
 
