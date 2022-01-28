@@ -3,20 +3,23 @@
 <p>This module contains CRUD operations over REST to handle person data.</p>
 
 ##Entity: Person
-* id [Long]
-* firstName [String]
-* lastName [String]
-* email [String]
+* id_p [Long]
+* first_name [String]
+* last_name [String]
 * birthday [LocalDate]
-* geoID [String]
+* email [String]
+* password [String]
+* id_geoDB [String]
 * city [String]
-* passwordHash [String]
+
 
 ##Paths
 * GET /persons
-* GET /persons/{id}
-* GET /persons/{email}
+* GET /persons?id={value}
+* GET /persons?email={value}
 * POST /persons
-* PUT /persons/{id}
-* DELETE /persons/{id}
+* PUT /persons?id={value}
+* PUT /persons?email={value}
+* DELETE /persons?id={value}
+* DELETE /persons?email={value}
 
