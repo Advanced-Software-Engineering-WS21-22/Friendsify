@@ -2,12 +2,14 @@ package aau.at.friendsifybirthdayservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-public class FriendsifyBirthdayServiceApplication {
+@EnableScheduling
+public class App {
 
     public static void main(String[] args) {
-        SpringApplication.run(FriendsifyBirthdayServiceApplication.class, args);
+        SpringApplication.run(App.class, args);
     }
 
 }
