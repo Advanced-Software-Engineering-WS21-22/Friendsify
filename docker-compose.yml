@@ -112,6 +112,21 @@ services:
       - .env
     restart: on-failure
 
+  friendsify-anniversary-reminder:
+    image: friendsify-anniversary-reminder
+    build: friendsify-anniversary-reminder-service
+    ports:
+      - "9008:9008"
+    environment:
+      - PERSON_HOST=friendsify-person
+      - PERSON_PORT=9001
+      - FRIENDS_HOST=friendsify-friends
+      - FRIENDS_PORT=9003
+    depends_on:
+      - friendsify-person
+      - friendsify-friends
+    restart: on-failure
+
 
   friendsify-frontend:
     image: friendsify-frontend
