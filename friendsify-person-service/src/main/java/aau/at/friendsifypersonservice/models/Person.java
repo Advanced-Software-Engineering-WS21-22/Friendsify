@@ -125,13 +125,15 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "id=" + id_p +
-                ", firstName='" + first_name + '\'' +
-                ", lastName='" + last_name + '\'' +
-                ", email='" + email + '\'' +
+        return "{" +
+                "id_p=" + id_p +
+                ", first_name=" + first_name +
+                ", last_name=" + last_name +
                 ", birthday=" + birthday +
-                ", place='" + city + '\'' +
+                ", email=" + email +
+                ", password=" + password +
+                ", id_geoDB=" + id_geoDB +
+                ", city=" + city +
                 '}';
     }
 
