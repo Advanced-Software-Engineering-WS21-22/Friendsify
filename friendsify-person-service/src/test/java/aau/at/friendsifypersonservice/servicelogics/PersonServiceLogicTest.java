@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -31,53 +30,53 @@ class PersonServiceLogicTest {
     @InjectMocks
     private PersonServiceLogic service;
 
-    List<Person> people;
-    Person max;
-    Person anna;
-    Person john;
-    Person hans;
+    List<Person> default_people;
+    Person defaultPerson1;
+    Person defaultPerson2;
+    Person defaultPerson3;
+    Person defaultPerson4;
 
-    static final Long ID=1L;
-    static final Long ID_NOT_AVAILABLE=6L;
-    static final String EMail = "max@mustermann.de";
-    static final String EMail_NOT_AVAILABLE = "clara@nussknacker.de";
-    static final String exID="Person not found by id: " + ID_NOT_AVAILABLE;
-    static final String exEMail="Person not found by email: " + EMail_NOT_AVAILABLE;
+    static final Long DEFAULT_ID =1L;
+    static final Long DEFAULT_ID_NOT_AVAILABLE =6L;
+    static final String DEFAULT_EMAIL = "max@mustermann.de";
+    static final String DEFAULT_EMAIL_NOT_AVAILABLE = "clara@nussknacker.de";
+    static final String DEFAULT_EXCEPTION_ID ="Person not found by id: " + DEFAULT_ID_NOT_AVAILABLE;
+    static final String DEFAULT_EXCEPTION_EMAIL ="Person not found by email: " + DEFAULT_EMAIL_NOT_AVAILABLE;
 
     @BeforeEach
     void setUp() {
-        max= new Person(1L,"Max", "Mustermann", LocalDate.of(2000,1,1), "max@mustermann.de", "cGFzc3dvcmQ= ", "Q483522", "Villach");
-        anna=new Person(1L,"Anna", "Mustermann", LocalDate.of(2001,1,1), "anna@mustermann.de", "cGFzc3dvcmQ", "Q483522", "Villach");
-        john=new Person(3L,"John", "Doe", LocalDate.of(1990,6,6), "john.doe@email.com", "cGFzc3dvcmQ", "Q41753", "Klagenfurt");
-        hans=new Person(4L,"Hans", "Müller", LocalDate.of(1994,8,18), "hans.m@gmail.com", "cGFzc3dvcmQ", "Q660687", "Velden am Wörthersee");
-        people =new ArrayList<>();
-        people.add(max);
-        people.add(john);
-        people.add(hans);
+        defaultPerson1 = new Person(1L,"Max", "Mustermann", LocalDate.of(2000,1,1), "max@mustermann.de", "cGFzc3dvcmQ= ", "Q483522", "Villach");
+        defaultPerson2 =new Person(1L,"Anna", "Mustermann", LocalDate.of(2001,1,1), "anna@mustermann.de", "cGFzc3dvcmQ", "Q483522", "Villach");
+        defaultPerson3 =new Person(3L,"John", "Doe", LocalDate.of(1990,6,6), "john.doe@email.com", "cGFzc3dvcmQ", "Q41753", "Klagenfurt");
+        defaultPerson4 =new Person(4L,"Hans", "Müller", LocalDate.of(1994,8,18), "hans.m@gmail.com", "cGFzc3dvcmQ", "Q660687", "Velden am Wörthersee");
+        default_people =new ArrayList<>();
+        default_people.add(defaultPerson1);
+        default_people.add(defaultPerson3);
+        default_people.add(defaultPerson4);
     }
 
     @AfterEach
     void tearDown() {
-        people =null;
-        max=null;
-        anna=null;
-        john=null;
-        hans=null;
+        default_people =null;
+        defaultPerson1 =null;
+        defaultPerson2 =null;
+        defaultPerson3 =null;
+        defaultPerson4 =null;
     }
 
     @Test
     void getAllPersons() {
-        when(personDao.findAll()).thenReturn(people);
-        assertThat(service.getAllPersons()).isNotNull().isEqualTo(people);
+        when(personDao.findAll()).thenReturn(default_people);
+        assertThat(service.getAllPersons()).isNotNull().isEqualTo(default_people);
         verify(personDao,times(1)).findAll();
     }
 
     @Test
     void getPersonByID() {
-        when(personDao.findById(ID)).thenReturn(java.util.Optional.ofNullable(max));
+        when(personDao.findById(DEFAULT_ID)).thenReturn(java.util.Optional.ofNullable(defaultPerson1));
         try {
-            assertThat(service.getPersonByID(ID)).isNotNull().isEqualTo(max);
-            verify(personDao,times(1)).findById(ID);
+            assertThat(service.getPersonByID(DEFAULT_ID)).isNotNull().isEqualTo(defaultPerson1);
+            verify(personDao,times(1)).findById(DEFAULT_ID);
         } catch (PersonNotFoundException e) {
             fail("Person should have been found!");
         }
@@ -86,18 +85,18 @@ class PersonServiceLogicTest {
     @Test
     void getPersonByIDFail() {
         PersonNotFoundException exception = assertThrows(PersonNotFoundException.class,()->{
-            service.getPersonByID(ID_NOT_AVAILABLE);
+            service.getPersonByID(DEFAULT_ID_NOT_AVAILABLE);
         });
-        assertEquals(exception.getMessage(),exID);
-        verify(personDao,times(1)).findById(ID_NOT_AVAILABLE);
+        assertEquals(exception.getMessage(), DEFAULT_EXCEPTION_ID);
+        verify(personDao,times(1)).findById(DEFAULT_ID_NOT_AVAILABLE);
     }
 
     @Test
     void getPersonByEmail() {
-        when(personDao.findByEmail(EMail)).thenReturn(max);
+        when(personDao.findByEmail(DEFAULT_EMAIL)).thenReturn(defaultPerson1);
         try {
-            assertThat(service.getPersonByEmail(EMail)).isNotNull().isEqualTo(max);
-            verify(personDao,times(1)).findByEmail(EMail);
+            assertThat(service.getPersonByEmail(DEFAULT_EMAIL)).isNotNull().isEqualTo(defaultPerson1);
+            verify(personDao,times(1)).findByEmail(DEFAULT_EMAIL);
         } catch (PersonNotFoundException e) {
             fail("Person should have been found!");
         }
@@ -106,26 +105,26 @@ class PersonServiceLogicTest {
     @Test
     void getPersonByEmailFail() {
         PersonNotFoundException exception = assertThrows(PersonNotFoundException.class,()->{
-            service.getPersonByEmail(EMail_NOT_AVAILABLE);
+            service.getPersonByEmail(DEFAULT_EMAIL_NOT_AVAILABLE);
         });
-        assertEquals(exception.getMessage(),exEMail);
-        verify(personDao,times(1)).findByEmail(EMail_NOT_AVAILABLE);
+        assertEquals(exception.getMessage(), DEFAULT_EXCEPTION_EMAIL);
+        verify(personDao,times(1)).findByEmail(DEFAULT_EMAIL_NOT_AVAILABLE);
     }
 
     @Test
     void createPerson() {
-        when(personDao.save(max)).thenReturn(max);
-        assertThat(service.createPerson(max)).isNotNull().isEqualTo(max);
-        verify(personDao,times(1)).save(max);
+        when(personDao.save(defaultPerson1)).thenReturn(defaultPerson1);
+        assertThat(service.createPerson(defaultPerson1)).isNotNull().isEqualTo(defaultPerson1);
+        verify(personDao,times(1)).save(defaultPerson1);
     }
     @Test
     void updatePersonId() {
-        when(personDao.findById(ID)).thenReturn(java.util.Optional.ofNullable(max));
-        when(personDao.save(anna)).thenReturn(anna);
+        when(personDao.findById(DEFAULT_ID)).thenReturn(java.util.Optional.ofNullable(defaultPerson1));
+        when(personDao.save(defaultPerson2)).thenReturn(defaultPerson2);
         try {
-            assertThat(service.updatePerson(ID,anna)).isNotNull().isEqualTo(max);
-            verify(personDao,times(1)).findById(ID);
-            verify(personDao,times(1)).save(anna);
+            assertThat(service.updatePerson(DEFAULT_ID, defaultPerson2)).isNotNull().isEqualTo(defaultPerson1);
+            verify(personDao,times(1)).findById(DEFAULT_ID);
+            verify(personDao,times(1)).save(defaultPerson2);
         } catch (PersonNotFoundException e) {
             fail("Person should have been found!");
         }
@@ -133,12 +132,12 @@ class PersonServiceLogicTest {
 
     @Test
     void updatePersonEmail() {
-        when(personDao.findByEmail(EMail)).thenReturn(max);
-        when(personDao.save(anna)).thenReturn(anna);
+        when(personDao.findByEmail(DEFAULT_EMAIL)).thenReturn(defaultPerson1);
+        when(personDao.save(defaultPerson2)).thenReturn(defaultPerson2);
         try {
-            assertThat(service.updatePerson(EMail,anna)).isNotNull().isEqualTo(max);
-            verify(personDao,times(1)).findByEmail(EMail);
-            verify(personDao,times(1)).save(anna);
+            assertThat(service.updatePerson(DEFAULT_EMAIL, defaultPerson2)).isNotNull().isEqualTo(defaultPerson1);
+            verify(personDao,times(1)).findByEmail(DEFAULT_EMAIL);
+            verify(personDao,times(1)).save(defaultPerson2);
         } catch (PersonNotFoundException e) {
             fail("Person should have been found!");
         }
@@ -146,53 +145,53 @@ class PersonServiceLogicTest {
 
     @Test
     void deletePersonID() {
-        when(personDao.findById(ID)).thenReturn(java.util.Optional.ofNullable(max));
+        when(personDao.findById(DEFAULT_ID)).thenReturn(java.util.Optional.ofNullable(defaultPerson1));
 
-        int peopleSize=people.size();
+        int peopleSize= default_people.size();
         doAnswer(invocationOnMock -> {
-            people.remove(max);
-            return people;
-        }).when(personDao).delete(max);
+            default_people.remove(defaultPerson1);
+            return default_people;
+        }).when(personDao).delete(defaultPerson1);
 
         Map<String,Boolean> response=null;
         Map<String,Boolean> expected= new HashMap<>();
         expected.put("deleted",true);
         try {
-            response =service.deletePerson(ID);
+            response =service.deletePerson(DEFAULT_ID);
         } catch (PersonNotFoundException e) {
             fail("Person should have been found.");
         }
 
-        assertEquals(peopleSize-1, people.size());
+        assertEquals(peopleSize-1, default_people.size());
         assertEquals(expected,response);
 
-        verify(personDao,times(1)).findById(ID);
-        verify(personDao,times(1)).delete(max);
+        verify(personDao,times(1)).findById(DEFAULT_ID);
+        verify(personDao,times(1)).delete(defaultPerson1);
     }
 
     @Test
     void DeletePersonEMail() {
-        when(personDao.findByEmail(EMail)).thenReturn(max);
+        when(personDao.findByEmail(DEFAULT_EMAIL)).thenReturn(defaultPerson1);
 
-        int peopleSize=people.size();
+        int peopleSize= default_people.size();
         doAnswer(invocationOnMock -> {
-            people.remove(max);
-            return people;
-        }).when(personDao).delete(max);
+            default_people.remove(defaultPerson1);
+            return default_people;
+        }).when(personDao).delete(defaultPerson1);
 
         Map<String,Boolean> response=null;
         Map<String,Boolean> expected= new HashMap<>();
         expected.put("deleted",true);
         try {
-            response =service.deletePerson(EMail);
+            response =service.deletePerson(DEFAULT_EMAIL);
         } catch (PersonNotFoundException e) {
             fail("Person should have been found.");
         }
 
-        assertEquals(peopleSize-1, people.size());
+        assertEquals(peopleSize-1, default_people.size());
         assertEquals(expected,response);
 
-        verify(personDao,times(1)).findByEmail(EMail);
-        verify(personDao,times(1)).delete(max);
+        verify(personDao,times(1)).findByEmail(DEFAULT_EMAIL);
+        verify(personDao,times(1)).delete(defaultPerson1);
     }
 }
