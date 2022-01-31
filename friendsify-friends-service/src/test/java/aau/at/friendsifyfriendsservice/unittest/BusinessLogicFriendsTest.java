@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import static org.mockito.Mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
@@ -22,6 +23,8 @@ import java.util.List;
 @ExtendWith(MockitoExtension.class)
 public class BusinessLogicFriendsTest {
     private Friends defaultFriends;
+    private Friends updateFriends;
+    private List<Friends> friends = new ArrayList<>();
     private final String default_email_initiator = "hans.m@gmail.com";
     private final String default_email_friend = "anna@gmx.at";
     private final boolean default_is_timed_out = false;
@@ -36,16 +39,17 @@ public class BusinessLogicFriendsTest {
     @BeforeEach
     public void setup(){
         defaultFriends = new Friends(0L, default_is_timed_out,default_email_initiator,default_email_friend, default_fs_start_date);
+        updateFriends = new Friends(0L,true, "hansi@gmail.com", "anni@gmx.at", LocalDate.of(6666,6,6));
+        friends.add(defaultFriends);
+
     }
     @AfterEach
     public void tearDown(){
         defaultFriends = null;
+        friends = null;
     }
 
     private List<Friends> indicateGetAllFriendships(){
-        List<Friends> friends = new ArrayList<>();
-        friends.add(defaultFriends);
-
         Mockito.when(this.friendsDao.findAll()).thenReturn(friends);
 
         return this.businessLogicFriends.getAllFriendship();
@@ -60,15 +64,10 @@ public class BusinessLogicFriendsTest {
     }
     @Test
     public void getAllFriendshipTest_Equals(){
-        List<Friends> friends = new ArrayList<>();
-        friends.add(defaultFriends);
         Assertions.assertEquals(friends, indicateGetAllFriendships());
     }
 
     private List<Friends> indicateGetByEmailInitiator() throws ResourceNotFoundException {
-        List<Friends> friends = new ArrayList<>();
-        friends.add(defaultFriends);
-
         Mockito.when(this.friendsDao.findAll()).thenReturn(friends);
 
         return this.businessLogicFriends.getByEmailInitiator(default_email_initiator);
@@ -85,15 +84,10 @@ public class BusinessLogicFriendsTest {
     }
     @Test
     public void getByEmailInitiatorTest_Equals() throws ResourceNotFoundException {
-        List<Friends> friends = new ArrayList<>();
-        friends.add(defaultFriends);
         Assertions.assertEquals(friends,indicateGetByEmailInitiator());
 
     }
     private List<Friends> indicateGetByEmailFriend() throws ResourceNotFoundException {
-        List<Friends> friends = new ArrayList<>();
-        friends.add(defaultFriends);
-
         Mockito.when(this.friendsDao.findAll()).thenReturn(friends);
 
         return this.businessLogicFriends.getByEmailFriend(default_email_friend);
@@ -108,16 +102,11 @@ public class BusinessLogicFriendsTest {
     }
     @Test
     public void getByEmailFriendTest_Equals() throws ResourceNotFoundException {
-        List<Friends> friends = new ArrayList<>();
-        friends.add(defaultFriends);
         Assertions.assertEquals(friends,indicateGetByEmailFriend());
     }
 
     @Test
     public void getIDTest() throws ResourceNotFoundException {
-        List<Friends> friends = new ArrayList<>();
-        friends.add(defaultFriends);
-
         Mockito.when(this.friendsDao.findAll()).thenReturn(friends);
 
         Long id = this.businessLogicFriends.getID(default_email_initiator,default_email_friend);
@@ -141,26 +130,23 @@ public class BusinessLogicFriendsTest {
 
     @Test
     public void updateTest() throws InvalidDataException, ResourceNotFoundException {
-        Friends f = new Friends(0L,true, "hansi@gmail.com", "anni@gmx.at", LocalDate.of(6666,6,6));
+        when(this.friendsDao.findById(0L)).thenReturn(java.util.Optional.ofNullable(defaultFriends));
+        when(this.friendsDao.save(updateFriends)).thenReturn(updateFriends);
 
-        Mockito.when(this.friendsDao.getById(0L)).thenReturn(defaultFriends);
-        Mockito.when(this.friendsDao.save(f)).thenReturn(f);
+        Friends updated = this.businessLogicFriends.update(0L,updateFriends);
 
-        Friends updated = this.businessLogicFriends.update(0L,f);
+        Assertions.assertTrue(updated.equals(defaultFriends));
 
-        Assertions.assertEquals(f,updated);
-        Assertions.assertEquals(f.getId_friend(),updated.getId_friend());
-        Assertions.assertEquals(f.isIs_timed_out(),updated.isIs_timed_out());
-        Assertions.assertEquals(f.getEmail_p_initiator(),updated.getEmail_p_initiator());
-        Assertions.assertEquals(f.getEmail_p_friend(),updated.getEmail_p_friend());
-        Assertions.assertEquals(f.getFs_start_date(),updated.getFs_start_date());
+        Assertions.assertEquals(updateFriends,updated);
+        Assertions.assertEquals(updateFriends.getId_friend(),updated.getId_friend());
+        Assertions.assertEquals(updateFriends.isIs_timed_out(),updated.isIs_timed_out());
+        Assertions.assertEquals(updateFriends.getEmail_p_initiator(),updated.getEmail_p_initiator());
+        Assertions.assertEquals(updateFriends.getEmail_p_friend(),updated.getEmail_p_friend());
+        Assertions.assertEquals(updateFriends.getFs_start_date(),updated.getFs_start_date());
     }
     @Test
     public void deleteTest() throws InvalidDataException, ResourceNotFoundException {
-        List<Friends> friends = new ArrayList<>();
-        friends.add(defaultFriends);
-
-        Mockito.when(this.friendsDao.getById(0L)).thenReturn(defaultFriends);
+        Mockito.when(this.friendsDao.findById(0L)).thenReturn(java.util.Optional.ofNullable(defaultFriends));
         Mockito.doAnswer(invocationOnMock -> {
             friends.remove(defaultFriends);
             return friends;
@@ -172,6 +158,7 @@ public class BusinessLogicFriendsTest {
         Assertions.assertEquals(1,returned.size());
         this.businessLogicFriends.delete(0L);
         Assertions.assertEquals(0,returned.size());
+
     }
 
 
