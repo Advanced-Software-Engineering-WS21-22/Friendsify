@@ -3,7 +3,6 @@ package aau.at.friendsifyfriendsservice.unittest;
 import aau.at.friendsifyfriendsservice.model.Friends;
 import org.junit.jupiter.api.*;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 public class FriendsModelTest {

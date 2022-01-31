@@ -34,11 +34,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Log4j2
 public class FriendsControllerTest {
     private Friends defaultFriends;
-    private String defaultEmailInitiator = "default@gmx.at";
-    private String defaultEmailFriend = "default_1@gmail.com";
-    private boolean default_is_timed_out = true;
-    private LocalDate default_fs_start_date = LocalDate.of(2021,12,12);
-    private Long default_id_friend = 0L;
+    private final String defaultEmailInitiator = "default@gmx.at";
+    private final String defaultEmailFriend = "default_1@gmail.com";
+    private final boolean default_is_timed_out = true;
+    private final LocalDate default_fs_start_date = LocalDate.of(2021,12,12);
+    private final Long default_id_friend = 0L;
 
     @MockBean
     private BusinessLogicFriends businessLogicFriends;
