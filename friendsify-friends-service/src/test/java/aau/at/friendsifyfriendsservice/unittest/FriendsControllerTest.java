@@ -1,5 +1,6 @@
 package aau.at.friendsifyfriendsservice.unittest;
 
+import aau.at.friendsifyfriendsservice.FriendsifyFriendsServiceApplication;
 import aau.at.friendsifyfriendsservice.businesslogic.BusinessLogicFriends;
 import aau.at.friendsifyfriendsservice.controller.FriendsController;
 import aau.at.friendsifyfriendsservice.model.Friends;
@@ -34,6 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Log4j2
 public class FriendsControllerTest {
     private Friends defaultFriends;
+    private Friends updateFriends;
+    private List<Friends> friendships = new ArrayList<>();
     private final String defaultEmailInitiator = "default@gmx.at";
     private final String defaultEmailFriend = "default_1@gmail.com";
     private final boolean default_is_timed_out = true;
@@ -49,17 +52,17 @@ public class FriendsControllerTest {
     @BeforeEach
     public void setUp(){
         defaultFriends = new Friends(0L,false, defaultEmailInitiator, defaultEmailFriend, LocalDate.of(2021,12,12));
+        updateFriends = new Friends(6L,true,"tester_initiator@gmail.com", "friend@gmail.com", LocalDate.of(2001,1,1));
+        friendships.add(defaultFriends);
     }
     @AfterEach
     public void setDown(){
         defaultFriends=null;
+        friendships = null;
     }
 
     @Test
     public void listFriendshipsTest() throws Exception {
-        List<Friends> friendships = new ArrayList<>();
-        friendships.add(defaultFriends);
-
         List<Long> ids = new ArrayList<>();
         ids.add( friendships.get(0).getId_friend());
         List<Integer> idsNew = new ArrayList<>();
@@ -89,9 +92,6 @@ public class FriendsControllerTest {
     }
     @Test
     public void getFriendshipByIdTest() throws Exception {
-        List<Friends> friendships = new ArrayList<>();
-        friendships.add(defaultFriends);
-
         Mockito.when(this.businessLogicFriends.getById(default_id_friend)).thenReturn(defaultFriends);
 
         final String link = "/friends/"+default_id_friend;
@@ -107,9 +107,6 @@ public class FriendsControllerTest {
     }
     @Test
     public void getFriendshipsByEmailInitiatorTest() throws Exception {
-        List<Friends> friendships = new ArrayList<>();
-        friendships.add(defaultFriends);
-
         List<String> emailInitiatorList = new ArrayList<>();
         emailInitiatorList.add(defaultFriends.getEmail_p_initiator());
 
@@ -133,9 +130,6 @@ public class FriendsControllerTest {
     }
     @Test
     public void getFriendshipsByEmailFriendTest() throws Exception {
-        List<Friends> friendships = new ArrayList<>();
-        friendships.add(defaultFriends);
-
         List<String> emailFriendList = new ArrayList<>();
         emailFriendList.add(defaultFriends.getEmail_p_friend());
 
@@ -159,9 +153,6 @@ public class FriendsControllerTest {
     }
     @Test
     public void getIDTest() throws Exception {
-        List<Friends> friendships = new ArrayList<>();
-        friendships.add(defaultFriends);
-
         for(Long i = 1L ;i<4;i++){
             Friends f = new Friends(i,default_is_timed_out,defaultEmailFriend,defaultEmailInitiator,default_fs_start_date);
             friendships.add(f);
@@ -181,7 +172,6 @@ public class FriendsControllerTest {
     }
     @Test
     public void createFriendshipTest() throws Exception {
-
         Mockito.when(this.businessLogicFriends.saveFriendship(defaultFriends)).thenReturn(defaultFriends);
         final String link = "/friends";
 
@@ -208,7 +198,6 @@ public class FriendsControllerTest {
     }
     @Test
     public void updateFriendshipTest() throws Exception {
-        Friends f = new Friends(6L,true,"tester_initiator@gmail.com", "friend@gmail.com", LocalDate.of(2001,1,1));
         String json = "{\n" +
                 "    \"id_friend\": 6,\n" +
                 "    \"email_p_initiator\": \"tester_initiator@gmail.com\",\n" +
@@ -219,7 +208,7 @@ public class FriendsControllerTest {
 
         final String link = "/friends/"+default_id_friend;
 
-        Mockito.when(this.businessLogicFriends.update(default_id_friend,f)).thenReturn(f);
+        Mockito.when(this.businessLogicFriends.update(default_id_friend,updateFriends)).thenReturn(updateFriends);
 
         this.mockMvc.perform(MockMvcRequestBuilders
         .put(link)
@@ -230,7 +219,6 @@ public class FriendsControllerTest {
     }
     @Test
     public void deleteFriendshipTest() throws Exception {
-
         Mockito.when(this.businessLogicFriends.delete(default_id_friend)).thenReturn("deleted");
 
         final  String link = "/friends/"+default_id_friend;
