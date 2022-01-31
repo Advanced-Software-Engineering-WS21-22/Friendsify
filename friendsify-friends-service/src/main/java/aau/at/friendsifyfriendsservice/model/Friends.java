@@ -2,8 +2,8 @@ package aau.at.friendsifyfriendsservice.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class Friends {
@@ -95,5 +95,10 @@ public class Friends {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_friend, email_p_initiator, email_p_friend, fs_start_date, is_timed_out);
     }
 }
