@@ -135,7 +135,7 @@ public class BusinessLogicFriendsTest {
 
         Friends updated = this.businessLogicFriends.update(0L,updateFriends);
 
-        Assertions.assertTrue(updated.equals(defaultFriends));
+        Assertions.assertEquals(updated, defaultFriends);
 
         Assertions.assertEquals(updateFriends,updated);
         Assertions.assertEquals(updateFriends.getId_friend(),updated.getId_friend());
@@ -145,7 +145,7 @@ public class BusinessLogicFriendsTest {
         Assertions.assertEquals(updateFriends.getFs_start_date(),updated.getFs_start_date());
     }
     @Test
-    public void deleteTest() throws InvalidDataException, ResourceNotFoundException {
+    public void deleteTest() throws ResourceNotFoundException {
         Mockito.when(this.friendsDao.findById(0L)).thenReturn(java.util.Optional.ofNullable(defaultFriends));
         Mockito.doAnswer(invocationOnMock -> {
             friends.remove(defaultFriends);
