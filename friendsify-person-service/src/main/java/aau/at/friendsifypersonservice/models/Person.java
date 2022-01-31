@@ -4,6 +4,7 @@ package aau.at.friendsifypersonservice.models;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class Person {
@@ -171,5 +172,10 @@ public class Person {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_p, first_name, last_name, birthday, email, password, id_geoDB, city);
     }
 }
