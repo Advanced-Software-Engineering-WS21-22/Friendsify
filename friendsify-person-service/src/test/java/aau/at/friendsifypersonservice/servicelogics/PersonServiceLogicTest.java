@@ -170,7 +170,7 @@ class PersonServiceLogicTest {
     }
 
     @Test
-    void DeletePersonEMail() {
+    void deletePersonEMail() {
         when(personDao.findByEmail(DEFAULT_EMAIL)).thenReturn(defaultPerson1);
 
         int peopleSize= default_people.size();
