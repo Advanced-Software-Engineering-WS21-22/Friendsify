@@ -19,9 +19,9 @@ public class ExceptionHandlingController {
     }
 
     @ExceptionHandler(HttpServerErrorException.class)
-    public String internalServerError(HttpServerErrorException exception, Model model) {
+    public RedirectView internalServerError(HttpServerErrorException exception, Model model) {
         System.out.println("ErrorController: " + exception.getMessage());
         model.addAttribute("errorMessage", exception.getMessage());
-        return "serverError";
+        return new RedirectView("./serverError");
     }
 }

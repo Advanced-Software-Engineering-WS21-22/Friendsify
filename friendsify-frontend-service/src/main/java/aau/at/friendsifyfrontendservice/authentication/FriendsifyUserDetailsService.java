@@ -19,6 +19,7 @@ public class FriendsifyUserDetailsService implements UserDetailsService {
     @Autowired
     private PersonService personService;
 
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         List authorities = new ArrayList();

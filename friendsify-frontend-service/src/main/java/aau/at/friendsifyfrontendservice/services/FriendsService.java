@@ -2,7 +2,6 @@ package aau.at.friendsifyfrontendservice.services;
 
 import aau.at.friendsifyfrontendservice.inputs.FriendsInput;
 import aau.at.friendsifyfrontendservice.models.Friends;
-import aau.at.friendsifyfrontendservice.models.Person;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;

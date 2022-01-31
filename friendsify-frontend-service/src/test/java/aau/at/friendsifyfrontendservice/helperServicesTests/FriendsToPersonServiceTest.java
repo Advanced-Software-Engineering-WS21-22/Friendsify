@@ -35,4 +35,6 @@ public class FriendsToPersonServiceTest {
         Assert.assertEquals(null, this.friendsToPersonService.getPerson("noperson@list.com"));
     }
 
+
+
 }

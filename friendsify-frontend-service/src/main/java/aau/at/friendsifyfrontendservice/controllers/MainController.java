@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.client.HttpServerErrorException;
 
 @Controller
 public class MainController {
@@ -23,11 +24,19 @@ public class MainController {
     private WeatherService weatherService;
 
     @GetMapping("/home")
-    public String main(Model model) {
+    public String main(Model model) throws HttpServerErrorException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
+        WeatherResult weatherResult = new WeatherResult();
 
-        WeatherResult weatherResult = this.weatherService.getWeatherByLocation(currentUser.getPerson().getCity());
+
+        try {
+            weatherResult = this.weatherService.getWeatherByLocation(currentUser.getPerson().getCity());
+        } catch (HttpServerErrorException e) {
+            System.out.println("EXCEPTION WHEN CALLING WEATHER");
+            throw e;
+        }
+
 
         model.addAttribute("weatherResult", weatherResult);
         model.addAttribute("location", currentUser.getPerson().getCity());

@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
@@ -24,9 +25,6 @@ import java.util.ArrayList;
 @Controller
 @RequestMapping("/friends")
 public class FriendsController {
-
-    @Autowired
-    private FriendsRepository friendsRepository = FriendsRepository.getFriendsRepository();
 
     @Autowired
     private FriendsToPersonService friendsToPersonService;
@@ -45,20 +43,16 @@ public class FriendsController {
     private Person[] selectable_persons;
 
     @GetMapping
-    public String friends(Model model) {
+    public String friends(Model model) throws HttpServerErrorException{
         friendsToPersonService.loadPersons();
         model.addAttribute("module", "friends");
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
 
-        /*
-        this.friendsList_active = this.friendsRepository.getFriendsActive(currentUser.getPerson().getEmail());
-        this.friendsList_passive = this.friendsRepository.getFriendsPassive(currentUser.getPerson().getEmail());
-        */
-
         this.friendsList_active = this.friendsService.getFriendsByInitiator(currentUser.getPerson().getEmail());
         this.friendsList_passive = this.friendsService.getFriendsByReceiver(currentUser.getPerson().getEmail());
+
 
         model.addAttribute("friendsList_active", this.friendsList_active);
         model.addAttribute("friendsList_passive", this.friendsList_passive);
@@ -66,7 +60,7 @@ public class FriendsController {
     }
 
     @GetMapping("/new")
-    public String newFriend(Model model) {
+    public String newFriend(Model model) throws HttpServerErrorException {
         model.addAttribute("module", "newFriends");
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -74,6 +68,7 @@ public class FriendsController {
 
         this.findFriendsService.loadData(currentUser.getPerson().getEmail());
         this.selectable_persons = this.findFriendsService.findSelectablePersons(currentUser.getPerson().getEmail());
+
 
         model.addAttribute("selectable_persons", this.selectable_persons);
 
@@ -86,7 +81,7 @@ public class FriendsController {
     }
 
     @PostMapping("/new")
-    public RedirectView addFriend(@ModelAttribute(value="friendsForm") FriendsInput friendsForm, Model model) {
+    public RedirectView addFriend(@ModelAttribute(value="friendsForm") FriendsInput friendsForm, Model model) throws HttpServerErrorException {
         System.out.println(friendsForm.getEmail_p_initiator());
         System.out.println(friendsForm.getEmail_p_friend());
 
@@ -108,7 +103,8 @@ public class FriendsController {
     }
 
     @PostMapping("/sendMail")
-    public RedirectView sendMail(@ModelAttribute(value="mail") Email email, Model model) {
+    public RedirectView sendMail(@ModelAttribute(value="mail") Email email, Model model) throws HttpServerErrorException {
+
         this.emailService.sendEmail(email);
         return new RedirectView("./");
     }
