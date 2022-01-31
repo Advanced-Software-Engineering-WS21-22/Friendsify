@@ -1,9 +1,8 @@
 FROM openjdk:11
 
-COPY target/friendsify-birthday-service-0.0.1-SNAPSHOT.jar /spring-boot.jar
-ENV POSTGRES_DB=host.docker.internal
-ENV POSTGRES_pASS=host.docker.internal
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
 
 EXPOSE 9005
 
-ENTRYPOINT ["java","-jar","spring-boot.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
