@@ -3,6 +3,7 @@ package aau.at.friendsifyfriendsservice.businesslogic;
 import aau.at.friendsifyfriendsservice.exceptions.*;
 import aau.at.friendsifyfriendsservice.model.Friends;
 import aau.at.friendsifyfriendsservice.repositories.FriendsDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
 @Service
 public class BusinessLogicFriends {
 
-//    @Autowired
+    @Autowired
     private final FriendsDao friendsDao;
 
     public BusinessLogicFriends (FriendsDao friendsDao){
@@ -23,10 +24,7 @@ public class BusinessLogicFriends {
     }
 
     public Friends getById(Long id) throws ResourceNotFoundException{
-        if(friendsDao.findById(id)!=null){
-            return friendsDao.getById(id);
-        }
-        throw new ResourceNotFoundException("Friendship not found for id: " + id);
+        return friendsDao.findById(id).orElseThrow(()-> new ResourceNotFoundException("Friendship not found for id: " + id));
     }
     public List<Friends> getByEmailInitiator(String email_initiator) throws ResourceNotFoundException {
         List<Friends> friends_of_initiator = new ArrayList<>();
