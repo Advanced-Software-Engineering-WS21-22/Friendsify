@@ -4,6 +4,7 @@ package aau.at.friendsifypersonservice.models;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class Person {
@@ -140,8 +141,7 @@ public class Person {
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Person) {
-            if ((this.id_p != null && ((Person) obj).getId_p() != null && this.id_p.equals(((Person) obj).getId_p())
-                    || this.id_p == ((Person) obj).getId_p()) &&
+            if ((this.id_p != null && ((Person) obj).getId_p() != null && this.id_p.equals(((Person) obj).getId_p())) &&
                     ((this.first_name != null && ((Person) obj).getFirst_name() != null &&
                             this.first_name.equals(((Person) obj).getFirst_name())) ||
                             this.first_name == ((Person) obj).getFirst_name()
@@ -173,5 +173,10 @@ public class Person {
             }
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_p, first_name, last_name, birthday, email, password, id_geoDB, city);
     }
 }
