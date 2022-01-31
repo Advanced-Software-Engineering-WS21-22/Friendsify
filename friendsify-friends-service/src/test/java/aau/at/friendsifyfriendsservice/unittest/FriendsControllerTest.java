@@ -1,6 +1,5 @@
 package aau.at.friendsifyfriendsservice.unittest;
 
-import aau.at.friendsifyfriendsservice.FriendsifyFriendsServiceApplication;
 import aau.at.friendsifyfriendsservice.businesslogic.BusinessLogicFriends;
 import aau.at.friendsifyfriendsservice.controller.FriendsController;
 import aau.at.friendsifyfriendsservice.model.Friends;
