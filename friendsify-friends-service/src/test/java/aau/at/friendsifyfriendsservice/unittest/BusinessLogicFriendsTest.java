@@ -68,6 +68,8 @@ public class BusinessLogicFriendsTest {
         defaultFriends = null;
         defaultFriends_2 = null;
         defaultFriends_3 = null;
+        friendshipToMyself = null;
+        updateFriends = null;
         friends = null;
     }
 
