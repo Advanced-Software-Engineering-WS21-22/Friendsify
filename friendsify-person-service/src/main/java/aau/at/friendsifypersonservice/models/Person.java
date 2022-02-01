@@ -140,8 +140,8 @@ public class Person {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Person) {
-            if ((this.id_p != null && ((Person) obj).getId_p() != null && this.id_p.equals(((Person) obj).getId_p())) &&
+        if (obj instanceof Person &&
+                ((this.id_p != null && ((Person) obj).getId_p() != null && this.id_p.equals(((Person) obj).getId_p())) &&
                     ((this.first_name != null && ((Person) obj).getFirst_name() != null &&
                             this.first_name.equals(((Person) obj).getFirst_name())) ||
                             this.first_name == ((Person) obj).getFirst_name()
@@ -168,10 +168,10 @@ public class Person {
                     ((this.password != null && ((Person) obj).getPassword() != null &&
                             this.password.equals(((Person) obj).getPassword())) ||
                             this.password == (((Person) obj).getPassword()))
-            ) {
+            ))
+        {
                 return true;
             }
-        }
         return false;
     }
 

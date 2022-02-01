@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class PersonServiceTest {
+class PersonServiceTest {
 
     @Autowired
     private MockMvc mvc;
@@ -53,7 +53,7 @@ public class PersonServiceTest {
     static final String DEFAULT_EXCEPTION_EMAIL = "Person not found by email: " + DEFAULT_EMAIL_NOT_AVAILABLE;
 
     @BeforeEach
-    public void init() {
+    void init() {
         defaultPerson1 = new Person(1L, "Max", "Mustermann", LocalDate.of(2000, 1, 1), "max@mustermann.de", "cGFzc3dvcmQ=", "Q483522", "Villach");
         defaultPerson1_2 = new Person(1L, "Anna", "Mustermann", LocalDate.of(2001, 1, 1), "anna@mustermann.de", "cGFzc3dvcmQ", "Q483522", "Villach");
         defaultPerson2 = new Person(2L, "John", "Doe", LocalDate.of(1990, 6, 6), "john.doe@email.com", "cGFzc3dvcmQ", "Q41753", "Klagenfurt");
@@ -64,7 +64,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void givenIDFindAll() throws Exception {
+    void givenIDFindAll() throws Exception {
 
         String response="["+defaultPerson1.toString().replaceAll("[\\n\\t ]", "")+","+
                 defaultPerson2.toString().replaceAll("[\\n\\t ]", "")+","+
@@ -80,7 +80,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void givenIDFindPerson() throws Exception {
+    void givenIDFindPerson() throws Exception {
 
         MvcResult result=mvc.perform(MockMvcRequestBuilders.get("/persons?id="+DEFAULT_ID)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -92,7 +92,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void givenEmailFindPerson() throws Exception {
+    void givenEmailFindPerson() throws Exception {
 
         MvcResult result=mvc.perform(MockMvcRequestBuilders.get("/persons?email="+DEFAULT_EMAIL)
                 .contentType(MediaType.APPLICATION_JSON))

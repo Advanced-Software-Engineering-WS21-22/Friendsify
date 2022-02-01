@@ -87,7 +87,7 @@ class PersonServiceLogicTest {
         PersonNotFoundException exception = assertThrows(PersonNotFoundException.class,()->{
             service.getPersonByID(DEFAULT_ID_NOT_AVAILABLE);
         });
-        assertEquals(exception.getMessage(), DEFAULT_EXCEPTION_ID);
+        assertEquals( DEFAULT_EXCEPTION_ID,exception.getMessage());
         verify(personDao,times(1)).findById(DEFAULT_ID_NOT_AVAILABLE);
     }
 
@@ -107,7 +107,7 @@ class PersonServiceLogicTest {
         PersonNotFoundException exception = assertThrows(PersonNotFoundException.class,()->{
             service.getPersonByEmail(DEFAULT_EMAIL_NOT_AVAILABLE);
         });
-        assertEquals(exception.getMessage(), DEFAULT_EXCEPTION_EMAIL);
+        assertEquals( DEFAULT_EXCEPTION_EMAIL,exception.getMessage());
         verify(personDao,times(1)).findByEmail(DEFAULT_EMAIL_NOT_AVAILABLE);
     }
 
