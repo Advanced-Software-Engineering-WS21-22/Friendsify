@@ -7,16 +7,19 @@ import java.time.LocalDate;
 
 public class FriendsModelTest {
     private Friends friends1;
+    private Friends friends1_2;
     private Friends friends2;
 
     @BeforeEach
     public void setUp(){
         friends1 = new Friends(0L,false,"hans.m@gmail.com","anna@mail.com", LocalDate.of(2021,4,12));
+        friends1_2 = new Friends(0L,false,"hans.m@gmail.com","anna@mail.com", LocalDate.of(2021,4,12));
         friends2 = new Friends(3L,true,"anna@gmail.com","hans.m@gmail.com",LocalDate.of(2019,8,19));
     }
     @AfterEach
     public void shutDown(){
         friends1 = null;
+        friends1_2 = null;
         friends2 = null;
     }
 
@@ -113,7 +116,7 @@ public class FriendsModelTest {
     @Test
     public void updateFromDtoTest(){
         friends1.updateFromDto(friends2);
-        Assertions.assertTrue(friends1.equals(friends1));
+        Assertions.assertTrue(friends1.equals(friends2));
     }
     @Test
     public void toStringTest_1(){
@@ -140,7 +143,7 @@ public class FriendsModelTest {
 
     @Test
     public void equalTest(){
-        Assertions.assertTrue(friends1.equals(friends1));
+        Assertions.assertTrue(friends1.equals(friends1_2));
     }
     @Test
     public void notEqualTest(){
