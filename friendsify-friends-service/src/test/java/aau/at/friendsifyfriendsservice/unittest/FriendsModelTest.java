@@ -116,7 +116,7 @@ public class FriendsModelTest {
     @Test
     public void updateFromDtoTest(){
         friends1.updateFromDto(friends2);
-        Assertions.assertTrue(friends1.equals(friends2));
+        Assertions.assertEquals(friends1, friends2);
     }
     @Test
     public void toStringTest_1(){
@@ -143,11 +143,11 @@ public class FriendsModelTest {
 
     @Test
     public void equalTest(){
-        Assertions.assertTrue(friends1.equals(friends1_2));
+        Assertions.assertEquals(friends1, friends1_2);
     }
     @Test
     public void notEqualTest(){
-        Assertions.assertFalse(friends1.equals(friends2));
+        Assertions.assertNotEquals(friends1, friends2);
     }
 
 }
