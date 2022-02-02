@@ -26,6 +26,7 @@
         <module>friendsify-frontend-service</module>
         <module>friendsify-data-mockups</module>
         <module>friendsify-core</module>
+        <module>friendsify-anniversary-reminder-service</module>
     </modules>
 
     <properties>
