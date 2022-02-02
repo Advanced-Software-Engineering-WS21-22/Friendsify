@@ -12,8 +12,7 @@ CREATE TABLE person
 
 INSERT INTO person( FIRST_NAME, LAST_NAME, BIRTHDAY, EMAIL, PASSWORD, ID_GEODB, CITY)
 VALUES ( 'Max', 'Mustermann', '2000-01-01', 'max@mustermann.de', '$2a$10$A7tRy7jyQsTKNVcEjkwlauKhSg6deU9bnpNJt2CeQQPkWJPKlhry6', 'Q483522', 'Villach'),
-       ( 'Anna', 'Mustermann', '2001-01-01', 'anna@mustermann.de', '$2a$10$v6vYLfGiwxC.Go1HyxKinuzNdhFto9ZW0K8cO6Y1LpNA5mt/YK5mK', 'Q483522', 'Villach'),
-       ( 'John', 'Doe', '1990-06-06', 'john.doe@email.com', '$2a$10$suHpLlQe44a4IzfXSx6kUeX1VN6Os1thIBaLnr2OEkkJbeb.RVeVG', 'Q41753', 'Klagenfurt'),
-       ( 'Hans', 'Müller', '1994-08-18', 'hans.m@gmail.com', '$2a$10$jyBKNyMulV6YVTgpl0M5EOl9Z2Iy/ncZvVdr.SAztZngb.qjpQJza', 'Q660687', 'Velden am Wörthersee'),
-       ( 'Maria', 'Schmidt', '1994-12-01', 'm.schmidt@gmail.com', '$2a$10$cQ2liy6Ut0AsaYNoQLBxOujRERYESHTRzBO0CVPuevrrMfpmuVHSi', 'Q875805', 'Pörtschach am Wörthersee');
-
+              ( 'Anna', 'Mustermann', '2001-01-01', 'anna@mustermann.de', '$2a$10$v6vYLfGiwxC.Go1HyxKinuzNdhFto9ZW0K8cO6Y1LpNA5mt/YK5mK', 'Q483522', 'Villach'),
+              ( 'John', 'Doe', '1990-06-06', 'john.doe@email.com', '$2a$10$suHpLlQe44a4IzfXSx6kUeX1VN6Os1thIBaLnr2OEkkJbeb.RVeVG', 'Q41753', 'Klagenfurt'),
+              ( 'Hans', 'Müller', '1994-08-18', 'hans.m@gmail.com', '$2a$10$jyBKNyMulV6YVTgpl0M5EOl9Z2Iy/ncZvVdr.SAztZngb.qjpQJza', 'Q660687', 'Velden am Wörthersee'),
+              ( 'Maria', 'Schmidt', '1994-12-01', 'm.schmidt@gmail.com', '$2a$10$cQ2liy6Ut0AsaYNoQLBxOujRERYESHTRzBO0CVPuevrrMfpmuVHSi', 'Q875805', 'Pörtschach am Wörthersee');

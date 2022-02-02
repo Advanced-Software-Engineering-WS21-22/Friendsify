@@ -12,5 +12,6 @@ INSERT INTO friends( EMAIL_P_INITIATOR, EMAIL_P_FRIEND, FS_START_DATE, IS_TIMED_
 VALUES ( 'hans.m@gmail.com', 'anna@mustermann.de', '2019-01-31', false),
        ( 'anna@mustermann.de', 'hans.m@gmail.com', '2019-02-20', false),
        ( 'max@mustermann.de', 'john.doe@email.com', '2016-10-10', false),
-       ( 'john.doe@email.com', 'max@mustermann.de', '2009-01-05', true);
+       ( 'max@mustermann.de', 'anna@mustermann.de', '2016-10-10', false),
+       ( 'hans.m@gmail.com', 'anna@mustermann.de', '2009-01-05', true);
 
