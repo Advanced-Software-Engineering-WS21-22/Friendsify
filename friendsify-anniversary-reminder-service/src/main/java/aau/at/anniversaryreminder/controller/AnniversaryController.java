@@ -12,8 +12,8 @@ public class AnniversaryController {
     @Autowired
     AnniversaryService anniversaryService;
 
-    @GetMapping("/{emailInitiator}/{emailFriend}")
-    public String getAnniversaryInfo(@PathVariable("emailInitiator") String emailInitiator, @PathVariable("emailFriend") String emailFriend) {
+    @GetMapping(value = "/reminder", params = {"email_initiator", "email_friend"})
+    public String getAnniversaryInfo(@RequestParam(value = "email_initiator") String emailInitiator, @RequestParam(value = "email_friend") String emailFriend) {
         String response = "";
         if (anniversaryService.isTodayAnniversary(emailInitiator, emailFriend)) {
             response = anniversaryService.getAnniversaryReminder(emailInitiator, emailFriend);
