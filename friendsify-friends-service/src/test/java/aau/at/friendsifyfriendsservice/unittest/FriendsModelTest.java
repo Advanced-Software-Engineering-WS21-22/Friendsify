@@ -149,5 +149,9 @@ class FriendsModelTest {
     void notEqualTest(){
         Assertions.assertNotEquals(friends1, friends2);
     }
+    @Test
+    void notEqualInstanceOfFriends(){
+        Assertions.assertFalse(friends1.equals(String.class));
+    }
 
 }
