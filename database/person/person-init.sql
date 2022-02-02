@@ -1,6 +1,6 @@
 CREATE TABLE person
 (
-    ID_P       int primary key not null,
+    ID_P       bigserial primary key not null,
     FIRST_NAME varchar         not null,
     LAST_NAME  varchar         not null,
     BIRTHDAY   date            not null,
@@ -10,11 +10,8 @@ CREATE TABLE person
     CITY      varchar
 );
 
-INSERT INTO person(ID_P, FIRST_NAME, LAST_NAME, BIRTHDAY, EMAIL, PASSWORD, ID_GEODB, CITY)
-VALUES (0, 'Max', 'Mustermann', '2000-01-01', 'max@mustermann.de', 'cGFzc3dvcmQ= ', 'Q483522', 'Villach'),
-       (1, 'Anna', 'Mustermann', '2001-01-01', 'anna@mustermann.de', 'cGFzc3dvcmQ=', 'Q483522', 'Villach'),
-       (2, 'John', 'Doe', '1990-06-06', 'john.doe@email.com', 'cGFzc3dvcmQ=', 'Q41753', 'Klagenfurt'),
-       (3, 'Hans', 'Müller', '1994-08-18', 'hans.m@gmail.com', 'cGFzc3dvcmQ=', 'Q660687', 'Velden am Wörthersee'),
-       (4, 'Test', 'Mann', (current_date - INTERVAL '20 YEARS'), 'test.mann@email.com', 'cGFzc3dvcmQ=', 'Q41753', 'Klagenfurt'),
-       (5, 'Test', 'Freund', (current_date - INTERVAL '25 YEARS'), 'alehofer@edu.aau.at', 'cGFzc3dvcmQ=', 'Q41753', 'Klagenfurt')
-       ;
+INSERT INTO person( FIRST_NAME, LAST_NAME, BIRTHDAY, EMAIL, PASSWORD, ID_GEODB, CITY)
+VALUES ( 'Max', 'Mustermann', '2000-01-01', 'max@mustermann.de', 'cGFzc3dvcmQ= ', 'Q483522', 'Villach'),
+       ( 'Anna', 'Mustermann', '2001-01-01', 'anna@mustermann.de', 'cGFzc3dvcmQ', 'Q483522', 'Villach'),
+       ( 'John', 'Doe', '1990-06-06', 'john.doe@email.com', 'cGFzc3dvcmQ', 'Q41753', 'Klagenfurt'),
+       ( 'Hans', 'Müller', '1994-08-18', 'hans.m@gmail.com', 'cGFzc3dvcmQ', 'Q660687', 'Velden am Wörthersee');
