@@ -15,9 +15,9 @@ class PersonTest {
 
     @BeforeEach
     void setUp(){
-        p1 = new Person("Max", "Mustermann", LocalDate.of(2000,1,1), "max@mustermann.de", "cGFzc3dvcmQ=", "Q483522", "Villach");
-        p1_2 = new Person("Max", "Mustermann", LocalDate.of(2000,1,1), "max@mustermann.de", "cGFzc3dvcmQ=", "Q483522", "Villach");
-        p2 = new Person("Mini", "Maustermann", LocalDate.of(2000,1,2), "mini@maustermann.de", "cGFzc3dvcmQ", "Q48352", "Klagenfurt");
+        p1 = new Person(1L,"Max", "Mustermann", LocalDate.of(2000,1,1), "max@mustermann.de", "cGFzc3dvcmQ=", "Q483522", "Villach");
+        p1_2 = new Person(1L,"Max", "Mustermann", LocalDate.of(2000,1,1), "max@mustermann.de", "cGFzc3dvcmQ=", "Q483522", "Villach");
+        p2 = new Person(2L,"Mini", "Maustermann", LocalDate.of(2000,1,2), "mini@maustermann.de", "cGFzc3dvcmQ", "Q48352", "Klagenfurt");
     }
 
     @AfterEach
@@ -47,7 +47,9 @@ class PersonTest {
     @Test
     void update() {
         p1.update(p2);
-        assertEquals(p2,p1);
+        Person expected= new Person(1L,"Mini", "Maustermann", LocalDate.of(2000,1,2), "mini@maustermann.de", "cGFzc3dvcmQ", "Q48352", "Klagenfurt");
+
+        assertEquals(expected,p1);
     }
 
 }
