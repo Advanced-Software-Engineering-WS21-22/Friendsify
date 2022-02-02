@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(FriendsController.class)
 @Log4j2
-public class FriendsControllerTest {
+class FriendsControllerTest {
     @MockBean
     private BusinessLogicFriends businessLogicFriends;
 
@@ -78,7 +78,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void listFriendshipsTest() throws Exception {
+    void listFriendshipsTest() throws Exception {
         when(this.businessLogicFriends.getAllFriendship()).thenReturn(friends);
         int defaultListSize = friends.size();
         this.mockMvc.perform(MockMvcRequestBuilders
@@ -93,7 +93,7 @@ public class FriendsControllerTest {
         verify(this.businessLogicFriends,times(1)).getAllFriendship();
     }
     @Test
-    public void getFriendshipByIdTest() throws Exception {
+    void getFriendshipByIdTest() throws Exception {
         try {
             when(this.businessLogicFriends.getById(defaultFriends.getId_friend())).thenReturn(defaultFriends);
             final String link = "/friends/"+defaultFriends.getId_friend();
@@ -110,7 +110,7 @@ public class FriendsControllerTest {
         }
     }
     @Test
-    public void getFriendshipByIdTest_Fail() throws Exception {
+    void getFriendshipByIdTest_Fail() throws Exception {
         when(this.businessLogicFriends.getById(default_notValid_ID)).thenThrow(new ResourceNotFoundException("Friendship not found for id: " + default_notValid_ID));
 
         final String link = "/friends/"+default_notValid_ID;
@@ -128,7 +128,7 @@ public class FriendsControllerTest {
 
 
     @Test
-    public void getFriendshipsByEmailInitiatorTest() throws Exception {
+    void getFriendshipsByEmailInitiatorTest() throws Exception {
         List<Friends> expected = new ArrayList<>();
         expected.add(defaultFriends);
         try {
@@ -145,7 +145,7 @@ public class FriendsControllerTest {
         }
     }
     @Test
-    public void getFriendshipsByEmailInitiatorTest_Fail() throws Exception {
+    void getFriendshipsByEmailInitiatorTest_Fail() throws Exception {
         when(this.businessLogicFriends.getByEmailInitiator(default_notValid_emailInitiator)).thenThrow(new ResourceNotFoundException("No Friendships with this initiator email found: "+default_notValid_emailInitiator));
 
         final String link = "/friends/?email_initiator="+default_notValid_emailInitiator;
@@ -161,7 +161,7 @@ public class FriendsControllerTest {
         }
     }
     @Test
-    public void getFriendshipsByEmailFriendTest() throws Exception {
+    void getFriendshipsByEmailFriendTest() throws Exception {
         List<Friends> expected = new ArrayList<>();
         expected.add(defaultFriends);
         try {
@@ -178,7 +178,7 @@ public class FriendsControllerTest {
         }
     }
     @Test
-    public void getFriendshipsByEmailFriendTest_Fail() throws Exception {
+    void getFriendshipsByEmailFriendTest_Fail() throws Exception {
         when(this.businessLogicFriends.getByEmailFriend(default_notValid_emailFriend)).thenThrow(new ResourceNotFoundException("No Friendships with this friend email found: "+default_notValid_emailFriend));
 
         final String link = "/friends/?email_friend="+default_notValid_emailFriend;
@@ -194,7 +194,7 @@ public class FriendsControllerTest {
         }
     }
     @Test
-    public void getIDTest() throws Exception {
+    void getIDTest() throws Exception {
 
         try {
             when(this.businessLogicFriends.getID(default_email_initiator,default_email_friend)).thenReturn(defaultFriends.getId_friend());
@@ -211,7 +211,7 @@ public class FriendsControllerTest {
         }
     }
     @Test
-    public void getIDTest_Fail() throws Exception {
+    void getIDTest_Fail() throws Exception {
         when(this.businessLogicFriends.getID(default_notValid_emailInitiator,default_notValid_emailFriend)).thenThrow(new ResourceNotFoundException("Friendship with email_initiator = "+default_notValid_emailInitiator+"and email_friend = "+default_notValid_emailFriend+"was not found."));
 
         final String link = "/friends/?email_initiator="+default_notValid_emailInitiator+"&email_friend="+default_notValid_emailFriend;
@@ -229,7 +229,7 @@ public class FriendsControllerTest {
 
 
     @Test
-    public void createFriendshipTest() throws Exception {
+    void createFriendshipTest() throws Exception {
         when(this.businessLogicFriends.saveFriendship(defaultFriends)).thenReturn(defaultFriends);
         final String link = "/friends";
 
@@ -257,7 +257,7 @@ public class FriendsControllerTest {
 
     }
     @Test
-    public void updateFriendshipTest() throws Exception {
+    void updateFriendshipTest() throws Exception {
         when(this.businessLogicFriends.update(defaultFriends.getId_friend(),updateFriends)).thenReturn(updateFriends);
 
         String json = "{\n" +
@@ -283,7 +283,7 @@ public class FriendsControllerTest {
         assertEquals(HttpStatus.OK.value(),result.getResponse().getStatus());
     }
     @Test
-    public void deleteFriendshipTest() throws Exception {
+    void deleteFriendshipTest() throws Exception {
         when(this.businessLogicFriends.delete(defaultFriends.getId_friend())).thenReturn("deleted");
 
         final  String link = "/friends/"+defaultFriends.getId_friend();

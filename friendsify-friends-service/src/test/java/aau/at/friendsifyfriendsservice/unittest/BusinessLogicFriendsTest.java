@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class BusinessLogicFriendsTest {
+class BusinessLogicFriendsTest {
     private Friends defaultFriends;
     private Friends defaultFriends_2;
     private Friends defaultFriends_3;
@@ -74,14 +74,14 @@ public class BusinessLogicFriendsTest {
     }
 
     @Test
-    public void getAllFriendshipsTest(){
+    void getAllFriendshipsTest(){
         when(this.friendsDao.findAll()).thenReturn(this.friends);
         assertThat(this.businessLogicFriends.getAllFriendship()).isNotNull().isEqualTo(this.friends).size().isEqualTo(this.friends.size());
         verify(this.friendsDao,times(1)).findAll();
     }
 
     @Test
-    public void getByIDTest() throws ResourceNotFoundException {
+    void getByIDTest() throws ResourceNotFoundException {
         when(this.friendsDao.findById(defaultFriends.getId_friend())).thenReturn(java.util.Optional.ofNullable(defaultFriends));
         try {
             assertThat(this.businessLogicFriends.getById(defaultFriends.getId_friend())).isNotNull().isEqualTo(defaultFriends);
@@ -91,13 +91,13 @@ public class BusinessLogicFriendsTest {
         }
     }
     @Test
-    public void getByIDTestFail(){
+    void getByIDTestFail(){
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class,()-> this.businessLogicFriends.getById(default_notValid_ID));
         assertEquals(default_exception_id,exception.getMessage());
         verify(this.friendsDao,times(1)).findById(default_notValid_ID);
     }
     @Test
-    public void getByEmailInitiatorTest() throws ResourceNotFoundException {
+    void getByEmailInitiatorTest() throws ResourceNotFoundException {
         when(this.friendsDao.findAll()).thenReturn(friends);
         try {
             assertThat(this.businessLogicFriends.getByEmailInitiator(default_email_initiator)).isNotNull().hasSize(1);
@@ -109,13 +109,13 @@ public class BusinessLogicFriendsTest {
         }
     }
     @Test
-    public void getByEmailInitiatorTest_Fail(){
+    void getByEmailInitiatorTest_Fail(){
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> this.businessLogicFriends.getByEmailInitiator(default_notValid_emailInitiator));
         assertEquals(default_exception_emailInitiator,exception.getMessage());
         verify(this.friendsDao,times(1)).findAll();
     }
     @Test
-    public void getByEmailFriendTest() throws ResourceNotFoundException {
+    void getByEmailFriendTest() throws ResourceNotFoundException {
         when(this.friendsDao.findAll()).thenReturn(friends);
         try {
             assertThat(this.businessLogicFriends.getByEmailFriend(default_email_friend)).isNotNull().hasSize(1);
@@ -127,13 +127,13 @@ public class BusinessLogicFriendsTest {
         }
     }
     @Test
-    public void getByEmailFriendTest_Fail(){
+    void getByEmailFriendTest_Fail(){
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> this.businessLogicFriends.getByEmailInitiator(default_notValid_emailFriend));
         assertEquals(default_exception_emailFriend,exception.getMessage());
         verify(this.friendsDao,times(1)).findAll();
     }
     @Test
-    public void getIDTest() throws ResourceNotFoundException {
+    void getIDTest() throws ResourceNotFoundException {
         Mockito.when(this.friendsDao.findAll()).thenReturn(friends);
         try {
             assertThat(this.businessLogicFriends.getID(default_email_initiator,default_email_friend)).isNotNull().isEqualTo(defaultFriends.getId_friend());
@@ -143,20 +143,20 @@ public class BusinessLogicFriendsTest {
         }
     }
     @Test
-    public void getIDTest_Fail(){
+    void getIDTest_Fail(){
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class, () -> this.businessLogicFriends.getID(default_notValid_emailInitiator,default_notValid_emailFriend));
         assertEquals(default_exception_getID,exception.getMessage());
         verify(this.friendsDao,times(1)).findAll();
     }
 
     @Test
-    public void saveFriendshipTest() throws InvalidDataException {
+    void saveFriendshipTest() throws InvalidDataException {
         when(this.friendsDao.save(defaultFriends)).thenReturn(defaultFriends);
         assertThat(this.businessLogicFriends.saveFriendship(defaultFriends)).isNotNull().isEqualTo(defaultFriends);
         verify(this.friendsDao,times(1)).save(defaultFriends);
     }
     @Test
-    public void saveFriendshipTest_Fail_duplicate(){
+    void saveFriendshipTest_Fail_duplicate(){
         when(this.friendsDao.findAll()).thenReturn(friends);
         InvalidDataException exception = assertThrows(InvalidDataException.class, () -> this.businessLogicFriends.saveFriendship(defaultFriends));
         assertEquals("Friendship is already in DB.",exception.getMessage());
@@ -165,13 +165,13 @@ public class BusinessLogicFriendsTest {
 
     }
     @Test
-    public void saveFriendshipTest_Fail_toItself(){
+    void saveFriendshipTest_Fail_toItself(){
         InvalidDataException exception = assertThrows(InvalidDataException.class, () -> this.businessLogicFriends.saveFriendship(friendshipToMyself));
         assertEquals("Friendship to itself is not allowed.", exception.getMessage());
         verify(this.friendsDao,times(0)).save(friendshipToMyself);
     }
     @Test
-    public void updateTest() throws InvalidDataException, ResourceNotFoundException {
+    void updateTest() throws InvalidDataException, ResourceNotFoundException {
         when(this.friendsDao.findById(defaultFriends.getId_friend())).thenReturn(java.util.Optional.ofNullable(defaultFriends));
         when(this.friendsDao.save(updateFriends)).thenReturn(updateFriends);
 
@@ -180,7 +180,7 @@ public class BusinessLogicFriendsTest {
         verify(this.friendsDao,times(1)).save(updateFriends);
     }
     @Test
-    public void updateTest_Fail_duplicate(){
+    void updateTest_Fail_duplicate(){
         when(this.friendsDao.findAll()).thenReturn(friends);
         when(this.friendsDao.findById(defaultFriends_2.getId_friend())).thenReturn(java.util.Optional.ofNullable(defaultFriends_2));
         InvalidDataException exception = assertThrows(InvalidDataException.class, () -> this.businessLogicFriends.update(defaultFriends_2.getId_friend(),defaultFriends));
@@ -191,7 +191,7 @@ public class BusinessLogicFriendsTest {
 
     }
     @Test
-    public void updateTest_Fail_toItself(){
+    void updateTest_Fail_toItself(){
         when(this.friendsDao.findById(defaultFriends.getId_friend())).thenReturn(java.util.Optional.ofNullable(defaultFriends));
 
         InvalidDataException exception = assertThrows(InvalidDataException.class, () -> this.businessLogicFriends.update(defaultFriends.getId_friend(),friendshipToMyself));
@@ -203,7 +203,7 @@ public class BusinessLogicFriendsTest {
 
 
     @Test
-    public void deleteTest() throws ResourceNotFoundException {
+    void deleteTest() throws ResourceNotFoundException {
         when(this.friendsDao.findById(0L)).thenReturn(java.util.Optional.ofNullable(defaultFriends));
         int friendsListSize = this.friends.size();
         doAnswer(invocationOnMock -> {

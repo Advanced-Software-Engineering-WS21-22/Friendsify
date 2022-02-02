@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestPropertySource(locations = "classpath:application-integrationtest.properties")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
-public class FriendsServiceTest {
+class FriendsServiceTest {
     @Autowired
     private MockMvc mvc;
 
