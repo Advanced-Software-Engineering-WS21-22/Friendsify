@@ -151,12 +151,12 @@ class FriendsModelTest {
     }
     @Test
     void notEqualInstanceOfFriends(){
-        Assertions.assertFalse(friends1.equals(String.class));
+        Assertions.assertNotEquals(friends1, String.class);
     }
     @Test
     void notEqualEmailInitiator(){
         friends2.setEmail_p_initiator("testqgmail@test.at");
-        Assertions.assertFalse(friends1.equals(friends2));
+        Assertions.assertNotEquals(friends1, friends2);
     }
     @Test
     void equalsHashCode(){
