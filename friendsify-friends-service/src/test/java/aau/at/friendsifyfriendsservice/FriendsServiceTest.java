@@ -39,8 +39,6 @@ public class FriendsServiceTest {
     private Friends defaultFriends;
     private Friends defaultFriends_2;
     private Friends defaultFriends_3;
-    private Friends friendshipToMyself;
-    private Friends updateFriends;
     private final String default_email_initiator = "hans.m@gmail.com";
     private final String default_email_friend = "anna@gmx.at";
     private final boolean default_is_timed_out = false;
@@ -52,23 +50,21 @@ public class FriendsServiceTest {
 
     @BeforeEach
     public void setUp(){
-        friendshipToMyself = new Friends(8L,true,"hello@gmx.at","hello@gmx.at", LocalDate.of(1000,2,2));
         defaultFriends = new Friends(1L, default_is_timed_out,default_email_initiator,default_email_friend, default_fs_start_date);
         defaultFriends_2 = new Friends(2L, true,"test@gamil.com","friendTest@aau.at",LocalDate.of(2006,8,5));
         defaultFriends_3 = new Friends(3L, default_is_timed_out, default_email_friend,default_email_initiator,default_fs_start_date);
-        updateFriends = new Friends(0L,true, "hansi@gmail.com", "anni@gmx.at", LocalDate.of(6666,6,6));
         friendsDao.save(defaultFriends);
         friendsDao.save(defaultFriends_2);
         friendsDao.save(defaultFriends_3);
 
         String oldDefault_1 = defaultFriends.toString().replaceAll("[\\n\\t ]", "").replace("Friends","").replaceAll("'","");
-        newDefault_1 = oldDefault_1.substring(0,1)+"id_friend="+defaultFriends.getId_friend()+","+oldDefault_1.substring(1);
+        newDefault_1 = oldDefault_1.charAt(0)+"id_friend="+defaultFriends.getId_friend()+","+oldDefault_1.substring(1);
 
         String oldDefault_2 = defaultFriends_2.toString().replaceAll("[\\n\\t ]", "").replace("Friends","").replaceAll("'","");
-        newDefault_2 = oldDefault_2.substring(0,1)+"id_friend="+defaultFriends_2.getId_friend()+","+oldDefault_2.substring(1);
+        newDefault_2 = oldDefault_2.charAt(0)+"id_friend="+defaultFriends_2.getId_friend()+","+oldDefault_2.substring(1);
 
         String oldDefault_3 = defaultFriends_3.toString().replaceAll("[\\n\\t ]", "").replace("Friends","").replaceAll("'","");
-        newDefault_3 = oldDefault_3.substring(0,1)+"id_friend="+defaultFriends_3.getId_friend()+","+oldDefault_3.substring(1);
+        newDefault_3 = oldDefault_3.charAt(0)+"id_friend="+defaultFriends_3.getId_friend()+","+oldDefault_3.substring(1);
 
     }
     @Test
