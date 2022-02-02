@@ -52,14 +52,14 @@ public class PersonController {
     }
 
     @DeleteMapping(params = "id")
-    public Map<String, Boolean> deletePerson(@RequestParam Long id)
+    public ResponseEntity<Map<String, Boolean>> deletePerson(@RequestParam Long id)
             throws PersonNotFoundException {
-        return personService.deletePerson(id);
+        return ResponseEntity.ok(personService.deletePerson(id));
     }
 
     @DeleteMapping(params = "email")
-    public Map<String, Boolean> deletePerson(@RequestParam String email)
+    public ResponseEntity<Map<String, Boolean>> deletePerson(@RequestParam String email)
             throws PersonNotFoundException {
-        return personService.deletePerson(email);
+        return ResponseEntity.ok(personService.deletePerson(email));
     }
 }
