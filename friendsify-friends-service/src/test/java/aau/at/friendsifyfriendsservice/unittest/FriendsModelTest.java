@@ -153,5 +153,10 @@ class FriendsModelTest {
     void notEqualInstanceOfFriends(){
         Assertions.assertFalse(friends1.equals(String.class));
     }
+    @Test
+    void notEqualEmailInitiator(){
+        friends2.setEmail_p_initiator("testqgmail@test.at");
+        Assertions.assertFalse(friends1.equals(friends2));
+    }
 
 }
