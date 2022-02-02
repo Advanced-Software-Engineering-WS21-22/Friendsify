@@ -6,7 +6,9 @@ import aau.at.friendsifyrecommendationsservice.models.Recommendation;
 import aau.at.friendsifyrecommendationsservice.services.FriendsService;
 import aau.at.friendsifyrecommendationsservice.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class RecommenderCoordinator {
 
     @Autowired

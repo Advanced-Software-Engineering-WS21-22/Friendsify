@@ -18,8 +18,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-
-import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,17 +30,17 @@ public class RecommendationControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @MockBean
+    private RecommenderCoordinator recommenderCoordinator;
 
-    /*
+
     @Test
     public void testGetRecommendation() throws Exception {
-        RecommenderCoordinator recommenderCoordinator = spy(new RecommenderCoordinator());
         when(recommenderCoordinator.findRecommendation(1L)).thenReturn(new Recommendation());
 
         this.mockMvc.perform(get("/recommendations/1")
                 .contentType("application/json"))
                 .andExpect(status().isOk());
     }
-    */
 
 }
