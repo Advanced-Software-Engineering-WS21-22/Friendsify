@@ -29,17 +29,6 @@ public class Person {
 
     }
 
-
-    public Person(String first_name, String last_name, String email, LocalDate birthday, String id_geoDB, String city, String password) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.email = email;
-        this.birthday = birthday;
-        this.id_geoDB = id_geoDB;
-        this.city = city;
-        this.password = password;
-    }
-
     public Person(Long id_p, String first_name, String last_name, String email, LocalDate birthday, String id_geoDB, String city, String password) {
         this.id_p = id_p;
         this.first_name = first_name;

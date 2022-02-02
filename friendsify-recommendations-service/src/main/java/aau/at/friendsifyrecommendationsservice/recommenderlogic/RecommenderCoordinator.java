@@ -17,20 +17,20 @@ public class RecommenderCoordinator {
     @Autowired
     private FriendsService friendsService;
 
-    private Person[] all_persons;
-    private Friends[] all_friends;
+    private Person[] allPersons;
+    private Friends[] allFriends;
 
     public Recommendation findRecommendation(Long id_p) {
         Recommendation recommendation = new Recommendation();
 
-        this.all_persons = this.personService.getPersons();
-        this.all_friends = this.friendsService.getFriends();
+        this.allPersons = this.personService.getPersons();
+        this.allFriends = this.friendsService.getFriends();
 
-        AgeRecommender ageRecommender = new AgeRecommender(this.all_persons);
-        CommonFriendsRecommender commonFriendsRecommender = new CommonFriendsRecommender(this.all_persons, this.all_friends);
+        AgeRecommender ageRecommender = new AgeRecommender(this.allPersons);
+        CommonFriendsRecommender commonFriendsRecommender = new CommonFriendsRecommender(this.allPersons, this.allFriends);
 
-        ageRecommender.recommended_by_age(id_p, recommendation);
-        commonFriendsRecommender.recommended_by_common_friends(id_p, recommendation);
+        ageRecommender.recommendedByAge(id_p, recommendation);
+        commonFriendsRecommender.recommendedByCommonFriends(id_p, recommendation);
 
 
         return recommendation;

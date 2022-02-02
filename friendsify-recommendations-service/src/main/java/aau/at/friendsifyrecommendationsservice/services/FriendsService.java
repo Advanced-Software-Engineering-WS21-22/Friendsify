@@ -19,9 +19,7 @@ public class FriendsService {
     }
 
     public Friends[] getFriends() {
-        System.out.println("CALL FRIENDS");
-        Friends[] friends = null;
-        friends = restTemplate.getForObject(friendsServiceEndpoint, Friends[].class);
+        Friends[] friends = restTemplate.getForObject(friendsServiceEndpoint, Friends[].class);
         return friends;
     }
 

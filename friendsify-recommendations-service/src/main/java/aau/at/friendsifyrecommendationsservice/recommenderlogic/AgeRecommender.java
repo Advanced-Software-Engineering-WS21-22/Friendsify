@@ -9,23 +9,23 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class AgeRecommender {
 
-    private Person[] all_persons;
+    private Person[] allPersons;
 
-    public AgeRecommender(Person[] all_persons) {
-        this.all_persons = all_persons;
+    public AgeRecommender(Person[] allPersons) {
+        this.allPersons = allPersons;
     }
 
-    public void recommended_by_age(Long id_p, Recommendation recommendation) throws PersonNotFoundException {
-        Person recommender_subject = this.findPersonById(id_p);
-        if(recommender_subject != null) {
-            this.findMinimalAgeDifference(recommender_subject, recommendation);
+    public void recommendedByAge(Long id_p, Recommendation recommendation) throws PersonNotFoundException {
+        Person recommenderSubject = this.findPersonById(id_p);
+        if(recommenderSubject != null) {
+            this.findMinimalAgeDifference(recommenderSubject, recommendation);
         } else {
             throw new PersonNotFoundException("Person not found");
         }
     }
 
     private Person findPersonById(Long id_p) {
-        for (Person p: this.all_persons) {
+        for (Person p: this.allPersons) {
             if(p.getId_p() == id_p) {
                 return p;
             }
@@ -34,22 +34,22 @@ public class AgeRecommender {
     }
 
     private void findMinimalAgeDifference(Person subject, Recommendation recommendation) {
-        LocalDate subject_birthday = subject.getBirthday();
+        LocalDate subjectBirthday = subject.getBirthday();
         Person found = null;
-        Long best_day_difference = -1L;
+        Long bestDayDifference = -1L;
 
-        for (Person person : this.all_persons) {
+        for (Person person : this.allPersons) {
             if(person.getId_p() != subject.getId_p()) {
-                LocalDate person_birthday = person.getBirthday();
-                Long day_difference = Math.abs(DAYS.between(subject_birthday, person_birthday));
-                if ( best_day_difference == -1 || day_difference < best_day_difference) {
-                    best_day_difference = day_difference;
+                LocalDate personBirthday = person.getBirthday();
+                Long dayDifference = Math.abs(DAYS.between(subjectBirthday, personBirthday));
+                if ( bestDayDifference == -1 || dayDifference < bestDayDifference) {
+                    bestDayDifference = dayDifference;
                     found = person;
                 }
             }
         }
-        recommendation.setRecommended_by_age(found);
-        recommendation.setAge_difference_days(best_day_difference);
+        recommendation.setRecommendedByAge(found);
+        recommendation.setAgeDifferenceInDays(bestDayDifference);
     }
 
 }

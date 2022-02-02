@@ -10,8 +10,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 
 public class AgeRecommenderTest {
 
@@ -30,10 +28,10 @@ public class AgeRecommenderTest {
     @Test
     public void testAgeRecommender() {
         this.ageRecommender = new AgeRecommender(this.all_persons);
-        ageRecommender.recommended_by_age(1L, this.recommendation);
+        ageRecommender.recommendedByAge(1L, this.recommendation);
 
-        Assert.assertEquals(this.all_persons[3], this.recommendation.getRecommended_by_age());
-        Assert.assertTrue(this.recommendation.getAge_difference_days() == 1L);
+        Assert.assertEquals(this.all_persons[3], this.recommendation.getRecommendedByAge());
+        Assert.assertTrue(this.recommendation.getAgeDifferenceInDays() == 1L);
     }
 
     @Test
@@ -42,7 +40,7 @@ public class AgeRecommenderTest {
 
         Assertions.assertThrows(PersonNotFoundException.class,
                 () ->  {
-            ageRecommender.recommended_by_age(-1L, this.recommendation);
+            ageRecommender.recommendedByAge(-1L, this.recommendation);
         });
     }
 }

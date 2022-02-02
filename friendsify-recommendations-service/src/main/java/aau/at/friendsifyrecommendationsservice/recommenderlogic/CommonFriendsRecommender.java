@@ -9,26 +9,26 @@ import java.util.ArrayList;
 
 public class CommonFriendsRecommender {
 
-    private Person[] all_persons;
+    private Person[] allPersons;
 
-    private Friends[] all_friends;
+    private Friends[] allFriends;
 
-    public CommonFriendsRecommender(Person[] all_persons, Friends[] all_friends) {
-        this.all_persons = all_persons;
-        this.all_friends = all_friends;
+    public CommonFriendsRecommender(Person[] allPersons, Friends[] allFriends) {
+        this.allPersons = allPersons;
+        this.allFriends = allFriends;
     }
 
-    public void recommended_by_common_friends(Long id_p, Recommendation recommendation) throws PersonNotFoundException {
-        Person recommender_subject = this.findPersonById(id_p);
-        if(recommender_subject != null) {
-            this.findPersonWithMostCommonFriends(recommender_subject.getEmail(), recommendation);
+    public void recommendedByCommonFriends(Long id_p, Recommendation recommendation) throws PersonNotFoundException {
+        Person recommenderSubject = this.findPersonById(id_p);
+        if(recommenderSubject != null) {
+            this.findPersonWithMostCommonFriends(recommenderSubject.getEmail(), recommendation);
         } else {
             throw new PersonNotFoundException("Person not found");
         }
     }
 
     private Person findPersonById(Long id_p) {
-        for (Person p: this.all_persons) {
+        for (Person p: this.allPersons) {
             if(p.getId_p() == id_p) {
                 return p;
             }
@@ -36,36 +36,36 @@ public class CommonFriendsRecommender {
         return null;
     }
 
-    private void findPersonWithMostCommonFriends(String subject_email, Recommendation recommendation) {
-        ArrayList<String> friends_of_subject = this.getFriendsEmails(subject_email);
+    private void findPersonWithMostCommonFriends(String subjectEmail, Recommendation recommendation) {
+        ArrayList<String> friends_of_subject = this.getFriendsEmails(subjectEmail);
         Person found = null;
-        int best_common_friends_count = -1;
+        int bestCommonFriendsCount = -1;
 
-        for (Person person : this.all_persons) {
-            if(!person.getEmail().equals(subject_email)) {
+        for (Person person : this.allPersons) {
+            if(!person.getEmail().equals(subjectEmail)) {
                 ArrayList<String> friends_of_person = this.getFriendsEmails(person.getEmail());
-                int common_friends_count = 0;
+                int commonFriendsCount = 0;
 
                 for (String mail : friends_of_person) {
-                    if(friends_of_subject.contains(mail) && !mail.equals(subject_email)) {
-                        common_friends_count++;
+                    if(friends_of_subject.contains(mail) && !mail.equals(subjectEmail)) {
+                        commonFriendsCount++;
                     }
                 }
 
-                if(common_friends_count > best_common_friends_count) {
-                    best_common_friends_count = common_friends_count;
+                if(commonFriendsCount > bestCommonFriendsCount) {
+                    bestCommonFriendsCount = commonFriendsCount;
                     found = person;
                 }
             }
         }
 
-        recommendation.setRecommended_by_common_friends(found);
-        recommendation.setCommon_friends_count(best_common_friends_count);
+        recommendation.setRecommendedByCommonFriends(found);
+        recommendation.setCommonFriendsCount(bestCommonFriendsCount);
     }
 
     private ArrayList<String> getFriendsEmails(String email) {
         ArrayList<String> friendsEmails = new ArrayList<String>();
-        for (Friends fs : this.all_friends) {
+        for (Friends fs : this.allFriends) {
             if(fs.getEmail_p_initiator().equals(email) && !friendsEmails.contains(fs.getEmail_p_friend())) {
                 friendsEmails.add(fs.getEmail_p_friend());
             } else if (fs.getEmail_p_friend().equals(email) && !friendsEmails.contains(fs.getEmail_p_initiator())) {

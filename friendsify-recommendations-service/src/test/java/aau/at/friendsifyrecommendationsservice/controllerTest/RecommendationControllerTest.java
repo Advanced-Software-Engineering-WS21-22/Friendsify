@@ -1,17 +1,10 @@
 package aau.at.friendsifyrecommendationsservice.controllerTest;
-
-import aau.at.friendsifyrecommendationsservice.TestSamples;
 import aau.at.friendsifyrecommendationsservice.controllers.RecommendationController;
+import aau.at.friendsifyrecommendationsservice.exceptions.PersonNotFoundException;
 import aau.at.friendsifyrecommendationsservice.models.Recommendation;
 import aau.at.friendsifyrecommendationsservice.recommenderlogic.RecommenderCoordinator;
-import aau.at.friendsifyrecommendationsservice.services.FriendsService;
-import aau.at.friendsifyrecommendationsservice.services.PersonService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -41,6 +34,15 @@ public class RecommendationControllerTest {
         this.mockMvc.perform(get("/recommendations/1")
                 .contentType("application/json"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testGetRecommendationError() throws Exception {
+        when(recommenderCoordinator.findRecommendation(-1L)).thenThrow(new PersonNotFoundException("Person not found"));
+
+        this.mockMvc.perform(get("/recommendations/-1")
+                        .contentType("application/json"))
+                .andExpect(status().is4xxClientError());
     }
 
 }

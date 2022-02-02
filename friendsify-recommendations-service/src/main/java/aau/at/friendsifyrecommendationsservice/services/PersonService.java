@@ -19,7 +19,6 @@ public class PersonService {
     }
 
     public Person[] getPersons() {
-        System.out.println("CALL PERSONS");
         Person[] allPersons = restTemplate.getForObject(personServiceEndpoint, Person[].class);
         return allPersons;
     }

@@ -30,11 +30,4 @@ public class Friends {
         this.fs_start_date = fs_start_date;
         this.is_timed_out = is_timed_out;
     }
-
-    public Friends(String email_p_initiator, String email_p_friend, LocalDate fs_start_date, boolean is_timed_out) {
-        this.email_p_initiator = email_p_initiator;
-        this.email_p_friend = email_p_friend;
-        this.fs_start_date = fs_start_date;
-        this.is_timed_out = is_timed_out;
-    }
 }
