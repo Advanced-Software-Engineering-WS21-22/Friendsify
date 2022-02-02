@@ -53,10 +53,6 @@ public class FriendsControllerTest {
     private final Long default_notValid_ID = 8L;
     private final String default_notValid_emailInitiator = "hansGuckInDieLuft@gmail.com";
     private final String default_notValid_emailFriend = "hansGuckInDieLuft@gmail.com";
-    private final String default_exception_id = "Friendship not found for id: " + default_notValid_ID;
-    private final String default_exception_emailInitiator = "No Friendships with this initiator email found: "+ default_notValid_emailInitiator;
-    private final String default_exception_emailFriend = "No Friendships with this initiator email found: "+ default_notValid_emailFriend;
-    private final String default_exception_getID = "Friendship with email_initiator = "+default_notValid_emailInitiator+" and email_friend = "+default_notValid_emailFriend+" was not found.";
 
 
     @BeforeEach
