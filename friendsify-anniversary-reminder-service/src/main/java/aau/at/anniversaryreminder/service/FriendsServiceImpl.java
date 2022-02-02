@@ -1,7 +1,7 @@
 package aau.at.anniversaryreminder.service;
 
 import aau.at.anniversaryreminder.obj.Friend;
-import aau.at.friendsifybirthdayservice.exception.ResourceNotFoundException;
+import aau.at.anniversaryreminder.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDate;
 
@@ -23,5 +24,9 @@ public class Person {
     private LocalDate birthday;
 
     private String email;
+
+    public String getFullName() {
+        return StringUtils.join(this.getFirstName(), this.getLastName());
+    }
 
 }
