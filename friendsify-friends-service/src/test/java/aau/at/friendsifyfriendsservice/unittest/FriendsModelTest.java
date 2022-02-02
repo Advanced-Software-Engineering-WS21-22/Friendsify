@@ -121,10 +121,10 @@ public class FriendsModelTest {
     @Test
     public void toStringTest_1(){
         String f1 = "Friends{" +
-                "id_p_initiator='" + "hans.m@gmail.com" + '\'' +
-                ", id_p_friend='" + "anna@mail.com" + '\'' +
+                "email_p_initiator='" + "hans.m@gmail.com" + '\'' +
+                ", email_p_friend='" + "anna@mail.com" + '\'' +
                 ", fs_start_date='" + LocalDate.of(2021,4,12) + '\'' +
-                ", timed_out='" +false  + '\'' +
+                ", is_timed_out='" +false  + '\'' +
                 '}';
 
         Assertions.assertEquals(f1, friends1.toString());
@@ -132,10 +132,10 @@ public class FriendsModelTest {
     @Test
     public void toStringTest_2(){
         String f2 = "Friends{" +
-                "id_p_initiator='" + "anna@gmail.com" + '\'' +
-                ", id_p_friend='" + "hans.m@gmail.com" + '\'' +
+                "email_p_initiator='" + "anna@gmail.com" + '\'' +
+                ", email_p_friend='" + "hans.m@gmail.com" + '\'' +
                 ", fs_start_date='" + LocalDate.of(2019,8,19) + '\'' +
-                ", timed_out='" +true  + '\'' +
+                ", is_timed_out='" +true  + '\'' +
                 '}';
 
         Assertions.assertEquals(f2, friends2.toString());

@@ -80,10 +80,10 @@ public class Friends {
     @Override
     public String toString() {
         return "Friends{" +
-                "id_p_initiator='" + email_p_initiator + '\'' +
-                ", id_p_friend='" + email_p_friend + '\'' +
+                "email_p_initiator='" + email_p_initiator + '\'' +
+                ", email_p_friend='" + email_p_friend + '\'' +
                 ", fs_start_date='" + fs_start_date + '\'' +
-                ", timed_out='" + is_timed_out + '\'' +
+                ", is_timed_out='" + is_timed_out + '\'' +
                 '}';
     }
 
