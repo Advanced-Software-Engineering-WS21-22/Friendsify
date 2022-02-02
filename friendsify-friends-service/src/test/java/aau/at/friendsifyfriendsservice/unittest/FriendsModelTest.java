@@ -158,5 +158,13 @@ class FriendsModelTest {
         friends2.setEmail_p_initiator("testqgmail@test.at");
         Assertions.assertFalse(friends1.equals(friends2));
     }
+    @Test
+    void equalsHashCode(){
+        Assertions.assertEquals(friends1.hashCode(),friends1_2.hashCode());
+    }
+    @Test
+    void notEqualsHashCode(){
+        Assertions.assertNotEquals(friends1.hashCode(), friends2.hashCode());
+    }
 
 }
