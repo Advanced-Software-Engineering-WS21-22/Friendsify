@@ -26,7 +26,7 @@ public class AgeRecommender {
 
     private Person findPersonById(Long id_p) {
         for (Person p: this.allPersons) {
-            if(p.getId_p() == id_p) {
+            if(p.getId_p().equals(id_p)) {
                 return p;
             }
         }
@@ -39,7 +39,7 @@ public class AgeRecommender {
         Long bestDayDifference = -1L;
 
         for (Person person : this.allPersons) {
-            if(person.getId_p() != subject.getId_p()) {
+            if(!person.getId_p().equals(subject.getId_p()) ) {
                 LocalDate personBirthday = person.getBirthday();
                 Long dayDifference = Math.abs(DAYS.between(subjectBirthday, personBirthday));
                 if ( bestDayDifference == -1 || dayDifference < bestDayDifference) {
