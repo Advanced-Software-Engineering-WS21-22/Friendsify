@@ -2,8 +2,8 @@ package aau.at.friendsifyfriendsservice.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 public class Friends {
@@ -80,20 +80,23 @@ public class Friends {
     @Override
     public String toString() {
         return "Friends{" +
-                "id_p_initiator='" + email_p_initiator + '\'' +
-                ", id_p_friend='" + email_p_friend + '\'' +
+                "email_p_initiator='" + email_p_initiator + '\'' +
+                ", email_p_friend='" + email_p_friend + '\'' +
                 ", fs_start_date='" + fs_start_date + '\'' +
-                ", timed_out='" + is_timed_out + '\'' +
+                ", is_timed_out='" + is_timed_out + '\'' +
                 '}';
     }
 
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof Friends){
-            if(this.email_p_initiator.equals(((Friends) obj).email_p_initiator) && this.email_p_friend.equals(((Friends) obj).email_p_friend) && this.is_timed_out == ((Friends) obj).is_timed_out && this.fs_start_date.equals(((Friends) obj).fs_start_date)){
-                return true;
-            }
+            return this.email_p_initiator.equals(((Friends) obj).email_p_initiator) && this.email_p_friend.equals(((Friends) obj).email_p_friend) && this.is_timed_out == ((Friends) obj).is_timed_out && this.fs_start_date.equals(((Friends) obj).fs_start_date);
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id_friend, email_p_initiator, email_p_friend, fs_start_date, is_timed_out);
     }
 }
