@@ -30,6 +30,16 @@
                 <button type="submit" value="Submit" class="btn btn-primary mb-2">Submit</button>
             </form>
         </div>
+
+        <h2>Recommendations:</h2>
+        <div>
+            <span>Recommended by age: </span>
+            <b th:text="${recommendation_age}"></b>
+        </div>
+        <div>
+            <span>Recommended by common friends: </span>
+            <b th:text="${recommendation_common_friends}"></b>
+        </div>
     </div>
 
 </body>

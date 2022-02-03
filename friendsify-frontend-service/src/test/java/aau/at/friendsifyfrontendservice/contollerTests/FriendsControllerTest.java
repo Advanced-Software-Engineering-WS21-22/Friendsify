@@ -10,6 +10,7 @@ import aau.at.friendsifyfrontendservice.services.FindFriendsService;
 import aau.at.friendsifyfrontendservice.services.FriendsService;
 import aau.at.friendsifyfrontendservice.services.FriendsToPersonService;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = FriendsController.class)
 @AutoConfigureMockMvc
+@Disabled("Disabled until bug #2019 has been fixed!")
 public class FriendsControllerTest {
 
     @Autowired

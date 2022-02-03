@@ -2,6 +2,7 @@ package aau.at.friendsifyfrontendservice.controllers;
 
 import aau.at.friendsifyfrontendservice.authentication.FriendsifyUser;
 import aau.at.friendsifyfrontendservice.models.WeatherResult;
+import aau.at.friendsifyfrontendservice.services.JokeService;
 import aau.at.friendsifyfrontendservice.services.WeatherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,21 +24,26 @@ public class MainController {
     @Autowired
     private WeatherService weatherService;
 
+    @Autowired
+    private JokeService jokeService;
+
     @GetMapping("/home")
     public String main(Model model) throws HttpServerErrorException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
         WeatherResult weatherResult = new WeatherResult();
+        String joke = "";
 
 
         try {
             weatherResult = this.weatherService.getWeatherByLocation(currentUser.getPerson().getCity());
+            joke = this.jokeService.getJoke();
+            System.out.println("Joke: "+joke);
         } catch (HttpServerErrorException e) {
-            System.out.println("EXCEPTION WHEN CALLING WEATHER");
             throw e;
         }
 
-
+        model.addAttribute("joke", joke);
         model.addAttribute("weatherResult", weatherResult);
         model.addAttribute("location", currentUser.getPerson().getCity());
         model.addAttribute("userFirstName", currentUser.getFirstName());

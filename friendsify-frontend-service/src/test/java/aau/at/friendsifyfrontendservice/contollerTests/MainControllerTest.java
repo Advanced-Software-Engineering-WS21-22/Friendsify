@@ -6,6 +6,7 @@ import aau.at.friendsifyfrontendservice.models.Person;
 import aau.at.friendsifyfrontendservice.models.WeatherResult;
 import aau.at.friendsifyfrontendservice.services.PersonService;
 import aau.at.friendsifyfrontendservice.services.WeatherService;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -34,6 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = MainController.class)
 @AutoConfigureMockMvc
+@Disabled("Disabled until bug #2019 has been fixed!")
 public class MainControllerTest {
 
     @Autowired

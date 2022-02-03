@@ -28,8 +28,9 @@
                     <th scope="col">Friend First Name</th>
                     <th scope="col">Friend Last Name</th>
                     <th scope="col">Friends since</th>
-                    <th scope="col">Details</th>
+                    <th scope="col">Cancel Friendship</th>
                     <th scope="col">Send Email</th>
+                    <th scope="col">Send Joke</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,16 +40,23 @@
                     <td th:text="${@friendsToPersonService.getPerson(friend.getEmail_p_friend()).getLast_name()}"></td>
                     <td th:text="${#temporals.format(friend.getFs_start_date(), 'dd.MM.yyyy')}"></td>
                     <td>
-                        <form action="#" th:action="@{./persons/} + ${{friend.getEmail_p_friend()}}" method="get">
+                        <form action="#" th:action="@{/friends/cancel/} + ${friend.getId_friend()}" method="post">
                             <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_friend()}" type="submit">
-                                <i class="fas fa-info-circle"></i>
+                                <i class="fas fa-user-minus"></i>
                             </button>
                         </form>
                     </td>
                     <td>
-                        <form action="#" th:action="@{./friends/sendMail/} + ${{friend.getEmail_p_initiator()}} + '/' + ${{friend.getEmail_p_friend()}}" method="get">
-                            <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_friend}" type="submit">
+                        <form action="#" th:action="@{/friends/sendMail/} + ${{friend.getEmail_p_initiator()}} + '/' + ${{friend.getEmail_p_friend()}}" method="get">
+                            <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_friend}" th:disabled="${friend.is_timed_out()}" type="submit">
                                 <i class="fas fa-envelope-square"></i>
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" th:action="@{/friends/sendJoke/} + ${{friend.getEmail_p_initiator()}} + '/' + ${{friend.getEmail_p_friend()}}" method="post">
+                            <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_friend}" th:disabled="${friend.is_timed_out()}" type="submit">
+                                <i class="far fa-smile-wink"></i>
                             </button>
                         </form>
                     </td>
@@ -66,7 +74,8 @@
                 <th scope="col">Friend First Name</th>
                 <th scope="col">Friend Last Name</th>
                 <th scope="col">Friends since</th>
-                <th scope="col">Details</th>
+                <th scope="col">Send Email</th>
+                <th scope="col">Set Timeout</th>
             </tr>
             </thead>
             <tbody>
@@ -76,10 +85,15 @@
                 <td th:text="${@friendsToPersonService.getPerson(friend.getEmail_p_initiator()).getLast_name()}"></td>
                 <td th:text="${#temporals.format(friend.getFs_start_date(), 'dd.MM.yyyy')}"></td>
                 <td>
-                    <form action="#" th:action="@{./persons/} + ${{friend.getEmail_p_initiator()}}" method="get">
+                    <form action="#" th:action="@{/friends/sendMail/} + ${{friend.getEmail_p_friend()}} + '/' + ${{friend.getEmail_p_initiator()}}" method="get">
                         <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getEmail_p_initiator()}" type="submit">
-                            <i class="fas fa-info-circle"></i>
+                            <i class="fas fa-envelope-square"></i>
                         </button>
+                    </form>
+                </td>
+                <td>
+                    <form action="#" th:action="@{/friends/timeout/} + ${{friend.getId_friend}}" method="post">
+                        <input type="checkbox" onclick="submit();" th:checked="${friend.is_timed_out} ? 'checked'">
                     </form>
                 </td>
             </tr>
