@@ -24,7 +24,11 @@ public class FindFriendsService {
 
     public void loadData(String email) {
         this.allPersons = personService.getPersons();
-        this.alreadyFriends = this.friendsService.getFriendsByInitiator(email);
+        try {
+            this.alreadyFriends = this.friendsService.getFriendsByInitiator(email);
+        } catch (Exception e) {
+            this.alreadyFriends = new Friends[0];
+        }
     }
 
     public Person[] findSelectablePersons(String email_initiator) {

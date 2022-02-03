@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
 @Controller
@@ -28,7 +29,7 @@ public class MainController {
     private JokeService jokeService;
 
     @GetMapping("/home")
-    public String main(Model model) throws HttpServerErrorException {
+    public String main(Model model) throws HttpServerErrorException, HttpClientErrorException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.servlet.view.RedirectView;
 import java.time.LocalDate;
@@ -59,7 +60,7 @@ public class PersonsController {
     }
 
     @PostMapping()
-    public RedirectView addPerson(@ModelAttribute(value="personForm") PersonInput personForm) throws PasswordMatchException, HttpServerErrorException {
+    public RedirectView addPerson(@ModelAttribute(value="personForm") PersonInput personForm) throws PasswordMatchException, HttpServerErrorException, HttpClientErrorException {
 
         if(!personForm.getPassword().equals(personForm.getRepeat_password())) {
             throw new PasswordMatchException("Passwords don't match.");

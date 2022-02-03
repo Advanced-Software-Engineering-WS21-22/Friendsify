@@ -56,10 +56,19 @@ public class FriendsController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
 
-        this.friendsListActive = this.friendsService.getFriendsByInitiator(currentUser.getPerson().getEmail());
-        this.friendsListPassive = this.friendsService.getFriendsByReceiver(currentUser.getPerson().getEmail());
+        try {
+            this.friendsListActive = this.friendsService.getFriendsByInitiator(currentUser.getPerson().getEmail());
+        } catch (Exception e) {
+            this.friendsListActive = new Friends[0];
+        }
+
+        try{
+            this.friendsListPassive = this.friendsService.getFriendsByReceiver(currentUser.getPerson().getEmail());
+        } catch (Exception e) {
+            this.friendsListPassive = new Friends[0];
+        }
+
         this.allPersons = this.personService.getPersons();
-        System.out.println(this.friendsListPassive[0].getEmail_p_friend()+ " " + this.friendsListPassive[0].is_timed_out());
 
         model.addAttribute("friendsListActive", this.friendsListActive);
         model.addAttribute("friendsListPassive", this.friendsListPassive);
