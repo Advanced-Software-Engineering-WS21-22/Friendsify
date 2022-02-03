@@ -30,23 +30,17 @@ public class FriendsService {
     }
 
     public Friends[] getFriends() {
-        Friends[] friends = null;
-        friends = restTemplate.getForObject(friendsServiceEndpoint, Friends[].class);
-        return friends;
+        return restTemplate.getForObject(friendsServiceEndpoint, Friends[].class);
     }
 
     //Returns Friendship where person is the initiator
     public Friends[] getFriendsByInitiator(String email) {
-        Friends[] friends = null;
-        friends = restTemplate.getForObject(friendsServiceEndpoint + "?email_initiator=" + email, Friends[].class);
-        return friends;
+        return restTemplate.getForObject(friendsServiceEndpoint + "?email_initiator=" + email, Friends[].class);
     }
 
     //Returns Friendship where person is the friend
     public Friends[] getFriendsByReceiver(String email) {
-        Friends[] friends = null;
-        friends = restTemplate.getForObject(friendsServiceEndpoint + "?email_friend=" + email, Friends[].class);
-        return friends;
+        return restTemplate.getForObject(friendsServiceEndpoint + "?email_friend=" + email, Friends[].class);
     }
 
     public void addFriends(FriendsInput friendsForm) {

@@ -19,7 +19,6 @@ public class RecommendationService {
     }
 
     public Recommendation getRecommendationForPerson(Long id_p) {
-        Recommendation recommendation = this.restTemplate.getForObject(this.recommendationServiceEndpoint + "/" + id_p, Recommendation.class);
-        return recommendation;
+        return this.restTemplate.getForObject(this.recommendationServiceEndpoint + "/" + id_p, Recommendation.class);
     }
 }

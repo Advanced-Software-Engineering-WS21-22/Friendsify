@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="friend : ${friendsList_active}">
+                <tr th:each="friend : ${friendsListActive}">
                     <td th:text="${friend.getId_friend()}"></td>
                     <td th:text="${@friendsToPersonService.getPerson(friend.getEmail_p_friend()).getFirst_name()}"></td>
                     <td th:text="${@friendsToPersonService.getPerson(friend.getEmail_p_friend()).getLast_name()}"></td>
@@ -79,7 +79,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="friend : ${friendsList_passive}">
+            <tr th:each="friend : ${friendsListPassive}">
                 <td th:text="${friend.getId_friend()}"></td>
                 <td th:text="${@friendsToPersonService.getPerson(friend.getEmail_p_initiator()).getFirst_name()}"></td>
                 <td th:text="${@friendsToPersonService.getPerson(friend.getEmail_p_initiator()).getLast_name()}"></td>

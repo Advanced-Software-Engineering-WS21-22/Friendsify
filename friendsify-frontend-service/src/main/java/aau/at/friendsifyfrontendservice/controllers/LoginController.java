@@ -12,13 +12,11 @@ public class LoginController {
 
     @GetMapping("/login")
     public String login() {
-        System.out.println("Request Login page");
         return "login";
     }
 
     @PostMapping("/login")
     public RedirectView submitForm() {
-        System.out.println("Try to login");
         return new RedirectView("./login?error");
     }
 

@@ -20,20 +20,15 @@ public class PersonService {
     }
 
     public Person[] getPersons() {
-        Person[] allPersons = null;
-        allPersons = restTemplate.getForObject(personServiceEndpoint, Person[].class);
-        return allPersons;
+        return restTemplate.getForObject(personServiceEndpoint, Person[].class);
     }
 
     public Person getPersonByEMail(String email) {
-        Person person = null;
-        person = restTemplate.getForObject(personServiceEndpoint + "?email=" + email, Person.class);
-        return person;
+        return restTemplate.getForObject(personServiceEndpoint + "?email=" + email, Person.class);
     }
 
     public Person getPersonById(Long id) {
-        Person person = restTemplate.getForObject(personServiceEndpoint + "?id=" + id, Person.class);
-        return person;
+        return restTemplate.getForObject(personServiceEndpoint + "?id=" + id, Person.class);
     }
 
     public void addPerson(Person person) throws HttpServerErrorException {

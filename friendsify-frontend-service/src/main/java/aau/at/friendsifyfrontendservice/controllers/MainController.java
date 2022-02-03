@@ -31,17 +31,9 @@ public class MainController {
     public String main(Model model) throws HttpServerErrorException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();
-        WeatherResult weatherResult = new WeatherResult();
-        String joke = "";
 
-
-        try {
-            weatherResult = this.weatherService.getWeatherByLocation(currentUser.getPerson().getCity());
-            joke = this.jokeService.getJoke();
-            System.out.println("Joke: "+joke);
-        } catch (HttpServerErrorException e) {
-            throw e;
-        }
+        WeatherResult weatherResult = this.weatherService.getWeatherByLocation(currentUser.getPerson().getCity());
+        String joke = this.jokeService.getJoke();
 
         model.addAttribute("joke", joke);
         model.addAttribute("weatherResult", weatherResult);

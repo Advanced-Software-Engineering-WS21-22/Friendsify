@@ -27,7 +27,6 @@ public class PersonsController {
     private PersonService personService;
 
     private ArrayList<Person> personArrayList;
-
     private Person[] allPersons;
 
     @ModelAttribute("module")
@@ -60,7 +59,7 @@ public class PersonsController {
     }
 
     @PostMapping()
-    public RedirectView addPerson(@ModelAttribute(value="personForm") PersonInput personForm, Model model) throws PasswordMatchException, HttpServerErrorException {
+    public RedirectView addPerson(@ModelAttribute(value="personForm") PersonInput personForm) throws PasswordMatchException, HttpServerErrorException {
 
         if(!personForm.getPassword().equals(personForm.getRepeat_password())) {
             throw new PasswordMatchException("Passwords don't match.");
