@@ -40,7 +40,7 @@ public class NameMatchRecommender {
         Person found = null;
 
         for(Person p: this.allPersons){
-            if(p.getFirst_name().equals(firstNameSubject)){
+            if(p.getFirst_name().equals(firstNameSubject) && !p.equals(subject)){
                 found = p;
             }
         }
@@ -55,7 +55,7 @@ public class NameMatchRecommender {
         Person found = null;
 
         for(Person p: this.allPersons){
-            if(p.getLast_name().equals(lastNameSubject)){
+            if(p.getLast_name().equals(lastNameSubject)&& !p.equals(subject)){
                 found = p;
             }
         }
