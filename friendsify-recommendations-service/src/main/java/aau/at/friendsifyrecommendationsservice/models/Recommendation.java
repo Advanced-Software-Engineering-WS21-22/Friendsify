@@ -13,15 +13,20 @@ public class Recommendation {
     private Person recommendedByCommonFriends;
     private int commonFriendsCount;
 
+    private Person recommendedByFirstName;
+    private Person recommendedByLastName;
+
 
     public Recommendation() {
 
     }
 
-    public Recommendation(Person recommendedByAge, Long ageDifferenceInDays, Person recommendedByCommonFriends, int commonFriendsCount) {
+    public Recommendation(Person recommendedByAge, Long ageDifferenceInDays, Person recommendedByCommonFriends, int commonFriendsCount, Person recommendedByFirstName, Person recommendedByLastName) {
         this.recommendedByAge = recommendedByAge;
         this.ageDifferenceInDays = ageDifferenceInDays;
         this.recommendedByCommonFriends = recommendedByCommonFriends;
         this.commonFriendsCount = commonFriendsCount;
+        this.recommendedByFirstName = recommendedByFirstName;
+        this.recommendedByLastName = recommendedByLastName;
     }
 }
