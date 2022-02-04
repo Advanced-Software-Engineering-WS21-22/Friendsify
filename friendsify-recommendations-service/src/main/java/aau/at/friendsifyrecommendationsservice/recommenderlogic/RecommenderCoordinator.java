@@ -28,9 +28,12 @@ public class RecommenderCoordinator {
 
         AgeRecommender ageRecommender = new AgeRecommender(this.allPersons);
         CommonFriendsRecommender commonFriendsRecommender = new CommonFriendsRecommender(this.allPersons, this.allFriends);
+        NameMatchRecommender nameMatchRecommender = new NameMatchRecommender(this.allPersons);
 
         ageRecommender.recommendedByAge(id_p, recommendation);
         commonFriendsRecommender.recommendedByCommonFriends(id_p, recommendation);
+        nameMatchRecommender.recommendByFirstName(id_p,recommendation);
+        nameMatchRecommender.recommendByLastName(id_p,recommendation);
 
 
         return recommendation;
