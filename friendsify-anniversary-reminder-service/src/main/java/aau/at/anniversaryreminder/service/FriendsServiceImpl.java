@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import javax.swing.plaf.PanelUI;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +22,11 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Value("${friend.host.url}")
     private String host;
+
+    public FriendsServiceImpl(String host, RestTemplate rt) {
+        this.host = host;
+        this.rt = rt;
+    }
 
     public FriendsServiceImpl() {
         this.rt = new RestTemplateBuilder().build();
