@@ -87,6 +87,14 @@
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
+                             <configuration>
+                            <excludes>
+                                <exclude>aau/at/anniversaryreminder/obj/*</exclude>
+                                <exclude>aau/at/anniversaryreminder/controller/*</exclude>
+                                <exclude>aau/at/anniversaryreminder/exception/*</exclude>
+                                <exclude>aau/at/anniversaryreminder/AnniversaryReminderApplication.class</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                     <!--second execution : for creating code coverage reports-->
                     <execution>
@@ -95,14 +103,7 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <configuration>
-                            <excludes>
-                                <exclude>aau/at/anniversaryreminder/obj/*</exclude>
-                                <exclude>aau/at/anniversaryreminder/controller/*</exclude>
-                                <exclude>aau/at/anniversaryreminder/exception/*</exclude>
-                                <exclude>aau/at/anniversaryreminder/AnniversaryReminderApplication.class</exclude>
-                            </excludes>
-                        </configuration>
+                        
                     </execution>
                 </executions>
             </plugin>
