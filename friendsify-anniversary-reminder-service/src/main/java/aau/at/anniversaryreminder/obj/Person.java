@@ -21,12 +21,14 @@ public class Person {
     @JsonProperty("last_name")
     private String lastName;
 
+    @JsonProperty("birthday")
     private LocalDate birthday;
 
+    @JsonProperty("email")
     private String email;
 
     public String getFullName() {
-        return StringUtils.join(this.getFirstName(), this.getLastName());
+        return StringUtils.join(this.getFirstName(), " ", this.getLastName());
     }
 
 }

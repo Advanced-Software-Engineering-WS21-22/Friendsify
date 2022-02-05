@@ -22,6 +22,11 @@ public class PersonServiceImpl implements PersonService {
         this.rt = new RestTemplateBuilder().build();
     }
 
+    public PersonServiceImpl(String host, RestTemplate rt) {
+        this.host = host;
+        this.rt = rt;
+    }
+
     public PersonServiceImpl(String host) {
         this();
         this.host = host;
