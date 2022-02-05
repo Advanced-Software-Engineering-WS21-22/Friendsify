@@ -77,6 +77,13 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>aau/at/friendsifyemailservice/Email.class</exclude>
+                                <exclude>aau/at/friendsifyemailservice/EmailConfiguration.class</exclude>
+                                <exclude>aau/at/friendsifyemailservice/FriendsifyEmailServiceApplication.class</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
