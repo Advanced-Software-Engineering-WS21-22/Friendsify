@@ -56,10 +56,10 @@ public class PersonServiceTest {
 
     @Test
     public void testGetPersonViaEmail() {
-        String filter = "?email={email}";
-        Mockito.when(restTemplate.getForObject(host + filter, Person[].class, email)).thenReturn(new Person[]{this.samplePerson});
+        String filter = "?email="+email;
+        Mockito.when(restTemplate.getForObject(host + filter, Person[].class)).thenReturn(new Person[]{this.samplePerson});
         Assertions.assertEquals("Max Mustermann", personService.getNameByEmail(email));
-        Mockito.verify(restTemplate, Mockito.times(1)).getForObject(host + filter, Person[].class, email);
+        Mockito.verify(restTemplate, Mockito.times(1)).getForObject(host + filter, Person[].class);
 
     }
 

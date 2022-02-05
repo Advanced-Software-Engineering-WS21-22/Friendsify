@@ -55,29 +55,29 @@ public class FriendsServiceTest {
 
     @Test
     public void testGetFriends() {
-        String filter = "?email_initiator={email}";
-        Mockito.when(restTemplate.getForObject(host + filter, Friend[].class, emailInitiator)).thenReturn(this.friends);
+        String filter = "?email_initiator="+emailInitiator;
+        Mockito.when(restTemplate.getForObject(host + filter, Friend[].class)).thenReturn(this.friends);
         Assertions.assertArrayEquals(friends, friendsService.getFriendsOf(emailInitiator).toArray());
-        Mockito.verify(restTemplate, Mockito.times(1)).getForObject(host + filter, Friend[].class, emailInitiator);
+        Mockito.verify(restTemplate, Mockito.times(1)).getForObject(host + filter, Friend[].class);
     }
 
     @Test
     public void testAreTheyFriends() {
-        String filter = "?email_initiator={email}";
-        Mockito.when(restTemplate.getForObject(host + filter, Friend[].class, emailInitiator)).thenReturn(this.friends);
+        String filter = "?email_initiator="+emailInitiator;
+        Mockito.when(restTemplate.getForObject(host + filter, Friend[].class)).thenReturn(this.friends);
         Assertions.assertTrue(friendsService.areTheyFriends(emailInitiator, emailFriend));
-        Mockito.verify(restTemplate, Mockito.times(1)).getForObject(host + filter, Friend[].class, emailInitiator);
+        Mockito.verify(restTemplate, Mockito.times(1)).getForObject(host + filter, Friend[].class);
     }
 
     @Test
     public void testFriendShipStartDate() {
-        String filter = "?email_initiator={emailInitiator}&email_friend={emailFriend}";
+        String filter = "?email_initiator="+emailInitiator+"&email_friend="+emailFriend;
 
         Friend[] expectedList = new Friend[1];
         expectedList[0] = new Friend(emailInitiator, emailFriend, friendshipStart, false);
 
-        Mockito.when(restTemplate.getForObject(host + filter, Friend[].class, emailInitiator, emailFriend)).thenReturn(expectedList);
+        Mockito.when(restTemplate.getForObject(host + filter, Friend[].class)).thenReturn(expectedList);
         Assertions.assertEquals(friendshipStart, friendsService.getFriendshipStartDate(emailInitiator, emailFriend));
-        Mockito.verify(restTemplate, Mockito.times(1)).getForObject(host + filter, Friend[].class, emailInitiator, emailFriend);
+        Mockito.verify(restTemplate, Mockito.times(1)).getForObject(host + filter, Friend[].class);
     }
 }

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Service
@@ -39,10 +40,10 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Override
     public List<Friend> getFriendsOf(String emailInitiator) throws ResourceNotFoundException {
-        String filter = "?email_initiator={email}";
+        String filter = "?email_initiator=" + emailInitiator;
         Friend[] friends;
         try {
-            friends = this.rt.getForObject(host + filter, Friend[].class, emailInitiator);
+            friends = this.rt.getForObject(host + filter, Friend[].class);
         } catch (HttpClientErrorException e) {
             throw new ResourceNotFoundException();
         }
@@ -51,10 +52,10 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Override
     public boolean areTheyFriends(String emailInitiator, String emailPossibleFriend) throws ResourceNotFoundException {
-        String filter = "?email_initiator={email}";
+        String filter = "?email_initiator=" + emailInitiator;
         Stream<Friend> friends;
         try {
-            friends = Arrays.stream(this.rt.getForObject(host + filter, Friend[].class, emailInitiator)).filter(friendShip -> friendShip.getEmailFriend().equals(emailPossibleFriend));
+            friends = Arrays.stream(this.rt.getForObject(host + filter, Friend[].class)).filter(friendShip -> friendShip.getEmailFriend().equals(emailPossibleFriend));
         } catch (HttpClientErrorException e) {
             throw new ResourceNotFoundException();
         }
@@ -63,10 +64,10 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Override
     public LocalDate getFriendshipStartDate(String emailInitiator, String emailFriend) throws ResourceNotFoundException {
-        String filter = "?email_initiator={emailInitiator}&email_friend={emailFriend}";
+        String filter = "?email_initiator=" + emailInitiator + "&email_friend=" + emailFriend;
         Friend[] friends;
         try {
-            friends = this.rt.getForObject(host + filter, Friend[].class, emailInitiator, emailFriend);
+            friends = Arrays.stream(this.rt.getForObject(host + filter, Friend[].class)).filter(friend -> friend.getEmailFriend().equals(emailFriend)).collect(Collectors.toList()).toArray(Friend[]::new);
         } catch (HttpClientErrorException e) {
             throw new ResourceNotFoundException();
         }

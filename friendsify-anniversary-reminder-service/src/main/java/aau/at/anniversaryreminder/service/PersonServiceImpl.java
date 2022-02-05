@@ -34,10 +34,10 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public String getNameByEmail(String email) {
-        String filter = "?email={email}";
+        String filter = "?email="+email;
         Person[] persons;
         try {
-            persons = this.rt.getForObject(host + filter, Person[].class, email);
+            persons = this.rt.getForObject(host + filter, Person[].class);
         } catch (HttpClientErrorException e) {
             throw new ResourceNotFoundException();
         }
