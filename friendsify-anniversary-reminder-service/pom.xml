@@ -52,6 +52,16 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.3</version>
@@ -85,6 +95,14 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>aau/at/anniversaryreminder/obj/*</exclude>
+                                <exclude>aau/at/anniversaryreminder/controller/*</exclude>
+                                <exclude>aau/at/anniversaryreminder/exception/*</exclude>
+                                <exclude>aau/at/anniversaryreminder/AnniversaryReminderApplication.class</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>

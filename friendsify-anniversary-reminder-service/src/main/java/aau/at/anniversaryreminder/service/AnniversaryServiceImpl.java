@@ -12,7 +12,7 @@ public class AnniversaryServiceImpl implements AnniversaryService {
     private FriendsService friendsService;
 
     @Autowired
-    PersonService personService;
+    private PersonService personService;
 
     @Override
     public boolean isTodayAnniversary(String emailInitiator, String emailFriend) {
@@ -22,10 +22,15 @@ public class AnniversaryServiceImpl implements AnniversaryService {
     }
 
     @Override
-    public int daysUntilAnniversary(String emailInitiator, String emailFriend) {
-        LocalDate today = LocalDate.now();
+    public int daysUntilAnniversary(String emailInitiator, String emailFriend, LocalDate dateToCompare) {
         LocalDate friendShipStart = friendsService.getFriendshipStartDate(emailInitiator, emailFriend);
-        return today.until(friendShipStart).getDays();
+        int dayAnniversary = friendShipStart.getDayOfYear();
+        int dayToCompare = dateToCompare.getDayOfYear();
+        if (dayAnniversary >= dayToCompare) {
+            return dayAnniversary - dayToCompare;
+        } else {
+            return 365 - (dayToCompare - dayAnniversary);
+        }
     }
 
     @Override
