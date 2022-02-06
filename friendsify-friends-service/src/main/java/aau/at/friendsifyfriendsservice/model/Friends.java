@@ -1,8 +1,10 @@
 package aau.at.friendsifyfriendsservice.model;
 
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity

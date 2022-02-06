@@ -1,13 +1,11 @@
 package aau.at.friendsifyfrontendservice.models;
 
 import aau.at.friendsifyfrontendservice.inputs.FriendsInput;
-import aau.at.friendsifyfrontendservice.inputs.PersonInput;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Locale;
 
 @Getter
 @Setter
@@ -15,8 +13,10 @@ public class Friends {
 
     private Long id_friend;
 
+    @JsonProperty("email_p_initiator")
     private String email_p_initiator;
 
+    @JsonProperty("email_p_friend")
     private String email_p_friend;
 
     private LocalDate fs_start_date;
