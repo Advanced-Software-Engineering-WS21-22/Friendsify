@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -124,6 +125,7 @@ public class FriendsControllerTest {
 
         this.mockMvc.perform(post("/friends/new")
                         .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
+                        .with(csrf())
                         .flashAttr("friendsForm", input)
                         .contentType("application/json"))
                 .andExpect(redirectedUrl("/friendsify/friends"));
@@ -142,6 +144,7 @@ public class FriendsControllerTest {
     public void testSendMail() throws Exception {
         Email email = new Email("max@mustermann.de", "anna@mustermann.de", "subject", "text");
         this.mockMvc.perform(post("/friends/sendMail")
+                        .with(csrf())
                         .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
                         .contentType("application/json"))
                 .andExpect(redirectedUrl("/friendsify/friends"));

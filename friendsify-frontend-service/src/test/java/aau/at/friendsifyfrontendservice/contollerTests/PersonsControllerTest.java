@@ -18,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import java.time.LocalDate;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
@@ -69,6 +70,7 @@ public class PersonsControllerTest {
         PersonInput personInput = new PersonInput(0L, "Max", "Mustermann", "max@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "test", "test");
 
         this.mockMvc.perform(post("/persons")
+                        .with(csrf())
                         .flashAttr("personForm", personInput)
                         .contentType("application/json"))
                 .andExpect(redirectedUrl("./persons"));
@@ -80,6 +82,7 @@ public class PersonsControllerTest {
         PersonInput personInput = new PersonInput(0L, "Max", "Mustermann", "max@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "same", "notsame");
 
         this.mockMvc.perform(post("/persons")
+                        .with(csrf())
                         .flashAttr("personForm", personInput)
                         .contentType("application/json"))
                 .andExpect(redirectedUrl("./persons?pwmatcherror"));

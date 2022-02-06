@@ -33,7 +33,7 @@ public class FriendsifyAuthenticationProvider implements AuthenticationProvider 
             String password = String.valueOf(authentication.getCredentials());
 
             if(!passwordEncoder.matches(password, user.getPassword())) {
-                throw new UsernameNotFoundException("Invalid login details");
+                throw new BadCredentialsException("Invalid login details");
             }
 
         } catch (UsernameNotFoundException exception) {
