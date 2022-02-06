@@ -44,11 +44,7 @@ public class NameMatchRecommender {
                 found = p;
             }
         }
-        if(found!=null){
-            recommendation.setRecommendedByFirstName(found);
-        }else {
-            throw new PersonNotFoundException("Sorry, no FirstNameMatch found.");
-        }
+        recommendation.setRecommendedByFirstName(found);
     }
     private void findLastNameMatch(Person subject, Recommendation recommendation)throws PersonNotFoundException{
         String lastNameSubject = subject.getLast_name();
@@ -59,10 +55,6 @@ public class NameMatchRecommender {
                 found = p;
             }
         }
-        if(found!=null){
-            recommendation.setRecommendedByLastName(found);
-        }else {
-            throw  new PersonNotFoundException("Sorry, no LastNameMatch found.");
-        }
+        recommendation.setRecommendedByLastName(found);
     }
 }

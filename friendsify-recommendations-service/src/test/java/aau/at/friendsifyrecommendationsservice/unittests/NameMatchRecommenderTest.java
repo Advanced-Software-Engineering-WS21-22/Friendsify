@@ -1,11 +1,9 @@
 package aau.at.friendsifyrecommendationsservice.unittests;
 
 import aau.at.friendsifyrecommendationsservice.TestSamples;
-import aau.at.friendsifyrecommendationsservice.exceptions.PersonNotFoundException;
 import aau.at.friendsifyrecommendationsservice.models.Person;
 import aau.at.friendsifyrecommendationsservice.models.Recommendation;
 import aau.at.friendsifyrecommendationsservice.recommenderlogic.NameMatchRecommender;
-import org.junit.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -36,8 +34,8 @@ public class NameMatchRecommenderTest {
     @Test
     public void testNameMatchRecommenderFirstName_Fail() {
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
-        PersonNotFoundException exception = Assert.assertThrows(PersonNotFoundException.class, ()-> this.nameMatchRecommender.recommendByFirstName(2L,this.recommendation));
-        assertEquals(firstNameException,exception.getMessage());
+        this.nameMatchRecommender.recommendByFirstName(1L,this.recommendation);
+        assertEquals(null, this.recommendation.getRecommendedByFirstName());
     }
     @Test
     public void testNameMatchRecommenderFirstName() {
@@ -50,8 +48,8 @@ public class NameMatchRecommenderTest {
     @Test
     public void testNameMatchRecommenderLastName_Fail(){
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
-        PersonNotFoundException exception = Assert.assertThrows(PersonNotFoundException.class, ()-> this.nameMatchRecommender.recommendByLastName(4L,this.recommendation));
-        assertEquals(lastNameException,exception.getMessage());
+        this.nameMatchRecommender.recommendByLastName(2L,this.recommendation);
+        assertEquals(null, this.recommendation.getRecommendedByLastName());
     }
     @Test
     public void testNameMatchRecommenderLastName(){
