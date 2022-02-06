@@ -29,7 +29,7 @@ public class CommonFriendsRecommender {
 
     private Person findPersonById(Long id_p) {
         for (Person p: this.allPersons) {
-            if(p.getId_p() == id_p) {
+            if(p.getId_p().equals(id_p)) {
                 return p;
             }
         }
