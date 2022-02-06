@@ -73,7 +73,7 @@ services:
      - PERSON_HOST=friendsify-person
      - PERSON_PORT=9001
    env_file:
-     - .env
+     - .env.sample
    depends_on:
      - friendsify-person
      - friendsify-email
@@ -118,7 +118,7 @@ services:
     ports:
       - "9007:9007"
     env_file:
-      - .env
+      - .env.sample
     restart: on-failure
 
 
