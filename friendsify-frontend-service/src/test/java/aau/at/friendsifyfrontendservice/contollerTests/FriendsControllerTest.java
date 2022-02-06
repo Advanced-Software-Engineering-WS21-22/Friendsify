@@ -5,10 +5,7 @@ import aau.at.friendsifyfrontendservice.inputs.FriendsInput;
 import aau.at.friendsifyfrontendservice.models.Email;
 import aau.at.friendsifyfrontendservice.models.Friends;
 import aau.at.friendsifyfrontendservice.models.Person;
-import aau.at.friendsifyfrontendservice.services.EmailService;
-import aau.at.friendsifyfrontendservice.services.FindFriendsService;
-import aau.at.friendsifyfrontendservice.services.FriendsService;
-import aau.at.friendsifyfrontendservice.services.FriendsToPersonService;
+import aau.at.friendsifyfrontendservice.services.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -30,13 +27,11 @@ import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = FriendsController.class)
 @AutoConfigureMockMvc
-@Disabled("Disabled until bug #2019 has been fixed!")
 public class FriendsControllerTest {
 
     @Autowired
@@ -56,6 +51,15 @@ public class FriendsControllerTest {
 
     @MockBean
     private UserDetailsService userDetailsServiceMock;
+
+    @MockBean
+    private RecommendationService recommendationService;
+
+    @MockBean
+    private PersonService personService;
+
+    @MockBean
+    private JokeService jokeService;
 
     private Person user;
     private List authorities;
@@ -88,7 +92,7 @@ public class FriendsControllerTest {
         this.mockMvc.perform(get("/friends")
                         .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
                         .contentType("application/json"))
-                .andExpect(redirectedUrl("./serverError?errorMessage=500+INTERNAL_SERVER_ERROR"));
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -109,7 +113,7 @@ public class FriendsControllerTest {
         this.mockMvc.perform(get("/friends/new")
                         .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
                         .contentType("application/json"))
-                .andExpect(redirectedUrl("./serverError?errorMessage=500+INTERNAL_SERVER_ERROR"));
+                .andExpect(status().isOk());
     }
 
     @Test
@@ -120,7 +124,7 @@ public class FriendsControllerTest {
                         .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
                         .flashAttr("friendsForm", input)
                         .contentType("application/json"))
-                .andExpect(redirectedUrl("./"));
+                .andExpect(redirectedUrl("/friendsify/friends"));
     }
 
     @Test
@@ -138,7 +142,7 @@ public class FriendsControllerTest {
         this.mockMvc.perform(post("/friends/sendMail")
                         .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
                         .contentType("application/json"))
-                .andExpect(redirectedUrl("./"));
+                .andExpect(redirectedUrl("/friendsify/friends"));
     }
 
 

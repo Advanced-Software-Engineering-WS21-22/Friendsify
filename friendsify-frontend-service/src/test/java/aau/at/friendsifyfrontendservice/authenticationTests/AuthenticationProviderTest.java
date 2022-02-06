@@ -60,14 +60,6 @@ public class AuthenticationProviderTest {
         friendsifyAuthenticationProvider.authenticate(authentication);
     }
 
-    /*
-    @Test(expected = UsernameNotFoundException.class)
-    public void testNoUserFoundAuthentication() {
-
-    }
-    */
-
-
 
     private FriendsifyUser createFriendsifyUser() {
         Person person =  new Person(1L, "Max", "Mustermann", "max@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "password_hash");

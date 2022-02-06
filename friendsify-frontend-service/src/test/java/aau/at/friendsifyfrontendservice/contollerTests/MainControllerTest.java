@@ -4,9 +4,8 @@ import aau.at.friendsifyfrontendservice.authentication.FriendsifyUser;
 import aau.at.friendsifyfrontendservice.controllers.MainController;
 import aau.at.friendsifyfrontendservice.models.Person;
 import aau.at.friendsifyfrontendservice.models.WeatherResult;
-import aau.at.friendsifyfrontendservice.services.PersonService;
+import aau.at.friendsifyfrontendservice.services.JokeService;
 import aau.at.friendsifyfrontendservice.services.WeatherService;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -29,13 +28,11 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = MainController.class)
 @AutoConfigureMockMvc
-@Disabled("Disabled until bug #2019 has been fixed!")
 public class MainControllerTest {
 
     @Autowired
@@ -46,6 +43,9 @@ public class MainControllerTest {
 
     @MockBean
     private WeatherService weatherServiceMock;
+
+    @MockBean
+    private JokeService jokeService;
 
     @Mock
     Authentication authentication;
@@ -77,6 +77,6 @@ public class MainControllerTest {
         this.mockMvc.perform(get("/home")
                         .with(user(new FriendsifyUser(person, true, false, false, false, authorities)))
                         .contentType("application/json"))
-                .andExpect(redirectedUrl("./serverError?errorMessage=500+INTERNAL_SERVER_ERROR"));
+                .andExpect(status().isOk());
     }
 }

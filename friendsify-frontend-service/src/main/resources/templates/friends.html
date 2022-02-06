@@ -75,7 +75,7 @@
                 <th scope="col">Friend Last Name</th>
                 <th scope="col">Friends since</th>
                 <th scope="col">Send Email</th>
-                <th scope="col">Set Timeout</th>
+                <!--<th scope="col">Set Timeout</th>-->
             </tr>
             </thead>
             <tbody>
@@ -91,11 +91,13 @@
                         </button>
                     </form>
                 </td>
+                <!--
                 <td>
                     <form action="#" th:action="@{/friends/timeout/} + ${{friend.getId_friend}}" method="post">
                         <input type="checkbox" onclick="submit();" th:checked="${friend.is_timed_out} ? 'checked'">
                     </form>
                 </td>
+                -->
             </tr>
             </tbody>
         </table>

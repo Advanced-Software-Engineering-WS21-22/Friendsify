@@ -11,7 +11,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import java.util.*;
 
-public class SuccessfulLogin {
+public class SuccessfulLoginTest {
     private WebDriver driver;
     private Map<String, Object> vars;
     JavascriptExecutor js;

@@ -76,10 +76,6 @@ public class BusinessLogicFriends {
         }else if(checkFriendshipToItself(friends)){
             throw  new InvalidDataException("Friendship to itself is not allowed.");
         }
-
-        System.out.println("update");
-        System.out.println(friends);
-        System.out.println(origFriends);
         origFriends.updateFromDto(friends);
 
         return friendsDao.save(origFriends);

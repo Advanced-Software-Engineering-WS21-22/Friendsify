@@ -8,12 +8,13 @@ import java.time.LocalDate;
 public class TestSamples {
 
     public static Person[] getPersonSamples() {
-        Person[] samples = new Person[5];
+        Person[] samples = new Person[6];
         samples[0] = new Person(1L, "Max", "Mustermann", "max@mustermann.de", LocalDate.of(1999, 01, 22), "Q1234", "Klagenfurt", "password");
         samples[1] = new Person(2L, "John", "Doe", "john@doe.de", LocalDate.of(1995, 03, 12), "Q1234", "Klagenfurt", "password");
         samples[2] = new Person(3L, "Anna", "Mustermann", "anna@mustermann.de", LocalDate.of(2000, 8, 14), "Q1234", "Klagenfurt", "password");
         samples[3] = new Person(4L, "Hans", "Lustig", "hansi@lustig.de", LocalDate.of(1999, 01, 23), "Q1234", "Klagenfurt", "password");
         samples[4] = new Person(5L, "Bob", "Ross", "bob@ross.de", LocalDate.of(1990, 01, 22), "Q1234", "Klagenfurt", "password");
+        samples[5] = new Person(5L, "Max", "Doe", "anna@doe.de", LocalDate.of(1990, 01, 22), "Q1234", "Klagenfurt", "password");
 
         return samples;
     }

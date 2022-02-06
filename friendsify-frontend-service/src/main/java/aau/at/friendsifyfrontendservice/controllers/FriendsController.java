@@ -87,8 +87,7 @@ public class FriendsController {
         Recommendation recommendation = this.recommendationService.getRecommendationForPerson(currentUser.getPerson().getId_p());
 
         model.addAttribute("selectable_persons", this.selectablePersons);
-        model.addAttribute("recommendation_age", recommendation.getRecommendedByAge().getFirst_name() +" "+recommendation.getRecommendedByAge().getLast_name());
-        model.addAttribute("recommendation_common_friends", recommendation.getRecommendedByCommonFriends().getFirst_name()+" "+recommendation.getRecommendedByCommonFriends().getLast_name());
+        model.addAttribute("recommendation", recommendation);
 
         FriendsInput friendsInput = new FriendsInput();
         friendsInput.setEmail_p_initiator(currentUser.getPerson().getEmail());
@@ -134,13 +133,15 @@ public class FriendsController {
         return new RedirectView("/friendsify/friends");
     }
 
+    /*
     @PostMapping("/timeout/{id_fs}")
     public RedirectView setTimeOut(@PathVariable("id_fs") Long id_fs) throws HttpServerErrorException {
         Friends friend = Arrays.stream(this.friendsListPassive).filter(f -> f.getId_friend() == id_fs).toArray(Friends[]::new)[0];
-        System.out.println("DEBUG TIMEOUT" + friend.getId_friend() + " " + friend.getEmail_p_friend() + " " + friend.getEmail_p_initiator() + " " + friend.is_timed_out() + " " + friend.getFs_start_date());
+        System.out.println("DEBUG TIMEOUT before" + friend.getId_friend() + " " + friend.getEmail_p_friend() + " " + friend.getEmail_p_initiator() + " " + friend.is_timed_out() + " " + friend.getFs_start_date());
         friend.set_timed_out(!friend.is_timed_out());
+        System.out.println("DEBUG TIMEOUT after" + friend.getId_friend() + " " + friend.getEmail_p_friend() + " " + friend.getEmail_p_initiator() + " " + friend.is_timed_out() + " " + friend.getFs_start_date());
         this.friendsService.updateFriends(friend);
-        System.out.println("Redirect View");
         return new RedirectView("/friendsify/friends");
     }
+    */
 }

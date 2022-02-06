@@ -36,7 +36,7 @@ public class NameMatchRecommenderTest {
     @Test
     public void testNameMatchRecommenderFirstName_Fail() {
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
-        PersonNotFoundException exception = Assert.assertThrows(PersonNotFoundException.class, ()-> this.nameMatchRecommender.recommendByFirstName(1L,this.recommendation));
+        PersonNotFoundException exception = Assert.assertThrows(PersonNotFoundException.class, ()-> this.nameMatchRecommender.recommendByFirstName(2L,this.recommendation));
         assertEquals(firstNameException,exception.getMessage());
     }
     @Test
@@ -50,7 +50,7 @@ public class NameMatchRecommenderTest {
     @Test
     public void testNameMatchRecommenderLastName_Fail(){
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
-        PersonNotFoundException exception = Assert.assertThrows(PersonNotFoundException.class, ()-> this.nameMatchRecommender.recommendByLastName(2L,this.recommendation));
+        PersonNotFoundException exception = Assert.assertThrows(PersonNotFoundException.class, ()-> this.nameMatchRecommender.recommendByLastName(4L,this.recommendation));
         assertEquals(lastNameException,exception.getMessage());
     }
     @Test
