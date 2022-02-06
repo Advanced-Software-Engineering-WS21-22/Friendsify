@@ -1,8 +1,10 @@
 package aau.at.friendsifyfrontendservice.acceptanceTests;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
+import org.junit.jupiter.api.Disabled;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,6 +13,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import java.util.*;
 
+@Disabled
 public class SuccessfulLoginTest {
     private WebDriver driver;
     private Map<String, Object> vars;
@@ -39,8 +42,12 @@ public class SuccessfulLoginTest {
         driver.findElement(By.name("password")).sendKeys("password");
         driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
         driver.findElement(By.linkText("Friends")).click();
+        String url = driver.getCurrentUrl();
         driver.close();
+        Assert.assertEquals("http://localhost:9000/friendsify/friends", url);
     }
+
+
      /*
         WDS.sampleResult.sampleStart()
         WDS.browser.get("http://localhost:9000/friendsify/login");

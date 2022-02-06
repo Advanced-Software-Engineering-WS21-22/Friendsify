@@ -33,18 +33,18 @@ public class FindFriendsService {
 
     public Person[] findSelectablePersons(String email_initiator) {
         ArrayList<Person> selectable = new ArrayList<>();
-        ArrayList<Person> alreadyFriends = new ArrayList<>();
+        ArrayList<Person> alreadyFriendsList = new ArrayList<>();
 
         for (Person p: this.allPersons) {
             for(Friends f : this.alreadyFriends) {
                 if(f.getEmail_p_friend().equals(p.getEmail())) {
-                    alreadyFriends.add(p);
+                    alreadyFriendsList.add(p);
                 }
             }
         }
 
         for (Person p: this.allPersons) {
-            if(!alreadyFriends.contains(p) && !p.getEmail().equals(email_initiator)) {
+            if(!alreadyFriendsList.contains(p) && !p.getEmail().equals(email_initiator)) {
                 selectable.add(p);
             }
         }

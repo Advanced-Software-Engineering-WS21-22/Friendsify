@@ -43,7 +43,6 @@ public class FriendsService {
     }
 
     public void updateFriends(Friends friends) {
-        System.out.println(friends.toString());
         restTemplate.put(this.friendsServiceEndpoint+"/"+friends.getId_friend(), friends);
     }
 }
