@@ -32,21 +32,21 @@
         </div>
 
         <h2>Recommendations:</h2>
-        <div>
+        <div th:if="${recommendation?.getRecommendedByAge() != null}">
             <span>Recommended by age: </span>
-            <b th:text="${recommendation_age}"></b>
+            <b th:text="${recommendation?.getRecommendedByAge()?.getFirst_name()} + ' ' + ${recommendation?.getRecommendedByAge()?.getLast_name()}"></b>
         </div>
-        <div>
+        <div  th:if="${recommendation?.getRecommendedByCommonFriends() != null}">
             <span>Recommended by common friends: </span>
-            <b th:text="${recommendation_common_friends}"></b>
+            <b th:text="${recommendation?.getRecommendedByCommonFriends()?.getFirst_name()} + ' ' + ${recommendation?.getRecommendedByCommonFriends()?.getLast_name()}"></b>
         </div>
-        <div>
-            <span>Recommended by last name: </span>
-            <b th:text="${recommendation_last_name}"></b>
-        </div>
-        <div>
+        <div  th:if="${recommendation?.getRecommendedByFirstName() != null}">
             <span>Recommended by first name: </span>
-            <b th:text="${recommendation_first_name}"></b>
+            <b th:text="${recommendation?.getRecommendedByFirstName()?.getFirst_name()} + ' ' + ${recommendation?.getRecommendedByFirstName()?.getLast_name()}"></b>
+        </div>
+        <div  th:if="${recommendation?.getRecommendedByLastName() != null}">
+            <span>Recommended by last name: </span>
+            <b th:text="${recommendation?.getRecommendedByLastName()?.getFirst_name()} + ' ' + ${recommendation?.getRecommendedByLastName()?.getLast_name()}"></b>
         </div>
     </div>
 

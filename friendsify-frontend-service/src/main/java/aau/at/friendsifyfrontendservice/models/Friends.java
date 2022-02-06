@@ -13,10 +13,8 @@ public class Friends {
 
     private Long id_friend;
 
-    @JsonProperty("email_p_initiator")
     private String email_p_initiator;
 
-    @JsonProperty("email_p_friend")
     private String email_p_friend;
 
     private LocalDate fs_start_date;

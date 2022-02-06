@@ -16,5 +16,5 @@ VALUES    ( 'Max', 'Mustermann', '2000-01-01', 'max@mustermann.de', '$2a$10$A7tR
           ( 'John', 'Doe', '1994-01-01', 'john.doe@email.com', '$2a$10$suHpLlQe44a4IzfXSx6kUeX1VN6Os1thIBaLnr2OEkkJbeb.RVeVG', 'Q41753', 'Klagenfurt'),
           ( 'Hans', 'Müller', '2001-01-01', 'hans.m@gmail.com', '$2a$10$jyBKNyMulV6YVTgpl0M5EOl9Z2Iy/ncZvVdr.SAztZngb.qjpQJza', 'Q660687', 'Velden am Wörthersee'),
           ( 'Maria', 'Schmidt', '1994-12-01', 'm.schmidt@gmail.com', '$2a$10$cQ2liy6Ut0AsaYNoQLBxOujRERYESHTRzBO0CVPuevrrMfpmuVHSi', 'Q875805', 'Pörtschach am Wörthersee'),
-          ( 'Alex', 'Wirth', '1999-01-01', 'alex@wirth.email', '$2a$10$A7tRy7jyQsTKNVcEjkwlauKhSg6deU9bnpNJt2CeQQPkWJPKlhry6', 'Q41753', 'Klagenfurt');
+          ( 'Alex', 'Wirth', '1999-01-01', 'alex@wirth.email', '$2a$10$A7tRy7jyQsTKNVcEjkwlauKhSg6deU9bnpNJt2CeQQPkWJPKlhry6', 'Q41753', 'Klagenfurt'),
           ( 'Max', 'Doe', '1999-01-01', 'max@doe.email', '$2a$10$A7tRy7jyQsTKNVcEjkwlauKhSg6deU9bnpNJt2CeQQPkWJPKlhry6', 'Q41753', 'Klagenfurt');

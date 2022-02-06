@@ -5,6 +5,7 @@ import aau.at.friendsifyfrontendservice.inputs.FriendsInput;
 import aau.at.friendsifyfrontendservice.models.Email;
 import aau.at.friendsifyfrontendservice.models.Friends;
 import aau.at.friendsifyfrontendservice.models.Person;
+import aau.at.friendsifyfrontendservice.models.Recommendation;
 import aau.at.friendsifyfrontendservice.services.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
@@ -99,6 +100,7 @@ public class FriendsControllerTest {
     public void testNewFriends() throws Exception {
         Person[] selectables = new Person[0];
         when(this.findFriendsService.findSelectablePersons("max@mustermann.de")).thenReturn(selectables);
+        when(this.recommendationService.getRecommendationForPerson(0L)).thenReturn(new Recommendation());
 
         this.mockMvc.perform(get("/friends/new")
                         .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
