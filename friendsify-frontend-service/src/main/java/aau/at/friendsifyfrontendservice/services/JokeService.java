@@ -1,5 +1,6 @@
 package aau.at.friendsifyfrontendservice.services;
 
+import aau.at.friendsifyfrontendservice.annotations.Generated;
 import aau.at.friendsifyfrontendservice.models.Friends;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@Generated
 public class JokeService {
 
     private final RestTemplate restTemplate;
