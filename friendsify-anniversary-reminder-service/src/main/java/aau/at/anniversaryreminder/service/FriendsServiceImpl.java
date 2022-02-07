@@ -64,7 +64,7 @@ public class FriendsServiceImpl implements FriendsService {
 
     @Override
     public LocalDate getFriendshipStartDate(String emailInitiator, String emailFriend) throws ResourceNotFoundException {
-        String filter = "?email_initiator=" + emailInitiator + "&email_friend=" + emailFriend;
+        String filter = "?email_initiator=" + emailInitiator;
         Friend[] friends;
         try {
             friends = Arrays.stream(this.rt.getForObject(host + filter, Friend[].class)).filter(friend -> friend.getEmailFriend().equals(emailFriend)).collect(Collectors.toList()).toArray(Friend[]::new);

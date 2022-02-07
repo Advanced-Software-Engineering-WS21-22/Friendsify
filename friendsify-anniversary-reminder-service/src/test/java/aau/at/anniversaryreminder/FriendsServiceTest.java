@@ -71,7 +71,7 @@ public class FriendsServiceTest {
 
     @Test
     public void testFriendShipStartDate() {
-        String filter = "?email_initiator="+emailInitiator+"&email_friend="+emailFriend;
+        String filter = "?email_initiator="+emailInitiator;
 
         Friend[] expectedList = new Friend[1];
         expectedList[0] = new Friend(emailInitiator, emailFriend, friendshipStart, false);
