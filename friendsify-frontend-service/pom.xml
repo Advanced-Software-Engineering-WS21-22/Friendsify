@@ -140,7 +140,7 @@
                         <exclude>**/*friendsifyfrontendservice/services/FindFriendsService.class</exclude>
                         <exclude>**/*friendsifyfrontendservice/services/JokeService.class</exclude>
                         <exclude>**/*friendsifyfrontendservice/services/RecommendationService.class</exclude>
-                        <exclude>a**/*friendsifyfrontendservice/services/FriendsToPersonService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/FriendsToPersonService.class</exclude>
                         <exclude>**/*friendsifyfrontendservice/services/WeatherService.class</exclude>
                         <exclude>**/*friendsifyfrontendservice/authentication/FriendsifyAuthenticationProvider.class</exclude>
                         <exclude>**/*friendsifyfrontendservice/authentication/FriendsifyUserDetailsService.class</exclude>
