@@ -47,6 +47,7 @@ public class SuccessfulLoginTest {
         https://chrome.google.com/webstore/detail/selenium-ide/mooikfkahbdckldjjndioackbalphokd
         https://chromedriver.chromium.org/downloads
         https://jmeter-plugins.org/wiki/PluginsManager/
+        https://www.youtube.com/watch?v=W5U-q3ATfb8&t=941s
         Selenium/WevDriver Support Plugin
         Add ChromeDriver Config -> Path to Chrome Driver
         Add WebDriver Sampler
