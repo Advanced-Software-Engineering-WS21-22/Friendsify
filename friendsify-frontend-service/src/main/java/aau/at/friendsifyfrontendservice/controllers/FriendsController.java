@@ -121,6 +121,7 @@ public class FriendsController {
 
     @PostMapping("/sendJoke/{person_mail}/{friend_mail}")
     public RedirectView sendJoke(@PathVariable("person_mail") String person_mail, @PathVariable("friend_mail") String friend_mail) throws HttpServerErrorException {
+        this.allPersons = this.personService.getPersons();
         Long id_p = Arrays.stream(this.allPersons).filter(p->p.getEmail().equals(person_mail)).toArray(Person[]::new)[0].getId_p();
         Long id_f = Arrays.stream(this.allPersons).filter(p->p.getEmail().equals(friend_mail)).toArray(Person[]::new)[0].getId_p();
         this.jokeService.sendJokeToFriend(id_p, id_f);

@@ -96,6 +96,11 @@
             <artifactId>selenium-api</artifactId>
             <version>3.141.59</version>
         </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <scope>test</scope>
+        </dependency>
 
 
     </dependencies>
@@ -115,6 +120,15 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.6</version>
+                <configuration>
+                    <excludes>
+                        <exclude>aau/at/friendsifyfrontendservice/models/*</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/inputs/*</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/dataSamples/*</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/exceptions/*</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/FriendsifyFrontendServiceApplication.class</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <!--first execution : for preparing JaCoCo runtime agent-->
                     <execution>

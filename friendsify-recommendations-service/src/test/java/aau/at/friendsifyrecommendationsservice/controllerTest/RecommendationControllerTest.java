@@ -19,7 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = RecommendationController.class)
 @AutoConfigureMockMvc
-@Disabled("Disabled")
 public class RecommendationControllerTest {
 
     @Autowired

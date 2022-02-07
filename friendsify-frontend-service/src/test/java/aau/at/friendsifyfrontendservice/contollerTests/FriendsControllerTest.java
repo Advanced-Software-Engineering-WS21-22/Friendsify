@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -148,6 +149,22 @@ public class FriendsControllerTest {
                         .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
                         .contentType("application/json"))
                 .andExpect(redirectedUrl("/friendsify/friends"));
+    }
+
+    @Test
+    public void testSendJoke() throws Exception {
+        Person[] allPersons = new Person[2];
+        allPersons[0] = new Person(0L, "Max", "Mustermann", "max@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "password_hash");
+        allPersons[1] = new Person(1L, "Anna", "Mustermann", "anna@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "password_hash");
+
+        Mockito.when(this.personService.getPersons()).thenReturn(allPersons);
+
+        this.mockMvc.perform(post("/friends/sendJoke/max@mustermann.de/anna@mustermann.de")
+                        .with(csrf())
+                        .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
+                        .contentType("application/json"))
+                .andExpect(redirectedUrl("/friendsify/friends"));
+
     }
 
 
