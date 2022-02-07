@@ -83,7 +83,6 @@
                 <configuration>
                     <excludes>
                         <exclude>aau/at/anniversaryreminder/obj/*</exclude>
-                        <exclude>aau/at/anniversaryreminder/controller/*</exclude>
                         <exclude>aau/at/anniversaryreminder/exception/*</exclude>
                         <exclude>aau/at/anniversaryreminder/AnniversaryReminderApplication.class</exclude>
                     </excludes>
