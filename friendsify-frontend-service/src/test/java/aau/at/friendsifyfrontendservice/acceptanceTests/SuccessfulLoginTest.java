@@ -9,22 +9,17 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.Dimension;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
-import java.util.*;
 
 @Disabled
 public class SuccessfulLoginTest {
+
     private WebDriver driver;
-    private Map<String, Object> vars;
-    JavascriptExecutor js;
 
     @Before
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver.exe");
         driver = new ChromeDriver();
-        js = (JavascriptExecutor) driver;
-        vars = new HashMap<String, Object>();
     }
 
     @After
