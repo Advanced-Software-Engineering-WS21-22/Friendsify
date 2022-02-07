@@ -106,6 +106,14 @@ services:
     build: friendsify-recommendations-service
     ports:
      - "9006:9006"
+    environment:
+       - PERSON_HOST=friendsify-person
+       - PERSON_PORT=9001
+       - FRIENDS_HOST=friendsify-friends
+       - FRIENDS_PORT=9003
+    depends_on:
+       - friendsify-person
+       - friendsify-friends
     restart: on-failure
 
   friendsify-weather:
