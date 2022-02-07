@@ -140,6 +140,14 @@ services:
       - friendsify-friends
     restart: on-failure
 
+  friendsify-location:
+    image: friendsify-location
+    build: friendsify-location-service
+    ports:
+      - "9008:9008"
+    env_file:
+      - .env
+    restart: on-failure
 
   friendsify-frontend:
     image: friendsify-frontend
