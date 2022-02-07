@@ -34,6 +34,8 @@
         <sonar.organization>advanced-software-engineering-ws21-22</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.coverage.exclusions>**/aau/at/friendsifyfrontendservice/services/**/*</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>**/aau/at/friendsifyfrontendservice/models/**/*</sonar.coverage.exclusions>
+        <sonar.coverage.exclusions>**/aau/at/friendsifyfrontendservice/inputs/**/*</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <dependency>
