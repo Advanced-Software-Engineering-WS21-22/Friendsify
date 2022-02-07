@@ -1,5 +1,6 @@
 package aau.at.anniversaryreminder.service;
 
+import aau.at.anniversaryreminder.annotations.Generated;
 import aau.at.anniversaryreminder.obj.Friend;
 import aau.at.anniversaryreminder.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,10 +30,12 @@ public class FriendsServiceImpl implements FriendsService {
         this.rt = rt;
     }
 
+    @Generated
     public FriendsServiceImpl() {
         this.rt = new RestTemplateBuilder().build();
     }
 
+    @Generated
     public FriendsServiceImpl(String host) {
         this();
         this.host = host;

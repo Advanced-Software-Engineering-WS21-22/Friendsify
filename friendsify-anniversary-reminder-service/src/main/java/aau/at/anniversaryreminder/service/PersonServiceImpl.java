@@ -1,5 +1,6 @@
 package aau.at.anniversaryreminder.service;
 
+import aau.at.anniversaryreminder.annotations.Generated;
 import aau.at.anniversaryreminder.exception.ResourceNotFoundException;
 import aau.at.anniversaryreminder.obj.Person;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +19,7 @@ public class PersonServiceImpl implements PersonService {
     @Value("${person.host.url}")
     private String host;
 
+    @Generated
     public PersonServiceImpl() {
         this.rt = new RestTemplateBuilder().build();
     }
@@ -27,6 +29,7 @@ public class PersonServiceImpl implements PersonService {
         this.rt = rt;
     }
 
+    @Generated
     public PersonServiceImpl(String host) {
         this();
         this.host = host;
