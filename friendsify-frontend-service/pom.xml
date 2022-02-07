@@ -132,19 +132,19 @@
                 <version>0.8.6</version>
                 <configuration>
                     <excludes>
-                        <exclude>aau/at/friendsifyfrontendservice/models/*</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/inputs/*</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/dataSamples/*</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/exceptions/*</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/services/EmailService.class</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/services/FindFriendsService.class</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/services/JokeService.class</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/services/RecommendationService.class</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/services/FriendsToPersonService.class</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/services/WeatherService.class</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/authentication/FriendsifyAuthenticationProvider.class</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/authentication/FriendsifyUserDetailsService.class</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/FriendsifyFrontendServiceApplication.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/models/**/*</exclude>
+                        <exclude>**/*friendsifyfrontendservice/inputs/**/*</exclude>
+                        <exclude>**/*friendsifyfrontendservice/dataSamples/**/*</exclude>
+                        <exclude>**/*friendsifyfrontendservice/exceptions/**/*</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/EmailService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/FindFriendsService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/JokeService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/RecommendationService.class</exclude>
+                        <exclude>a**/*friendsifyfrontendservice/services/FriendsToPersonService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/WeatherService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/authentication/FriendsifyAuthenticationProvider.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/authentication/FriendsifyUserDetailsService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/FriendsifyFrontendServiceApplication.class</exclude>
                     </excludes>
                 </configuration>
                 <executions>
