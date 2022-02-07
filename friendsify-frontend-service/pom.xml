@@ -136,6 +136,7 @@
                         <exclude>aau/at/friendsifyfrontendservice/inputs/*</exclude>
                         <exclude>aau/at/friendsifyfrontendservice/dataSamples/*</exclude>
                         <exclude>aau/at/friendsifyfrontendservice/exceptions/*</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/services/*</exclude>
                         <exclude>aau/at/friendsifyfrontendservice/FriendsifyFrontendServiceApplication.class</exclude>
                     </excludes>
                 </configuration>
