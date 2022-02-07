@@ -136,7 +136,14 @@
                         <exclude>aau/at/friendsifyfrontendservice/inputs/*</exclude>
                         <exclude>aau/at/friendsifyfrontendservice/dataSamples/*</exclude>
                         <exclude>aau/at/friendsifyfrontendservice/exceptions/*</exclude>
-                        <exclude>aau/at/friendsifyfrontendservice/services/*</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/services/EmailService.class</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/services/FindFriendsService.class</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/services/JokeService.class</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/services/RecommendationService.class</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/services/FriendsToPersonService.class</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/services/WeatherService.class</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/authentication/FriendsifyAuthenticationProvider.class</exclude>
+                        <exclude>aau/at/friendsifyfrontendservice/authentication/FriendsifyUserDetailsService.class</exclude>
                         <exclude>aau/at/friendsifyfrontendservice/FriendsifyFrontendServiceApplication.class</exclude>
                     </excludes>
                 </configuration>
