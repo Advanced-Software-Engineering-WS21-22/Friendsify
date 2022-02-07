@@ -33,6 +33,15 @@
         <maven.compiler.target>11</maven.compiler.target>
         <sonar.organization>advanced-software-engineering-ws21-22</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.coverage.exclusions>
+            aau/at/friendsifyfrontendservice/models/*
+            aau/at/friendsifyfrontendservice/inputs/*
+            aau/at/friendsifyfrontendservice/dataSamples/*
+            aau/at/friendsifyfrontendservice/exceptions/*
+            aau/at/friendsifyfrontendservice/services/*
+            aau/at/friendsifyfrontendservice/FriendsifyFrontendServiceApplication.class
+        </sonar.coverage.exclusions>
+
     </properties>
     <dependencies>
         <dependency>
