@@ -40,6 +40,8 @@ services:
     depends_on:
       - person-db
     restart: on-failure
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   friendsify-email:
     image: friendsify-email
@@ -51,8 +53,8 @@ services:
   friendsify-friends:
     image: friendsify-friends
     build: friendsify-friends-service
-    ports:
-      - "9003:9003"
+    ports: 
+     - "9003:9003"
     environment:
       - POSTGRES_DB=friendsify
       - POSTGRES_PASS=placeholder # TODO: later replace with secret env variable
@@ -60,6 +62,8 @@ services:
       - DB_PORT=5002
     depends_on:
       - friends-db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     restart: on-failure
 
   friendsify-joke:
@@ -119,6 +123,21 @@ services:
       - "9007:9007"
     env_file:
       - .env
+    restart: on-failure
+
+  friendsify-anniversary-reminder:
+    image: friendsify-anniversary-reminder
+    build: friendsify-anniversary-reminder-service
+    ports:
+      - "9008:9008"
+    environment:
+      - PERSON_HOST=friendsify-person
+      - PERSON_PORT=9001
+      - FRIENDS_HOST=friendsify-friends
+      - FRIENDS_PORT=9003
+    depends_on:
+      - friendsify-person
+      - friendsify-friends
     restart: on-failure
 
 

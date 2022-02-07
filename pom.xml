@@ -24,6 +24,7 @@
         <module>friendsify-weather-service</module>
         <module>friendsify-recommendations-service</module>
         <module>friendsify-frontend-service</module>
+        <module>friendsify-anniversary-reminder-service</module>
     </modules>
 
     <properties>
