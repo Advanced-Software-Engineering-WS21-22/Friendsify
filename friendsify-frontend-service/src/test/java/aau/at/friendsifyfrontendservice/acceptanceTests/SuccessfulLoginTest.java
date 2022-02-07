@@ -44,6 +44,15 @@ public class SuccessfulLoginTest {
 
 
      /*
+        https://chrome.google.com/webstore/detail/selenium-ide/mooikfkahbdckldjjndioackbalphokd
+        https://chromedriver.chromium.org/downloads
+        https://jmeter-plugins.org/wiki/PluginsManager/
+        Selenium/WevDriver Support Plugin
+        Add ChromeDriver Config -> Path to Chrome Driver
+        Add WebDriver Sampler
+
+
+
         WDS.sampleResult.sampleStart()
         WDS.browser.get("http://localhost:9000/friendsify/login");
         WDS.browser.manage().window().setSize(new org.openqa.selenium.Dimension(2576, 1408));
