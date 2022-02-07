@@ -1,6 +1,5 @@
 package aau.at.friendsifyfrontendservice.services;
 
-import aau.at.friendsifyfrontendservice.annotations.Generated;
 import aau.at.friendsifyfrontendservice.inputs.FriendsInput;
 import aau.at.friendsifyfrontendservice.models.Friends;
 import org.springframework.beans.factory.annotation.Value;

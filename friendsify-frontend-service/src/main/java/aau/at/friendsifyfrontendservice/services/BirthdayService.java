@@ -1,6 +1,5 @@
 package aau.at.friendsifyfrontendservice.services;
 
-import aau.at.friendsifyfrontendservice.annotations.Generated;
 import aau.at.friendsifyfrontendservice.models.Person;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -9,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Service
-@Generated
 public class BirthdayService {
 
     private final RestTemplate restTemplate;
