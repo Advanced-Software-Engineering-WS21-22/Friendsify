@@ -80,11 +80,18 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.6</version>
+                <configuration>
+                    <excludes>
+                        <exclude>aau/at/anniversaryreminder/obj/*</exclude>
+                        <exclude>aau/at/anniversaryreminder/controller/*</exclude>
+                        <exclude>aau/at/anniversaryreminder/exception/*</exclude>
+                        <exclude>aau/at/anniversaryreminder/AnniversaryReminderApplication.class</exclude>
+                    </excludes>
+                </configuration>
                 <executions>
                     <!--first execution : for preparing JaCoCo runtime agent-->
                     <execution>
                         <id>prepare-agent</id>
-                        <phase>compile</phase>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
@@ -96,14 +103,6 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <configuration>
-                            <excludes>
-                                <exclude>aau/at/anniversaryreminder/obj/*</exclude>
-                                <exclude>aau/at/anniversaryreminder/controller/*</exclude>
-                                <exclude>aau/at/anniversaryreminder/exception/*</exclude>
-                                <exclude>aau/at/anniversaryreminder/AnniversaryReminderApplication.class</exclude>
-                            </excludes>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
