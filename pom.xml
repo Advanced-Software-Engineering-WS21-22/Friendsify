@@ -14,7 +14,6 @@
     <name>ASE</name>
     <packaging>pom</packaging>
     <description>ASE</description>
-
     <modules>
         <module>friendsify-person-service</module>
         <module>friendsify-email-service</module>
@@ -33,6 +32,9 @@
         <maven.compiler.target>11</maven.compiler.target>
         <sonar.organization>advanced-software-engineering-ws21-22</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.cpd.exclusions>
+            **/friendsifyfrontendservice/models/**/*,
+        </sonar.cpd.exclusions>
         <sonar.coverage.exclusions>
             **/friendsifyfrontendservice/services/**/*,
             **/friendsifyfrontendservice/models/**/*,
