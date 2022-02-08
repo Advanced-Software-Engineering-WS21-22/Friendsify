@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = LoginController.class)
 @AutoConfigureMockMvc
-public class LoginControllerTests {
+class LoginControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -28,14 +28,14 @@ public class LoginControllerTests {
     private UserDetailsService userDetailsServiceMock;
 
     @Test
-    public void testGetLogin() throws Exception {
+    void testGetLogin() throws Exception {
         this.mockMvc.perform(get("/login")
                         .contentType("application/json"))
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void testPostLogin() throws Exception {
+    void testPostLogin() throws Exception {
         this.mockMvc.perform(post("/login")
                         .with(csrf())
                         .contentType("application/json"))

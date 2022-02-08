@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-public class AgeRecommenderTest {
+class AgeRecommenderTest {
 
     private Person[] all_persons;
 
@@ -25,7 +25,7 @@ public class AgeRecommenderTest {
     }
 
     @Test
-    public void testAgeRecommender() {
+    void testAgeRecommender() {
         this.ageRecommender = new AgeRecommender(this.all_persons);
         ageRecommender.recommendedByAge(1L, this.recommendation);
 
@@ -34,7 +34,7 @@ public class AgeRecommenderTest {
     }
 
     @Test
-    public void testAgeRecommenderPersonNotFound() {
+    void testAgeRecommenderPersonNotFound() {
         this.ageRecommender = new AgeRecommender(this.all_persons);
 
         Assertions.assertThrows(PersonNotFoundException.class,

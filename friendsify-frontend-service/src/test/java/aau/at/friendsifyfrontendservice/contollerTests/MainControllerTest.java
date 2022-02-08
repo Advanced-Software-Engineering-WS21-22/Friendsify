@@ -33,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = MainController.class)
 @AutoConfigureMockMvc
-public class MainControllerTest {
+class MainControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -51,7 +51,7 @@ public class MainControllerTest {
     Authentication authentication;
 
     @Test
-    public void testPersonsRequest() throws Exception {
+    void testPersonsRequest() throws Exception {
         List authorities = new ArrayList();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         when(weatherServiceMock.getWeatherByLocation("Klagenfurt")).thenReturn(new WeatherResult());
@@ -66,7 +66,7 @@ public class MainControllerTest {
     }
 
     @Test
-    public void testBadWeatherServiceRequest() throws Exception {
+    void testBadWeatherServiceRequest() throws Exception {
         List authorities = new ArrayList();
         authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
         when(weatherServiceMock.getWeatherByLocation("Klagenfurt")).thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));

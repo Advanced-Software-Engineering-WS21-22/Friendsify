@@ -37,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = FriendsController.class)
 @AutoConfigureMockMvc
-public class FriendsControllerTest {
+class FriendsControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -80,7 +80,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void testGetFriends() throws Exception {
+    void testGetFriends() throws Exception {
         Friends[] active = new Friends[0];
         Friends[] passive = new Friends[0];
 
@@ -94,7 +94,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void testGetFriendsServerError() throws Exception {
+    void testGetFriendsServerError() throws Exception {
         when(this.friendsServiceMock.getFriendsByInitiator("max@mustermann.de")).thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
 
         this.mockMvc.perform(get("/friends")
@@ -104,7 +104,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void testNewFriends() throws Exception {
+    void testNewFriends() throws Exception {
         Person[] selectables = new Person[0];
         when(this.findFriendsService.findSelectablePersons("max@mustermann.de")).thenReturn(selectables);
         when(this.recommendationService.getRecommendationForPerson(0L)).thenReturn(new Recommendation());
@@ -116,7 +116,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void testNewFriendsServerError() throws Exception {
+    void testNewFriendsServerError() throws Exception {
         when(this.findFriendsService.findSelectablePersons("max@mustermann.de")).thenThrow(new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR));
 
         this.mockMvc.perform(get("/friends/new")
@@ -126,7 +126,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void testAddFriends() throws Exception {
+    void testAddFriends() throws Exception {
         FriendsInput input = new FriendsInput("max@mustermann.de", "anna@mustermann.de", false);
 
         this.mockMvc.perform(post("/friends/new")
@@ -138,7 +138,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void testGetSendMail() throws Exception {
+    void testGetSendMail() throws Exception {
 
         this.mockMvc.perform(get("/friends/sendMail/max@mustermann.de/anna@mustermann.de")
                         .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
@@ -147,7 +147,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void testSendMail() throws Exception {
+    void testSendMail() throws Exception {
         Email email = new Email("max@mustermann.de", "anna@mustermann.de", "subject", "text");
         this.mockMvc.perform(post("/friends/sendMail")
                         .with(csrf())
@@ -157,7 +157,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void testSendJoke() throws Exception {
+    void testSendJoke() throws Exception {
         Person[] allPersons = new Person[2];
         allPersons[0] = new Person(0L, "Max", "Mustermann", "max@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "password_hash");
         allPersons[1] = new Person(1L, "Anna", "Mustermann", "anna@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "password_hash");
@@ -173,7 +173,7 @@ public class FriendsControllerTest {
     }
 
     @Test
-    public void testFriendsDetails() throws Exception {
+    void testFriendsDetails() throws Exception {
         Friends friends = new Friends(0L, "max@mustermann.de", "john.doe@email.com", LocalDate.now(), false);
         Mockito.when(this.friendsServiceMock.getFriendsByID(0L)).thenReturn(friends);
         Mockito.when(this.anniversaryService.getAnniversary(friends.getEmail_p_initiator(), friends.getEmail_p_friend())).thenReturn("Days until anniversary: 245");

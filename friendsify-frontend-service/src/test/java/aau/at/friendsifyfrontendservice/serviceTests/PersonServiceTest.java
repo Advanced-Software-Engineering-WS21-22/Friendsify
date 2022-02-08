@@ -21,7 +21,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @RestClientTest(PersonService.class)
-public class PersonServiceTest {
+class PersonServiceTest {
 
     @Autowired
     private PersonService personService;
@@ -60,7 +60,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void getAll() throws JsonProcessingException {
+    void getAll() throws JsonProcessingException {
         String allPersons = objectMapper.writeValueAsString(this.allPersons);
         this.server.expect(requestTo(personServiceEndpoint)).andRespond(withSuccess(allPersons, MediaType.APPLICATION_JSON));
 
@@ -69,7 +69,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void getByEmail() throws JsonProcessingException {
+    void getByEmail() throws JsonProcessingException {
         String person = objectMapper.writeValueAsString(this.samplePerson);
         this.server.expect(requestTo(personServiceEndpoint+"?email=" + this.email)).andRespond(withSuccess(person, MediaType.APPLICATION_JSON));
 
@@ -78,7 +78,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void getByID() throws JsonProcessingException {
+    void getByID() throws JsonProcessingException {
         String person = objectMapper.writeValueAsString(this.samplePerson);
         this.server.expect(requestTo(personServiceEndpoint+"?id=" + this.id_p)).andRespond(withSuccess(person, MediaType.APPLICATION_JSON));
 
@@ -87,7 +87,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void addPerson() {
+    void addPerson() {
         this.server.expect(requestTo(personServiceEndpoint)).andExpect(method(HttpMethod.POST)).andRespond(withSuccess());
         this.personService.addPerson(this.samplePerson);
     }

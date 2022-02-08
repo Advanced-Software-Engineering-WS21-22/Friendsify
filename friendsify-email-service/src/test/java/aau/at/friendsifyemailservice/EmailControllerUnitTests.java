@@ -8,7 +8,7 @@ import org.mockito.Mockito;
 
 import static aau.at.friendsifyemailservice.ConfigurationProperties.*;
 
-public class EmailControllerUnitTests {
+class EmailControllerUnitTests {
 
     private EmailController emailController;
     private EmailService emailServiceMock;
@@ -29,13 +29,13 @@ public class EmailControllerUnitTests {
     }
 
     @Test
-    public void testEMailControllerGetRequest() {
+    void testEMailControllerGetRequest() {
         String result = this.emailController.showEmailsPage();
         Assertions.assertEquals("emails", result);
     }
 
     @Test
-    public void testEMailControllerPostRequest() {
+    void testEMailControllerPostRequest() {
         String actualReturn = this.emailController.createMail(this.email);
         String expectedReturn = this.email.toString();
         Mockito.verify(this.emailServiceMock, Mockito.times(1)).sendEmail(SAMPLE_RECEIVER_GMAIL, SAMPLE_SENDER_GMAIL, SAMPLE_SUBJECT, SAMPLE_TEXT);

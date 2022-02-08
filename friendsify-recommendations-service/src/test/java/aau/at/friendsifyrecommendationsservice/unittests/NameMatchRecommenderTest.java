@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class NameMatchRecommenderTest {
+class NameMatchRecommenderTest {
     private Person[] all_persons;
 
     private NameMatchRecommender nameMatchRecommender;
@@ -32,13 +32,13 @@ public class NameMatchRecommenderTest {
         this.recommendation = null;
     }
     @Test
-    public void testNameMatchRecommenderFirstName_Fail() {
+    void testNameMatchRecommenderFirstName_Fail() {
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
         this.nameMatchRecommender.recommendByFirstName(2L,this.recommendation);
         assertEquals(null, this.recommendation.getRecommendedByFirstName());
     }
     @Test
-    public void testNameMatchRecommenderFirstName() {
+    void testNameMatchRecommenderFirstName() {
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
         this.all_persons[0].setFirst_name("Bob");
         this.nameMatchRecommender.recommendByFirstName(1L,this.recommendation);
@@ -46,13 +46,13 @@ public class NameMatchRecommenderTest {
         assertEquals(this.all_persons[4],this.recommendation.getRecommendedByFirstName());
     }
     @Test
-    public void testNameMatchRecommenderLastName_Fail(){
+    void testNameMatchRecommenderLastName_Fail(){
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
         this.nameMatchRecommender.recommendByLastName(4L,this.recommendation);
         assertEquals(null, this.recommendation.getRecommendedByLastName());
     }
     @Test
-    public void testNameMatchRecommenderLastName(){
+    void testNameMatchRecommenderLastName(){
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
         this.nameMatchRecommender.recommendByLastName(1L,this.recommendation);
         assertNotNull(this.recommendation.getRecommendedByLastName());

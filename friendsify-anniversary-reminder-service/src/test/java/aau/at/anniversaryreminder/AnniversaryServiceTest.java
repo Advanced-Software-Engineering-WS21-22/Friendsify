@@ -15,7 +15,7 @@ import java.time.format.DateTimeFormatter;
 
 
 @ExtendWith(MockitoExtension.class)
-public class AnniversaryServiceTest {
+class AnniversaryServiceTest {
 
     @Mock
     private FriendsService friendsService;
@@ -45,7 +45,7 @@ public class AnniversaryServiceTest {
     }
 
     @Test
-    public void testAnniversaryIsTodayCheck() {
+    void testAnniversaryIsTodayCheck() {
         Mockito.when(friendsService.getFriendshipStartDate(emailInitiator, emailFriend)).thenReturn(LocalDate.parse("2000-01-01", DateTimeFormatter.ISO_LOCAL_DATE));
         if (!LocalDate.now().isEqual(date)) {
             // Today is not anniversary
@@ -58,21 +58,21 @@ public class AnniversaryServiceTest {
     }
 
     @Test
-    public void testDaysLeftUntilAnniversary() {
+    void testDaysLeftUntilAnniversary() {
         Mockito.when(friendsService.getFriendshipStartDate(emailInitiator, emailFriend)).thenReturn(LocalDate.parse("1990-01-31", DateTimeFormatter.ISO_LOCAL_DATE));
         Assertions.assertEquals(30, anniversaryService.daysUntilAnniversary(emailInitiator, emailFriend, date));
         Mockito.verify(friendsService, Mockito.times(1)).getFriendshipStartDate(emailInitiator, emailFriend);
     }
 
     @Test
-    public void testDaysRemainingUntilNextAnniversary() {
+    void testDaysRemainingUntilNextAnniversary() {
         Mockito.when(friendsService.getFriendshipStartDate(emailInitiator, emailFriend)).thenReturn(LocalDate.parse("1990-01-31", DateTimeFormatter.ISO_LOCAL_DATE));
         Assertions.assertEquals(364, anniversaryService.daysUntilAnniversary(emailInitiator, emailFriend, LocalDate.parse("2001-02-01", DateTimeFormatter.ISO_LOCAL_DATE)));
         Mockito.verify(friendsService, Mockito.times(1)).getFriendshipStartDate(emailInitiator, emailFriend);
     }
 
     @Test
-    public void testReminderAnswer() {
+    void testReminderAnswer() {
         Mockito.when(personService.getNameByEmail(emailInitiator)).thenReturn("Max Mustermann");
         Mockito.when(personService.getNameByEmail(emailFriend)).thenReturn("Bob Fisher");
         Mockito.when(friendsService.getFriendshipStartDate(emailInitiator, emailFriend)).thenReturn(date);

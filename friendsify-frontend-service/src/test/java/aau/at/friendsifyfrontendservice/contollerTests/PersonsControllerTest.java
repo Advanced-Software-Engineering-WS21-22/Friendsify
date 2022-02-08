@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = PersonsController.class)
 @AutoConfigureMockMvc
-public class PersonsControllerTest {
+class PersonsControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -45,7 +45,7 @@ public class PersonsControllerTest {
 
     @Test
     @WithMockUser(username = "max@mustermann.de", password = "password", roles = "USER")
-    public void testPersonsRequest() throws Exception {
+    void testPersonsRequest() throws Exception {
         Person[] expectedPeople = new Person[0];
         when(personServiceMock.getPersons()).thenReturn(expectedPeople);
         this.mockMvc.perform(get("/persons")
@@ -56,7 +56,7 @@ public class PersonsControllerTest {
 
     @Test
     @WithMockUser(username = "max@mustermann.de", password = "password", roles = "USER")
-    public void testPersonByIDRequest() throws Exception {
+    void testPersonByIDRequest() throws Exception {
         Person person = new Person(0L, "Max", "Mustermann", "max@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "password_hash");
         when(personServiceMock.getPersonById(0L)).thenReturn(person);
         this.mockMvc.perform(get("/persons/{id_p}", "0")
@@ -66,7 +66,7 @@ public class PersonsControllerTest {
 
     @Test
     @WithMockUser(username = "max@mustermann.de", password = "password", roles = "USER")
-    public void testAddPersonWithPositivePasswords() throws Exception {
+    void testAddPersonWithPositivePasswords() throws Exception {
         PersonInput personInput = new PersonInput(0L, "Max", "Mustermann", "max@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "test", "test");
 
         this.mockMvc.perform(post("/persons")
@@ -78,7 +78,7 @@ public class PersonsControllerTest {
 
     @Test
     @WithMockUser(username = "max@mustermann.de", password = "password", roles = "USER")
-    public void testAddPersonWithNegativePasswords() throws Exception {
+    void testAddPersonWithNegativePasswords() throws Exception {
         PersonInput personInput = new PersonInput(0L, "Max", "Mustermann", "max@mustermann.de", LocalDate.now(), "Q1234", "Klagenfurt", "same", "notsame");
 
         this.mockMvc.perform(post("/persons")
