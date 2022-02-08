@@ -1,6 +1,5 @@
 package aau.at.friendsifyfrontendservice.inputs;
 
-import aau.at.friendsifyfrontendservice.models.Person;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,6 +1,5 @@
 package aau.at.friendsifyfrontendservice.dataSamples;
 
-import aau.at.friendsifyfrontendservice.inputs.PersonInput;
 import aau.at.friendsifyfrontendservice.models.Person;
 
 import java.time.LocalDate;
