@@ -7,10 +7,12 @@ import org.openqa.selenium.By;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Disabled
-public class WeatherTest extends BaseAcceptanceTest {
+public class WeatherTest extends BaseLoggedInAcceptanceTest {
 
     @Test
     public void findWeatherData() {
-        assertTrue(getDriver().findElement(By.id("weather-data")).isDisplayed());
+        boolean result = getDriver().findElement(By.id("weather-data")).isDisplayed();
+
+        assertTrue(result);
     }
 }

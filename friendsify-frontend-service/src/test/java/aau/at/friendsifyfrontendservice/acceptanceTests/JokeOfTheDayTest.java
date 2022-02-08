@@ -2,12 +2,13 @@ package aau.at.friendsifyfrontendservice.acceptanceTests;
 
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Disabled;
 import org.openqa.selenium.By;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @Disabled
-public class JokeOfTheDayTest extends BaseAcceptanceTest {
+public class JokeOfTheDayTest extends BaseLoggedInAcceptanceTest {
 
     @Test
     public void isJokeFilled() {
@@ -18,6 +19,8 @@ public class JokeOfTheDayTest extends BaseAcceptanceTest {
 
     @Test
     public void findJokeOfTheDay() {
-        assertTrue(getDriver().findElement(By.id("joke-of-the-day")).isDisplayed());
+        boolean result = getDriver().findElement(By.id("joke-of-the-day")).isDisplayed();
+
+        assertTrue(result);
     }
 }
