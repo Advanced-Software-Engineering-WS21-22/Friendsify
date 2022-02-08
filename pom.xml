@@ -38,7 +38,7 @@
             **/friendsifyfrontendservice/models/**/*,
             **/friendsifyfrontendservice/inputs/**/*,
             **/friendsifyfrontendservice/dataSamples/**/*,
-            **/friendsifyfrontendservice/authentication/**/*
+            **/friendsifyfrontendservice/authentication/**/*,
             **/friendsifyfrontendservice/exceptions/**/*
         </sonar.coverage.exclusions>
     </properties>
