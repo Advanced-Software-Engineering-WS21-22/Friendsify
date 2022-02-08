@@ -23,6 +23,10 @@ public class FriendsService {
         return restTemplate.getForObject(friendsServiceEndpoint, Friends[].class);
     }
 
+    public Friends getFriendsByID(Long id_fs) {
+        return restTemplate.getForObject(friendsServiceEndpoint+"/"+id_fs, Friends.class);
+    }
+
     //Returns Friendship where person is the initiator
     public Friends[] getFriendsByInitiator(String email) {
         return restTemplate.getForObject(friendsServiceEndpoint + "?email_initiator=" + email, Friends[].class);

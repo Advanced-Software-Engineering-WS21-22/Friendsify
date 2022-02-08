@@ -161,4 +161,6 @@ services:
       - RECOMMENDATIONS_PORT=9006
       - WEATHER_HOST=friendsify-weather
       - WEATHER_PORT=9007
+      - ANNIVERSARY_HOST=friendsify-anniversary-reminder
+      - ANNIVERSARY_PORT=9008
     restart: on-failure
