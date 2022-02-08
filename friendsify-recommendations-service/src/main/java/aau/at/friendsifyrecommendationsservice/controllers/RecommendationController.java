@@ -20,7 +20,6 @@ public class RecommendationController {
     @GetMapping(value = "/{id_p}")
     public ResponseEntity<Recommendation> getRecommendation(@PathVariable(name = "id_p", required = true) Long id_p) throws PersonNotFoundException {
         Recommendation response = recommenderCoordinator.findRecommendation(id_p);
-
         return ResponseEntity.ok().body(response);
     }
 

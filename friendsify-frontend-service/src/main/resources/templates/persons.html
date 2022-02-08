@@ -4,11 +4,113 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/5.15.4/css/all.css} "/>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container mt-5">
     <h1>Persons Overview</h1>
+
+    <div class="container">
+        <div class="card mt-3">
+            <div class="card-header">
+                <h5>Add a new person!</h5>
+            </div>
+            <div class="card-body">
+                <form action="#" th:action="@{/persons}" th:object="${personForm}" method="post">
+                    <div th:if="${param.pwmatcherror}">
+                        <div class="alert alert-danger">
+                            Invalid username or password.
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="firstName" class="col-sm-2 col-form-label">First Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="firstName" placeholder="John" th:field="*{first_name}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="lastName" class="col-sm-2 col-form-label">Last Name:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="lastName" placeholder="Doe" th:field="*{last_name}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-2 col-form-label">E-Mail:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="email" placeholder="example@email.com" th:field="*{email}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="birthdate" class="col-sm-2 col-form-label">Birthday:</label>
+                        <div class="col-sm-10">
+                            <input type="date" class="form-control" id="birthdate" autocomplete="off" th:field="*{birthday}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="id_geoDB" class="col-sm-2 col-form-label">GeoDB ID:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="id_geoDB" placeholder="Q1234" th:field="*{id_geoDB}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="city" class="col-sm-2 col-form-label">City:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="city" placeholder="Klagenfurt" th:field="*{city}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-sm-2 col-form-label">Password:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="password" name="password" th:field="*{password}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="repeated_password" class="col-sm-2 col-form-label">Repeat Password:</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" id="repeated_password" name="repeated_password" th:field="*{repeat_password}">
+                        </div>
+                    </div>
+                    <button type="submit" value="Submit" class="btn btn-primary mb-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container mt-5">
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">E-Mail</th>
+                    <th scope="col">Birthday</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="person : ${personList}">
+                    <td th:text="${person.getId_p()}"></td>
+                    <td th:text="${person.getFirst_name()}"></td>
+                    <td th:text="${person.getLast_name()}"></td>
+                    <td th:text="${person.getEmail()}"></td>
+                    <td th:text="${#temporals.format(person.getBirthday(), 'dd.MM.yyyy')}"></td>
+                    <td th:text="${person.getCity()}"></td>
+                    <td>
+                        <form action="#" th:action="@{./persons/} + ${{person.getId_p()}}" method="get">
+                            <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${person.getId_p()}" type="submit">
+                                <i class="fas fa-info-circle"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 </body>

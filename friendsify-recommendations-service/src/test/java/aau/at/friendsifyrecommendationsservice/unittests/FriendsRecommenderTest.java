@@ -32,7 +32,7 @@ public class FriendsRecommenderTest {
         commonFriendsRecommender.recommendedByCommonFriends(1L, recommendation);
 
         Assertions.assertEquals(this.all_persons[2].getEmail(), this.recommendation.getRecommendedByCommonFriends().getEmail());
-        Assertions.assertTrue(this.recommendation.getCommonFriendsCount() == 2L);
+        Assertions.assertEquals(2L, this.recommendation.getCommonFriendsCount());
     }
 
     @Test

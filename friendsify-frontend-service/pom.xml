@@ -51,11 +51,68 @@
             <version>4.0.0-2</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>friendsify-data-mockups</artifactId>
-            <version>2.6.2</version>
-            <scope>compile</scope>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>5.15.4</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <version>4.2.2.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <version>4.2.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.0.3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>mockwebserver</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.3.14</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
+
+
     </dependencies>
 
     <build>
@@ -68,6 +125,45 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.3.6</version>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.6</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*friendsifyfrontendservice/models/**/*</exclude>
+                        <exclude>**/*friendsifyfrontendservice/inputs/**/*</exclude>
+                        <exclude>**/*friendsifyfrontendservice/dataSamples/**/*</exclude>
+                        <exclude>**/*friendsifyfrontendservice/exceptions/**/*</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/EmailService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/FindFriendsService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/JokeService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/RecommendationService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/FriendsToPersonService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/services/WeatherService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/authentication/FriendsifyAuthenticationProvider.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/authentication/FriendsifyUserDetailsService.class</exclude>
+                        <exclude>**/*friendsifyfrontendservice/FriendsifyFrontendServiceApplication.class</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <!--first execution : for preparing JaCoCo runtime agent-->
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <!--second execution : for creating code coverage reports-->
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

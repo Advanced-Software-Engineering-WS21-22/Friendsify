@@ -34,7 +34,7 @@ public class NameMatchRecommenderTest {
     @Test
     public void testNameMatchRecommenderFirstName_Fail() {
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
-        this.nameMatchRecommender.recommendByFirstName(1L,this.recommendation);
+        this.nameMatchRecommender.recommendByFirstName(2L,this.recommendation);
         assertEquals(null, this.recommendation.getRecommendedByFirstName());
     }
     @Test
@@ -48,7 +48,7 @@ public class NameMatchRecommenderTest {
     @Test
     public void testNameMatchRecommenderLastName_Fail(){
         this.nameMatchRecommender = new NameMatchRecommender(this.all_persons);
-        this.nameMatchRecommender.recommendByLastName(2L,this.recommendation);
+        this.nameMatchRecommender.recommendByLastName(4L,this.recommendation);
         assertEquals(null, this.recommendation.getRecommendedByLastName());
     }
     @Test

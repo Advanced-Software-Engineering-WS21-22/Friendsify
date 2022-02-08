@@ -10,13 +10,37 @@
 
 <div class="container mt-5" th:fragment="home">
     <div class="jumbotron">
-        <h1 class="display-4">Connect with other lonely people!</h1>
+        <h1 class="display-4">Hello <span th:text="${userFirstName}"></span> <span th:text="${userLastName}"></span></h1>
         <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
         <hr class="my-4">
         <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
         <p class="lead">
             <a class="btn btn-primary btn-lg" href="#" th:href="@{/persons}" role="button">Get started!</a>
         </p>
+    </div>
+
+    <div class="card mt-5">
+        <div class="card-header">
+            <h3>Weather in <span th:text="${location}"></span></h3>
+        </div>
+        <div class="card-body">
+            <span>Current temperature: </span><b th:text="${weatherResult.getTemperature()}"></b><span>° C</span><br>
+            <span>MIN temperature: </span><b th:text="${weatherResult.getTemperatureMin()}"></b><span>° C</span><br>
+            <span>MAX temperature: </span><b th:text="${weatherResult.getTemperatureMax()}"></b><span>° C</span><br>
+            <span>Humidity: </span><b th:text="${weatherResult.getHumidity()}"></b><span> %</span><br>
+            <span>Pressure: </span><b th:text="${weatherResult.getPressure()}"></b><span> Pa</span><br>
+            <span>WindSpeed: </span><b th:text="${weatherResult.getWindSpeed()}"></b><span> mph</span><br>
+            <span>Description: </span><b th:text="${weatherResult.getDescription()}"></b><br>
+        </div>
+    </div>
+
+    <div class="card mt-5">
+        <div class="card-header">
+            <h3>Joke for you</h3>
+        </div>
+        <div class="card-body">
+            <b th:text="${joke}"></b>
+        </div>
     </div>
 </div>
 

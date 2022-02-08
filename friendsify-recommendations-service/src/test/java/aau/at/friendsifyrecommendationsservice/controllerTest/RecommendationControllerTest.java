@@ -3,6 +3,7 @@ import aau.at.friendsifyrecommendationsservice.controllers.RecommendationControl
 import aau.at.friendsifyrecommendationsservice.exceptions.PersonNotFoundException;
 import aau.at.friendsifyrecommendationsservice.models.Recommendation;
 import aau.at.friendsifyrecommendationsservice.recommenderlogic.RecommenderCoordinator;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

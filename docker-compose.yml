@@ -11,9 +11,9 @@ services:
     ports:
       - 5001:5432
     environment:
-     - POSTGRES_PASSWORD=placeholder # TODO: later replace with secret env variable
-     - POSTGRES_USER=admin
-     - POSTGRES_DB=friendsify
+      - POSTGRES_PASSWORD=placeholder # TODO: later replace with secret env variable
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=friendsify
 
   friends-db:
     image: postgres:alpine3.15
@@ -67,27 +67,27 @@ services:
     restart: on-failure
 
   friendsify-joke:
-   image: friendsify-joke
-   build: friendsify-joke-service
-   ports:
-    - "9004:9004"
-   environment:
-     - EMAIL_HOST=friendsify-email
-     - EMAIL_PORT=9002
-     - PERSON_HOST=friendsify-person
-     - PERSON_PORT=9001
-   env_file:
-     - .env
-   depends_on:
-     - friendsify-person
-     - friendsify-email
-   restart: on-failure
+    image: friendsify-joke
+    build: friendsify-joke-service
+    ports:
+      - "9004:9004"
+    environment:
+      - EMAIL_HOST=friendsify-email
+      - EMAIL_PORT=9002
+      - PERSON_HOST=friendsify-person
+      - PERSON_PORT=9001
+    env_file:
+      - .env
+    depends_on:
+      - friendsify-person
+      - friendsify-email
+    restart: on-failure
 
   friendsify-birthday:
     image: friendsify-birthday
     build: friendsify-birthday-service
     ports:
-     - "9005:9005"
+      - "9005:9005"
     environment:
       - EMAIL_HOST=friendsify-email
       - EMAIL_PORT=9002
@@ -105,15 +105,15 @@ services:
     image: friendsify-recommendations
     build: friendsify-recommendations-service
     ports:
-     - "9006:9006"
+      - "9006:9006"
     environment:
-       - PERSON_HOST=friendsify-person
-       - PERSON_PORT=9001
-       - FRIENDS_HOST=friendsify-friends
-       - FRIENDS_PORT=9003
+      - PERSON_HOST=friendsify-person
+      - PERSON_PORT=9001
+      - FRIENDS_HOST=friendsify-friends
+      - FRIENDS_PORT=9003
     depends_on:
-       - friendsify-person
-       - friendsify-friends
+      - friendsify-person
+      - friendsify-friends
     restart: on-failure
 
   friendsify-weather:
@@ -144,13 +144,13 @@ services:
   friendsify-frontend:
     image: friendsify-frontend
     build: friendsify-frontend-service
-    ports: 
+    ports:
       - "9000:9000"
     environment:
       - EMAIL_HOST=friendsify-email
-      - EMAIL_PORT=9001
+      - EMAIL_PORT=9002
       - PERSON_HOST=friendsify-person
-      - PERSON_PORT=9002
+      - PERSON_PORT=9001
       - FRIENDS_HOST=friendsify-friends
       - FRIENDS_PORT=9003
       - JOKE_HOST=friendsify-joke
