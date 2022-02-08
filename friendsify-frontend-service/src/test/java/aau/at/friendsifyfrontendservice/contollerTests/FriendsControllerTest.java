@@ -22,6 +22,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.client.HttpServerErrorException;
+
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,9 @@ public class FriendsControllerTest {
 
     @MockBean
     private JokeService jokeService;
+
+    @MockBean
+    private AnniversaryService anniversaryService;
 
     private Person user;
     private List authorities;
@@ -165,6 +170,19 @@ public class FriendsControllerTest {
                         .contentType("application/json"))
                 .andExpect(redirectedUrl("/friendsify/friends"));
 
+    }
+
+    @Test
+    public void testFriendsDetails() throws Exception {
+        Friends friends = new Friends(0L, "max@mustermann.de", "john.doe@email.com", LocalDate.now(), false);
+        Mockito.when(this.friendsServiceMock.getFriendsByID(0L)).thenReturn(friends);
+        Mockito.when(this.anniversaryService.getAnniversary(friends.getEmail_p_initiator(), friends.getEmail_p_friend())).thenReturn("Days until anniversary: 245");
+
+        this.mockMvc.perform(get("/friends/0")
+                .with(csrf())
+                .with(user(new FriendsifyUser(this.user, true, false, false, false, this.authorities)))
+                .contentType("application/json"))
+                .andExpect(status().isOk());
     }
 
 

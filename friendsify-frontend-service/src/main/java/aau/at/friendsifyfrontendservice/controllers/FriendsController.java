@@ -41,6 +41,9 @@ public class FriendsController {
     private JokeService jokeService;
 
     @Autowired
+    private AnniversaryService anniversaryService;
+
+    @Autowired
     private RecommendationService recommendationService;
 
     private Friends[] friendsListActive;
@@ -134,15 +137,13 @@ public class FriendsController {
         return new RedirectView("/friendsify/friends");
     }
 
-    /*
-    @PostMapping("/timeout/{id_fs}")
-    public RedirectView setTimeOut(@PathVariable("id_fs") Long id_fs) throws HttpServerErrorException {
-        Friends friend = Arrays.stream(this.friendsListPassive).filter(f -> f.getId_friend() == id_fs).toArray(Friends[]::new)[0];
-        System.out.println("DEBUG TIMEOUT before" + friend.getId_friend() + " " + friend.getEmail_p_friend() + " " + friend.getEmail_p_initiator() + " " + friend.is_timed_out() + " " + friend.getFs_start_date());
-        friend.set_timed_out(!friend.is_timed_out());
-        System.out.println("DEBUG TIMEOUT after" + friend.getId_friend() + " " + friend.getEmail_p_friend() + " " + friend.getEmail_p_initiator() + " " + friend.is_timed_out() + " " + friend.getFs_start_date());
-        this.friendsService.updateFriends(friend);
-        return new RedirectView("/friendsify/friends");
+    @GetMapping("{id_fs}")
+    public String friendsDetails(Model model, @PathVariable("id_fs") Long id_fs) throws HttpServerErrorException {
+        Friends friends = this.friendsService.getFriendsByID(id_fs);
+        String anniversary = this.anniversaryService.getAnniversary(friends.getEmail_p_initiator(), friends.getEmail_p_friend());
+
+        model.addAttribute("selectedFriends", friends);
+        model.addAttribute("anniversary", anniversary);
+        return "friend";
     }
-    */
 }

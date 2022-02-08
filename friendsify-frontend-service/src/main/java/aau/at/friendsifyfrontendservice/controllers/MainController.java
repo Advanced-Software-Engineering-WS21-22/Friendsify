@@ -28,7 +28,7 @@ public class MainController {
     @Autowired
     private JokeService jokeService;
 
-    @GetMapping("/home")
+    @GetMapping(value={"", "/", "/home"})
     public String main(Model model) throws HttpServerErrorException, HttpClientErrorException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         FriendsifyUser currentUser = (FriendsifyUser) auth.getPrincipal();

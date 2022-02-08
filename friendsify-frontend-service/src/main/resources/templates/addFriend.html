@@ -23,7 +23,7 @@
                     <label for="friends_new" class="col-sm-2 col-form-label">New Friend</label>
                     <div class="col-sm-10">
                         <select class="form-control" id="friends_new" th:field="*{email_p_friend}">
-                            <option th:each="person : ${selectable_persons}" th:value="${person.getEmail()}" th:text="${person.getFirst_name()}"></option>
+                            <option th:each="person : ${selectable_persons}" th:value="${person.getEmail()}" th:text="${person.getFirst_name()} + ' ' + ${person.getLast_name()}"></option>
                         </select>
                     </div>
                 </div>

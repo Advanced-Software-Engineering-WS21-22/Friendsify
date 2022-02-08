@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container mt-5">
+    <div class="card mt-3">
+        <div class="card-header">
+            <h3>Friendship Details</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Initiator E-Mail:</strong>
+                </div>
+                <div class="col-md-6">
+                    <p th:text="${selectedFriends.getEmail_p_initiator()}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Friend E-Mail:</strong>
+                </div>
+                <div class="col-md-6">
+                    <p th:text="${selectedFriends.getEmail_p_friend()}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Friends since:</strong>
+                </div>
+                <div class="col-md-6">
+                    <p th:text="${#temporals.format(selectedFriends.getFs_start_date(), 'dd.MM.yyyy')}"></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Anniversary:</strong>
+                </div>
+                <div class="col-md-6">
+                    <p th:text="${anniversary}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

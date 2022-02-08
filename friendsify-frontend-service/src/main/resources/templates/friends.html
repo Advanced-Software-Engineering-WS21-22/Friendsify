@@ -15,7 +15,7 @@
             <h1>Friends Overview</h1>
         </div>
         <div class="card-body">
-            <p>Bellow you can see, wall of your friends. The first table shows persons, that you are friends with. The second one shows people that added you as a friend.</p>
+            <p>Bellow you can see all of your friends. The first table shows persons that you are friends with. The second one shows people that added you as a friend.</p>
         </div>
     </div>
 
@@ -31,6 +31,7 @@
                 <th scope="col">Cancel Friendship</th>
                 <th scope="col">Send Email</th>
                 <th scope="col">Send Joke</th>
+                <th scope="col">Details</th>
             </tr>
             </thead>
             <tbody>
@@ -60,6 +61,13 @@
                         </button>
                     </form>
                 </td>
+                <td>
+                    <form action="#" th:action="@{/friends/} + ${{friend.getId_friend()}}" method="get">
+                        <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_friend()}" type="submit">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
@@ -75,7 +83,7 @@
                 <th scope="col">Friend Last Name</th>
                 <th scope="col">Friends since</th>
                 <th scope="col">Send Email</th>
-                <!--<th scope="col">Set Timeout</th>-->
+                <th scope="col">Details</th>
             </tr>
             </thead>
             <tbody>
@@ -91,18 +99,17 @@
                         </button>
                     </form>
                 </td>
-                <!--
                 <td>
-                    <form action="#" th:action="@{/friends/timeout/} + ${{friend.getId_friend}}" method="post">
-                        <input type="checkbox" onclick="submit();" th:checked="${friend.is_timed_out} ? 'checked'">
+                    <form action="#" th:action="@{/friends/} + ${{friend.getId_friend()}}" method="get">
+                        <button class="btn btn-white" th:id="'table_entry_childs_button_' + ${friend.getId_friend()}" type="submit">
+                            <i class="fas fa-info-circle"></i>
+                        </button>
                     </form>
                 </td>
-                -->
             </tr>
             </tbody>
         </table>
     </div>
-
 </div>
 
 </body>
