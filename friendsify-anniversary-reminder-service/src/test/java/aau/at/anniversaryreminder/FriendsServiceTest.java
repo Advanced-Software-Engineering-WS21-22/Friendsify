@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @ExtendWith(MockitoExtension.class)
-public class FriendsServiceTest {
+class FriendsServiceTest {
 
     @Mock
     private RestTemplate restTemplate;
@@ -54,7 +54,7 @@ public class FriendsServiceTest {
     }
 
     @Test
-    public void testGetFriends() {
+    void testGetFriends() {
         String filter = "?email_initiator="+emailInitiator;
         Mockito.when(restTemplate.getForObject(host + filter, Friend[].class)).thenReturn(this.friends);
         Assertions.assertArrayEquals(friends, friendsService.getFriendsOf(emailInitiator).toArray());
@@ -62,7 +62,7 @@ public class FriendsServiceTest {
     }
 
     @Test
-    public void testAreTheyFriends() {
+    void testAreTheyFriends() {
         String filter = "?email_initiator="+emailInitiator;
         Mockito.when(restTemplate.getForObject(host + filter, Friend[].class)).thenReturn(this.friends);
         Assertions.assertTrue(friendsService.areTheyFriends(emailInitiator, emailFriend));
@@ -70,7 +70,7 @@ public class FriendsServiceTest {
     }
 
     @Test
-    public void testFriendShipStartDate() {
+    void testFriendShipStartDate() {
         String filter = "?email_initiator="+emailInitiator;
 
         Friend[] expectedList = new Friend[1];

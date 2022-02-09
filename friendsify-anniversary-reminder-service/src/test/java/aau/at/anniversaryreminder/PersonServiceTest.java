@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @ExtendWith(MockitoExtension.class)
-public class PersonServiceTest {
+class PersonServiceTest {
 
     @Mock
     private RestTemplate restTemplate;
@@ -55,7 +55,7 @@ public class PersonServiceTest {
     }
 
     @Test
-    public void testGetPersonViaEmail() {
+    void testGetPersonViaEmail() {
         String filter = "?email="+email;
         Mockito.when(restTemplate.getForObject(host + filter, Person[].class)).thenReturn(new Person[]{this.samplePerson});
         Assertions.assertEquals("Max Mustermann", personService.getNameByEmail(email));

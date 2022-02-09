@@ -23,7 +23,7 @@ import static org.springframework.test.web.client.match.MockRestRequestMatchers.
 import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
 @RestClientTest(FriendsService.class)
-public class FriendsServiceTest {
+class FriendsServiceTest {
 
     @Autowired
     private FriendsService friendsService;
@@ -66,7 +66,7 @@ public class FriendsServiceTest {
     }
 
     @Test
-    public void getAll() throws JsonProcessingException {
+    void getAll() throws JsonProcessingException {
         String allFriends = objectMapper.writeValueAsString(this.allFriends);
         this.server.expect(requestTo(friendsServiceEndpoint)).andRespond(withSuccess(allFriends, MediaType.APPLICATION_JSON));
 
@@ -75,7 +75,7 @@ public class FriendsServiceTest {
     }
 
     @Test
-    public void getByInitiator() throws JsonProcessingException {
+    void getByInitiator() throws JsonProcessingException {
         String friends = objectMapper.writeValueAsString(this.allFriends);
         this.server.expect(requestTo(friendsServiceEndpoint+"?email_initiator="+this.email_person_initiator)).andRespond(withSuccess(friends, MediaType.APPLICATION_JSON));
 
@@ -84,7 +84,7 @@ public class FriendsServiceTest {
     }
 
     @Test
-    public void getBFriend() throws JsonProcessingException {
+    void getBFriend() throws JsonProcessingException {
         String friends = objectMapper.writeValueAsString(this.allFriends);
         this.server.expect(requestTo(friendsServiceEndpoint+"?email_friend="+this.email_person_friend)).andRespond(withSuccess(friends, MediaType.APPLICATION_JSON));
 
@@ -93,12 +93,12 @@ public class FriendsServiceTest {
     }
 
     @Test
-    public void addFriends() {
+    void addFriends() {
         this.server.expect(requestTo(friendsServiceEndpoint)).andExpect(method(HttpMethod.POST)).andRespond(withSuccess());
         this.friendsService.addFriends(this.friendsInput);
     }
     @Test
-    public void deleteFriends() {
+    void deleteFriends() {
         this.server.expect(requestTo(friendsServiceEndpoint+"/"+this.id_fs)).andExpect(method(HttpMethod.DELETE)).andRespond(withSuccess());
         this.friendsService.cancelFriendship(this.id_fs);
     }

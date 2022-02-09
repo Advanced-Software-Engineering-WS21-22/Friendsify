@@ -15,7 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalDate;
 
 @ExtendWith(MockitoExtension.class)
-public class ControllerTest {
+class ControllerTest {
 
     @Mock
     private AnniversaryServiceImpl anniversaryService;
@@ -39,7 +39,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testTodayIsAnniversary(){
+    void testTodayIsAnniversary(){
         String expectedResult = "Today is test and samples 5 year anniversary!";
         Mockito.when(anniversaryService.isTodayAnniversary(emailInitiator, emailFriend)).thenReturn(true);
         Mockito.when(anniversaryService.getAnniversaryReminder(emailInitiator, emailFriend)).thenReturn(expectedResult);
@@ -50,7 +50,7 @@ public class ControllerTest {
     }
 
     @Test
-    public void testTodayIsNotAnniversary(){
+    void testTodayIsNotAnniversary(){
         String expectedResult = "Days until anniversary: 200";
         Mockito.when(anniversaryService.isTodayAnniversary(emailInitiator, emailFriend)).thenReturn(false);
         Mockito.when(anniversaryService.daysUntilAnniversary(emailInitiator, emailFriend, LocalDate.now())).thenReturn(200);

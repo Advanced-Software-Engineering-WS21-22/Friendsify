@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class FriendsRecommenderTest {
+class FriendsRecommenderTest {
 
     private Person[] all_persons;
     private Friends[] all_friends;
@@ -27,7 +27,7 @@ public class FriendsRecommenderTest {
     }
 
     @Test
-    public void testRecommendedByCommonFriends() {
+    void testRecommendedByCommonFriends() {
         this.commonFriendsRecommender = new CommonFriendsRecommender(this.all_persons, this.all_friends);
         commonFriendsRecommender.recommendedByCommonFriends(1L, recommendation);
 
@@ -36,7 +36,7 @@ public class FriendsRecommenderTest {
     }
 
     @Test
-    public void testRecommendedByCommonFriendsPersonNotFound() {
+    void testRecommendedByCommonFriendsPersonNotFound() {
         this.commonFriendsRecommender = new CommonFriendsRecommender(this.all_persons, this.all_friends);
 
         Assertions.assertThrows(PersonNotFoundException.class,

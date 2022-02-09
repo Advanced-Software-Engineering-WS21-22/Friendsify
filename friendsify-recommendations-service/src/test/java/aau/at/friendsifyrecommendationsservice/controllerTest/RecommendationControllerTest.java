@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = RecommendationController.class)
 @AutoConfigureMockMvc
-public class RecommendationControllerTest {
+class RecommendationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,7 +29,7 @@ public class RecommendationControllerTest {
 
 
     @Test
-    public void testGetRecommendation() throws Exception {
+    void testGetRecommendation() throws Exception {
         when(recommenderCoordinator.findRecommendation(1L)).thenReturn(new Recommendation());
 
         this.mockMvc.perform(get("/recommendations/1")
@@ -38,7 +38,7 @@ public class RecommendationControllerTest {
     }
 
     @Test
-    public void testGetRecommendationError() throws Exception {
+    void testGetRecommendationError() throws Exception {
         when(recommenderCoordinator.findRecommendation(-1L)).thenThrow(new PersonNotFoundException("Person not found"));
 
         this.mockMvc.perform(get("/recommendations/-1")

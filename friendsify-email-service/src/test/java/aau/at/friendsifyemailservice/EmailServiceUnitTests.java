@@ -9,7 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 
 import static aau.at.friendsifyemailservice.ConfigurationProperties.*;
 
-public class EmailServiceUnitTests {
+class EmailServiceUnitTests {
 
     private JavaMailSender mailSenderMock;
     private EmailService emailService;
@@ -35,7 +35,7 @@ public class EmailServiceUnitTests {
 
 
     @Test
-    public void testSimpleEmailSendRequest() {
+    void testSimpleEmailSendRequest() {
         this.emailService.sendEmail(SAMPLE_RECEIVER_GMAIL, SAMPLE_SENDER_GMAIL, SAMPLE_SUBJECT, SAMPLE_TEXT);
         Mockito.verify(this.mailSenderMock, Mockito.times(1)).send(this.message);
     }
