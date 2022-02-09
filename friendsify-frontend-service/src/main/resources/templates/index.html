@@ -21,7 +21,7 @@
         </p>
     </div>
 
-    <div class="card mt-5">
+    <div class="card mt-5" id="weather-data">
         <div class="card-header">
             <h3>Weather in <span th:text="${location}"></span></h3>
         </div>
@@ -36,12 +36,12 @@
         </div>
     </div>
 
-    <div class="card mt-5">
+    <div class="card mt-5" id="joke-of-the-day">
         <div class="card-header">
             <h3>Joke for you</h3>
         </div>
         <div class="card-body">
-            <b th:text="${joke}"></b>
+            <b id="joke-text" th:text="${joke}"></b>
         </div>
     </div>
 </div>
