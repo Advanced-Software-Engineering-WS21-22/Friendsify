@@ -144,7 +144,7 @@ services:
     image: friendsify-location
     build: friendsify-location-service
     ports:
-      - "9008:9008"
+      - "9009:9009"
     env_file:
       - .env
     restart: on-failure
