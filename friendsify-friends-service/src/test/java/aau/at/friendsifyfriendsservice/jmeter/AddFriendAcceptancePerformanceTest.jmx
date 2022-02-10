@@ -42,7 +42,7 @@
           <boolProp name="WebDriverConfig.maximize_browser">true</boolProp>
           <boolProp name="WebDriverConfig.reset_per_iteration">false</boolProp>
           <boolProp name="WebDriverConfig.dev_mode">false</boolProp>
-          <stringProp name="ChromeDriverConfig.chromedriver_path">C:\Users\Larissa\Downloads\chromedriver_win32</stringProp>
+          <stringProp name="ChromeDriverConfig.chromedriver_path">C:\Users\Larissa\Downloads\chromedriver_win32\chromedriver.exe</stringProp>
           <boolProp name="ChromeDriverConfig.android_enabled">false</boolProp>
           <boolProp name="ChromeDriverConfig.headless_enabled">false</boolProp>
           <boolProp name="ChromeDriverConfig.insecurecerts_enabled">false</boolProp>
@@ -52,26 +52,61 @@
         <hashTree/>
         <com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler guiclass="com.googlecode.jmeter.plugins.webdriver.sampler.gui.WebDriverSamplerGui" testclass="com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler" testname="jp@gc - WebDriver Sampler" enabled="true">
           <stringProp name="WebDriverSampler.script">WDS.sampleResult.sampleStart()
-WDS.browser.get(&apos;http://jmeter-plugins.org&apos;)
-WDS.get(&quot;http://localhost:9000/friendsify/login&quot;);
-WDS.manage().window().setSize(new Dimension(2576, 1408));
-WDS.findElement(By.name(&quot;username&quot;)).click();
-WDS.findElement(By.name(&quot;username&quot;)).sendKeys(&quot;max@mustermann.de&quot;);
-WDS.findElement(By.name(&quot;password&quot;)).click();
-WDS.findElement(By.name(&quot;password&quot;)).sendKeys(&quot;password&quot;);
-WDS.findElement(By.name(&quot;password&quot;)).sendKeys(Keys.ENTER);
-WDS.findElement(By.linkText(&quot;Find new Friends&quot;)).click();
-WDS.findElement(By.id(&quot;friends_new&quot;)).click();
-    {
-      WebElement dropdown = driver.findElement(By.id(&quot;friends_new&quot;));
-      dropdown.findElement(By.xpath(&quot;//option[. = &apos;Max Doe&apos;]&quot;)).click();
-    }
-WDS.findElement(By.cssSelector(&quot;.btn&quot;)).click();
-WDS.close();
+WDS.browser.get(&apos;http://localhost:9000/friendsify&apos;);
+WDS.browser.manage().window().setSize(new org.openqa.selenium.Dimension(2576, 1408));
+WDS.browser.findElement(org.openqa.selenium.By.name(&quot;username&quot;)).click();
+WDS.browser.findElement(org.openqa.selenium.By.name(&quot;username&quot;)).sendKeys(&quot;max@mustermann.de&quot;);
+WDS.browser.findElement(org.openqa.selenium.By.name(&quot;password&quot;)).click();
+WDS.browser.findElement(org.openqa.selenium.By.name(&quot;password&quot;)).sendKeys(&quot;password&quot;);
+WDS.browser.findElement(org.openqa.selenium.By.name(&quot;password&quot;)).sendKeys(org.openqa.selenium.Keys.ENTER);
+WDS.browser.findElement(org.openqa.selenium.By.linkText(&quot;Find new Friends&quot;)).click();
+WDS.browser.findElement(org.openqa.selenium.By.id(&quot;friends_new&quot;)).click();
+//org.openqa.selenium.WebElement dropdown = WDS.browser.findElement(org.openqa.selenium.By.id(&quot;friends_new&quot;));
+var dropdown = WDS.browser.findElement(org.openqa.selenium.By.id(&quot;friends_new&quot;));
+dropdown.findElement(org.openqa.selenium.By.xpath(&quot;//option[. = &apos;Max Doe&apos;]&quot;)).click();
+WDS.browser.findElement(org.openqa.selenium.By.cssSelector(&quot;.btn&quot;)).click()
+//WDS.browser.close()
 WDS.sampleResult.sampleEnd()</stringProp>
           <stringProp name="WebDriverSampler.parameters"></stringProp>
           <stringProp name="WebDriverSampler.language">javascript</stringProp>
         </com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
         <hashTree/>
       </hashTree>
     </hashTree>
