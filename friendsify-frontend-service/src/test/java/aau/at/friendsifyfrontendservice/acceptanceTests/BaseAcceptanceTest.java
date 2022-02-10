@@ -16,7 +16,7 @@ public abstract class BaseAcceptanceTest {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Uni\\Selenium\\driver\\chromedriver97.exe");
+        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Larissa\\Downloads\\chromedriver_win32\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
