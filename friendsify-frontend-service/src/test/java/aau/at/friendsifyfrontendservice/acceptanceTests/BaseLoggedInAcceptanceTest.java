@@ -16,7 +16,7 @@ public abstract class BaseLoggedInAcceptanceTest extends BaseAcceptanceTest {
     }
 
     protected void login() {
-        getDriver().get("http://localhost:9000/friendsify/login");
+        getDriver().get("http://localhost:9000/friendsify");
         getDriver().manage().window().setSize(new Dimension(2576, 1408));
         getDriver().findElement(By.name("username")).click();
         getDriver().findElement(By.name("username")).sendKeys("max@mustermann.de");

@@ -32,7 +32,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(FriendsController.class)
-@Log4j2
 class FriendsControllerTest {
     @MockBean
     private BusinessLogicFriends businessLogicFriends;
