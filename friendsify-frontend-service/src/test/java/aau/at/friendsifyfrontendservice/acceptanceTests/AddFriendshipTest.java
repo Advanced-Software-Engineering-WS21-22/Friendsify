@@ -30,16 +30,7 @@ public class AddFriendshipTest extends BaseLoggedInAcceptanceTest{
   private WebDriver driver;
   private Map<String, Object> vars;
   JavascriptExecutor js;
-  @Before
-  public void setUp() {
-    driver = new ChromeDriver();
-    js = (JavascriptExecutor) driver;
-    vars = new HashMap<String, Object>();
-  }
-  @After
-  public void tearDown() {
-    driver.quit();
-  }
+
   @Test
   public void addFriendship() {
 //    driver.get("http://localhost:9000/friendsify/login");
