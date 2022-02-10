@@ -10,4 +10,5 @@ class FriendsifyRecommendationsServiceApplicationTests {
     void contextLoads() {
     }
 
+
 }
