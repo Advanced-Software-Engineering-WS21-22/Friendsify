@@ -40,15 +40,15 @@ public class AddFriendshipTest extends BaseLoggedInAcceptanceTest{
 //    driver.findElement(By.name("password")).click();
 //    driver.findElement(By.name("password")).sendKeys("password");
 //    driver.findElement(By.name("password")).sendKeys(Keys.ENTER);
-    driver.findElement(By.linkText("Find new Friends")).click();
-    driver.findElement(By.id("friends_new")).click();
+    getDriver().findElement(By.linkText("Find new Friends")).click();
+    getDriver().findElement(By.id("friends_new")).click();
     {
-      WebElement dropdown = driver.findElement(By.id("friends_new"));
+      WebElement dropdown = getDriver().findElement(By.id("friends_new"));
       dropdown.findElement(By.xpath("//option[. = 'Max Doe']")).click();
     }
-    driver.findElement(By.cssSelector(".btn")).click();
-    String url = driver.getCurrentUrl();
-    driver.close();
+    getDriver().findElement(By.cssSelector(".btn")).click();
+    String url = getDriver().getCurrentUrl();
+    getDriver().close();
     Assert.assertEquals("http://localhost:9000/friendsify/friends", url);
   }
 }
