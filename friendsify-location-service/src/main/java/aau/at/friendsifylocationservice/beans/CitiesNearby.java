@@ -10,9 +10,5 @@ import java.util.List;
 @Setter
 public class CitiesNearby {
     @JsonProperty("")
-    private List<CityDetails> data;
-    @JsonProperty("")
-    private String links;
-    @JsonProperty("")
-    private String metadata;
+    private List<City> data;
 }

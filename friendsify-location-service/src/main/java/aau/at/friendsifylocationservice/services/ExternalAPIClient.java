@@ -34,7 +34,7 @@ public class ExternalAPIClient {
         MultiValueMap<String, String> params= new LinkedMultiValueMap<>();
         params.add("radius","100");
         params.add("limit","10");
-        params.add("minPopulation", Mono.just(populationMin).toString());
+        params.add("minPopulation", Long.toString(populationMin));
         params.add("distanceUnit", "KM");
         params.add("types", "CITY");
 

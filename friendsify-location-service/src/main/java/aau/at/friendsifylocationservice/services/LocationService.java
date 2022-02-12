@@ -1,6 +1,7 @@
 package aau.at.friendsifylocationservice.services;
 
 import aau.at.friendsifylocationservice.beans.CitiesNearby;
+import aau.at.friendsifylocationservice.beans.City;
 import aau.at.friendsifylocationservice.beans.CityDetails;
 import aau.at.friendsifylocationservice.beans.Distance;
 import aau.at.friendsifylocationservice.services.ExternalAPIClient;
@@ -24,25 +25,32 @@ public class LocationService {
     }
 
 
-    public List<CityDetails> getMeetingPoints(String fromCityWikiDataID, String toCityWikiDataID) {
-        List<CityDetails> citiesList= new ArrayList<>();
+    public List<City> getMeetingPoints(String fromCityWikiDataID, String toCityWikiDataID) {
+        List<City> citiesList= new ArrayList<>();
         Distance distance = this.getDistance(fromCityWikiDataID, toCityWikiDataID);
-        if (distance.getDistanceInKM()<=100){
-            CityDetails details=getCityDetails(toCityWikiDataID);
-            citiesList.addAll(this.getCitiesNearby(fromCityWikiDataID,details.getData().getPopulation()));
-        }else{
-            citiesList.addAll(this.getBigCitiesNearby(fromCityWikiDataID));
-            citiesList.addAll(this.getBigCitiesNearby(toCityWikiDataID));
-        }
+        try {
+            Thread.sleep(2000);
+            if (distance.getDistanceInKM()<=100){
+                CityDetails details=getCityDetails(toCityWikiDataID);
+                Thread.sleep(2000);
+                citiesList.addAll(this.getCitiesNearby(fromCityWikiDataID,details.getData().getPopulation()));
+            }else{
+                citiesList.addAll(this.getBigCitiesNearby(fromCityWikiDataID));
+                Thread.sleep(2000);
+                citiesList.addAll(this.getBigCitiesNearby(toCityWikiDataID));
+            }
 
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return citiesList;
     }
 
-    public List<CityDetails> getCitiesNearby(String geoDBID, long minPopulation) {
+    public List<City> getCitiesNearby(String geoDBID, long minPopulation) {
         return client.getCitiesNearby(geoDBID,minPopulation).getData();
     }
 
-    public List<CityDetails> getBigCitiesNearby(String geoDBID) {
+    public List<City> getBigCitiesNearby(String geoDBID) {
         return this.getCitiesNearby(geoDBID,10000);
     }
 

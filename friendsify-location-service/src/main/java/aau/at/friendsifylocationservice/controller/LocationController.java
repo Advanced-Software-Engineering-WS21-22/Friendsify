@@ -1,5 +1,6 @@
 package aau.at.friendsifylocationservice.controller;
 
+import aau.at.friendsifylocationservice.beans.City;
 import aau.at.friendsifylocationservice.beans.CityDetails;
 import aau.at.friendsifylocationservice.beans.Distance;
 import aau.at.friendsifylocationservice.services.LocationService;
@@ -28,20 +29,20 @@ public class LocationController {
     }
 
     @GetMapping("/meetingsLocations")
-    public ResponseEntity<List<CityDetails>> getMeetingsLocations(@RequestParam String fromGeoDBID, @RequestParam String toGeoDBID) {
-        List<CityDetails> cities=service.getMeetingPoints(fromGeoDBID, toGeoDBID);
+    public ResponseEntity<List<City>> getMeetingsLocations(@RequestParam String fromGeoDBID, @RequestParam String toGeoDBID) {
+        List<City> cities=service.getMeetingPoints(fromGeoDBID, toGeoDBID);
         return ResponseEntity.ok(cities);
     }
 
     @GetMapping("/{geoDBID}/nearbyCities")
-    public ResponseEntity<List<CityDetails>> getCitiesNearbyWithMinPopulation(@PathVariable String geoDBID, @RequestParam(required=false, defaultValue="1") long minPopulationCount) {
-        List<CityDetails> cities=service.getCitiesNearby(geoDBID,minPopulationCount);
+    public ResponseEntity<List<City>> getCitiesNearbyWithMinPopulation(@PathVariable String geoDBID, @RequestParam(required=false, defaultValue="1") long minPopulationCount) {
+        List<City> cities=service.getCitiesNearby(geoDBID,minPopulationCount);
         return ResponseEntity.ok(cities);
     }
 
    @GetMapping("/{geoDBID}/nearbyBigCities")
-    public ResponseEntity<List<CityDetails>> getBigCitiesNearby(@PathVariable String geoDBID){
-       List<CityDetails> cities=service.getBigCitiesNearby(geoDBID);
+    public ResponseEntity<List<City>> getBigCitiesNearby(@PathVariable String geoDBID){
+       List<City> cities=service.getBigCitiesNearby(geoDBID);
        return ResponseEntity.ok(cities);
     }
 }
