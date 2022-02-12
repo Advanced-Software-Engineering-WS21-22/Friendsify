@@ -11,4 +11,8 @@ import java.util.List;
 public class CitiesNearby {
     @JsonProperty("")
     private List<City> data;
+
+    public CitiesNearby(List<City> data) {
+        this.data = data;
+    }
 }

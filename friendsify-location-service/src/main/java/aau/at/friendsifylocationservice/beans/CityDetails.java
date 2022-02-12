@@ -10,4 +10,8 @@ import lombok.Setter;
 public class CityDetails {
     @JsonProperty("")
     private City data;
+
+    public CityDetails(City data) {
+        this.data = data;
+    }
 }

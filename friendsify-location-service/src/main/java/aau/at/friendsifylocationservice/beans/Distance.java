@@ -9,4 +9,8 @@ import lombok.Setter;
 public class Distance {
     @JsonProperty("data")
     private int distanceInKM;
+
+    public Distance(int distanceInKM) {
+        this.distanceInKM = distanceInKM;
+    }
 }
