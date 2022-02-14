@@ -17,6 +17,8 @@ public class ExternalAPIClient {
 
     private final WebClient geoApiClient;
 
+    private final String CITIES="cities";
+
     @Autowired
     public ExternalAPIClient(
     @Value("${geo.api.url}") String geoApiUrl,
@@ -41,7 +43,7 @@ public class ExternalAPIClient {
 
          CitiesNearby response= this.geoApiClient
                 .get()
-                .uri(builder ->builder.path("/cities/"+cityWikiDataID+"/nearbyCities").queryParams(params).build())
+                .uri(builder ->builder.path("/"+CITIES+"/"+cityWikiDataID+"/nearbyCities").queryParams(params).build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                  .bodyToMono(CitiesNearby.class)
@@ -58,7 +60,7 @@ public class ExternalAPIClient {
 
          Distance response= this.geoApiClient
                 .get()
-                .uri(builder ->builder.path("/cities/"+toCityWikiDataID+"/distance").queryParams(params).build())
+                .uri(builder ->builder.path("/"+CITIES+"/"+toCityWikiDataID+"/distance").queryParams(params).build())
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                  .bodyToMono(Distance.class)
@@ -70,7 +72,7 @@ public class ExternalAPIClient {
     public CityDetails getCityDetails(String cityWikiDataID) {
         CityDetails response= this.geoApiClient
                 .get()
-                .uri("/cities/"+cityWikiDataID)
+                .uri("/"+CITIES+"/"+cityWikiDataID)
                 .accept(MediaType.APPLICATION_JSON)
                 .retrieve()
                 .bodyToMono(CityDetails.class)

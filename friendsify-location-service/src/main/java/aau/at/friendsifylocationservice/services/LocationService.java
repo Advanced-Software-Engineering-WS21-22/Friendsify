@@ -41,7 +41,8 @@ public class LocationService {
             }
 
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("Only 1 request per second allowed - timeout was stopped.");
+            Thread.currentThread().interrupt();
         }
         return citiesList;
     }
