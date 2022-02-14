@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class City {
-    public City(int id, String wikiDataId, String type, String city, String name, String country, String countryCode, String region, String regionCode, int elevationMeters, double latitude, double longitude, long population, String timezone, boolean deleted) {
+
+    public City(int id, String wikiDataId, String type, String city, String name, String country, String countryCode, String region, String regionCode, Integer elevationMeters, Double latitude, Double longitude, Integer population, String timezone) {
         this.id = id;
         this.wikiDataId = wikiDataId;
         this.type = type;
@@ -22,7 +23,6 @@ public class City {
         this.longitude = longitude;
         this.population = population;
         this.timezone = timezone;
-        this.deleted = deleted;
     }
 
     @JsonProperty("")
@@ -44,15 +44,14 @@ public class City {
     @JsonProperty("")
     private String regionCode;
     @JsonProperty("")
-    private int elevationMeters;
+    private Integer elevationMeters;
     @JsonProperty("")
-    private double latitude;
+    private Double latitude;
     @JsonProperty("")
-    private double longitude;
+    private Double longitude;
     @JsonProperty("")
-    private long population;
+    private Integer population;
     @JsonProperty("")
     private String timezone;
-    @JsonProperty("")
-    private boolean deleted;
+
 }
