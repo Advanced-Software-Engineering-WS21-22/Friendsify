@@ -10,6 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>aau.at</groupId>
     <artifactId>friendsify-location-service</artifactId>
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
